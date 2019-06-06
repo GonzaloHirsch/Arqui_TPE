@@ -1,4 +1,5 @@
-
+doit: 
+	cd Toolchain; make all; cd ../; make all
 all:  bootloader kernel userland image
 
 bootloader:
@@ -19,4 +20,4 @@ clean:
 	cd Kernel; make clean
 	cd Userland; make clean
 
-.PHONY: bootloader image collections kernel userland all clean
+.PHONY: bootloader image collections kernel userland all clean doit
