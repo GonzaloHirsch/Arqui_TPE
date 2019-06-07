@@ -1,23 +1,30 @@
-doit: 
-	cd Toolchain; make all; cd ../; make all
-all:  bootloader kernel userland image
+include ../Makefile.inc
 
-bootloader:
-	cd Bootloader; make all
+MODULE=0000-sampleCodeModule.bin
+SOURCES=$(wildcard src/[^_]*.c)
+SOURCES_ASM=$(wildcard asm/*.asm)
+OBJECTS=$(SOURCES:.c=.o)
+OBJECTS_ASM=$(SOURCES_ASM:.asm=.o)
+LOADERSRC=_loader.c
 
-kernel:
-	cd Kernel; make all
+LOADEROBJECT=$(LOADERSRC:.c=.o)
+STATICLIBS=
 
-userland:
-	cd Userland; make all
+all: $(MODULE)
 
-image: kernel bootloader userland
-	cd Image; make all
+$(MODULE): $(LOADEROBJECT) $(OBJECTS) $(STATICLIBS) $(OBJECTS_ASM)
+	$(LD) $(LDFLAGS) -T sampleCodeModule.ld -o ../$(MODULE) $(LOADEROBJECT) $(OBJECTS) $(OBJECTS_ASM) $(STATICLIBS)
+
+%.o: %.c
+	$(GCC) $(GCCFLAGS) -I./include -c $< -o $@
+
+%.o : %.asm
+	$(ASM) $(ASMFLAGS) $< -o $@
+
+$(LOADEROBJECT):
+	$(GCC) $(GCCFLAGS) $(LOADERSRC) -c -o $(LOADEROBJECT)
 
 clean:
-	cd Bootloader; make clean
-	cd Image; make clean
-	cd Kernel; make clean
-	cd Userland; make clean
+	rm -rf asm/*.o *.o src/*.o
 
-.PHONY: bootloader image collections kernel userland all clean doit
+.PHONY: all clean print
