@@ -18,7 +18,7 @@ void irqDispatcher(uint64_t irq) {
 			break;
         case 1:
             buffer[0] = read_key();
-            ncPrint((char *) 0xB8000 + 80*2, buffer);
+            ncPrint(buffer);
         break;
 	}
 	return; 
