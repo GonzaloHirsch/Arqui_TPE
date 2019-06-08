@@ -1,9 +1,5 @@
 doit: 
-	cd Userland/SampleCodeModule; make all
-	cd Toolchain; make all
-	make all
-	./run.sh
-
+	cd Toolchain; make all; cd ../; make all
 all:  bootloader kernel userland image
 
 bootloader:
