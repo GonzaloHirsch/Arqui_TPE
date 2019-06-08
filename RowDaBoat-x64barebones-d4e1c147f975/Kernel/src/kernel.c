@@ -23,6 +23,8 @@ static void * const sampleDataModuleAddress = (void*)0x500000;
 
 typedef int (*EntryPoint)();
 
+extern char read_key();
+
 
 void clearBSS(void * bssAddress, uint64_t bssSize)
 {
@@ -87,7 +89,9 @@ void * initializeKernelBinary()
 }
 
 int main()
-{	
+{
+
+    char buffer[100];
 	ncPrint("[Kernel Main]");
 	ncNewline();
 	ncPrint("Loading IDT...");
@@ -97,11 +101,7 @@ int main()
 	ncNewline();
 	ncPrint("Arquitectura de Computadoras");
 	ncNewline();
-	for (int i = 0; i < 2000000000; i++){
-		if ("sdfgsdf" == "dfghsdf"){
 
-		}
-	}
 	ncPrintDec(ticks_elapsed());
 	ncNewline();
 	ncPrint("  Sample code module at 0x");
@@ -111,6 +111,10 @@ int main()
 	ncPrintHex(((EntryPoint)sampleCodeModuleAddress)());
 	ncNewline();
 	ncNewline();
+
+	while(1){
+	    ncPrintOnAddress((char *) 0xB8000, itoa(ticks_elapsed(), buffer, 10));
+	}
 
 	ncPrint("  Sample data module at 0x");
 	ncPrintHex((uint64_t)sampleDataModuleAddress);

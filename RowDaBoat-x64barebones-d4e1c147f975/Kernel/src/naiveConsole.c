@@ -63,6 +63,20 @@ void ncClear()
 	currentVideo = video;
 }
 
+void ncPrintOnAddress(char * address, char * text){
+
+    int i = 0;
+
+    while(*text != 0){
+
+        *(address+i) = *text;
+        *(address+i+1) = 0x74;
+
+        i+=2;
+        text++;
+    }
+}
+
 static uint32_t uintToBase(uint64_t value, char * buffer, uint32_t base)
 {
 	char *p = buffer;
@@ -95,3 +109,5 @@ static uint32_t uintToBase(uint64_t value, char * buffer, uint32_t base)
 
 	return digits;
 }
+
+

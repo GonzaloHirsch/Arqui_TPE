@@ -2,6 +2,7 @@
 #define INTERRUPTS_H
 
 void _irq00Handler();
+void _irq01Handler();
 
 void _cli();
 void _sti();

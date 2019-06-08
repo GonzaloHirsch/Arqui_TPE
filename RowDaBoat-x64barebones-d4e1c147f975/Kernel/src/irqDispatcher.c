@@ -1,15 +1,25 @@
 #include <irqDispatcher.h>
 #include <stdint.h>
 #include <time.h>
+#include <naiveConsole.h>
+
+
 
 void irqDispatcher(uint64_t irq);
-void int_20(); 
+void int_20();
+extern char read_key();
+
+static char buffer[100];
 
 void irqDispatcher(uint64_t irq) {
     switch (irq) {
         case 0:
         	int_20();
 			break;
+        case 1:
+            buffer[0] = read_key();
+            ncPrint((char *) 0xB8000 + 80*2, buffer);
+        break;
 	}
 	return; 
 }
