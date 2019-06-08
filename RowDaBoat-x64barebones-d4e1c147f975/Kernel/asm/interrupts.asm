@@ -21,6 +21,9 @@ EXTERN irqDispatcher
 _irq00Handler:
     irqHandlerMaster 0
 
+_irq01Handler:
+    irqHandlerMaster 1
+
 _cli:
 	cli
 	ret
