@@ -2,11 +2,12 @@
 #include <stdint.h>
 #include <time.h>
 #include <naiveConsole.h>
-
+#include <keyboard.h>
 
 
 void irqDispatcher(uint64_t irq);
 void int_20();
+void int_21();
 extern char read_key();
 
 static char buffer[100];
@@ -17,8 +18,7 @@ void irqDispatcher(uint64_t irq) {
         	int_20();
 			break;
         case 1:
-            buffer[0] = read_key();
-            ncPrint(buffer);
+            int_21();
         break;
 	}
 	return; 
@@ -26,4 +26,8 @@ void irqDispatcher(uint64_t irq) {
 
 void int_20() {
     timer_handler();
+}
+
+void int_21() {
+    printKey();
 }
