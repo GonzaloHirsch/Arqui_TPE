@@ -3,6 +3,10 @@
 #include <lib.h>
 #include <moduleLoader.h>
 #include <naiveConsole.h>
+#include <irqDispatcher.h>
+#include <time.h>
+#include <idtLoader.h>
+#include <interrupts.h>
 
 extern uint8_t text;
 extern uint8_t rodata;
@@ -84,13 +88,21 @@ void * initializeKernelBinary()
 
 int main()
 {	
-	char buffer[100];
-
 	ncPrint("[Kernel Main]");
+	ncNewline();
+	ncPrint("Loading IDT...");
+	ncNewline();
+	load_idt();
+	ncPrint("IDT Loaded");
 	ncNewline();
 	ncPrint("Arquitectura de Computadoras");
 	ncNewline();
-	ncPrintHex(getSeconds());
+	for (int i = 0; i < 1000000000; i++){
+		if ("sdfgsdf" == "dfghsdf"){
+
+		}
+	}
+	ncPrintDec(ticks_elapsed());
 	ncNewline();
 	ncPrint("  Sample code module at 0x");
 	ncPrintHex((uint64_t)sampleCodeModuleAddress);
