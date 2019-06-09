@@ -22,6 +22,10 @@ static const uint64_t PageSize = 0x1000;
 static void * const sampleCodeModuleAddress = (void*)0x400000;
 static void * const sampleDataModuleAddress = (void*)0x500000;
 
+static char stdin[200]={0};
+static char stdout[200]={0};
+static char stderr[200]={0};
+
 typedef int (*EntryPoint)();
 
 extern char read_key();
@@ -39,6 +43,16 @@ void * getStackBase()
 		+ PageSize * 8				//The size of the stack itself, 32KiB
 		- sizeof(uint64_t)			//Begin at the top of the stack
 	);
+}
+
+void printModules(){
+	char module[] = "n - First module to be loaded";
+	ncPrint(module);
+	ncNewline();
+}
+
+void handleModuleChoosing(int option){
+
 }
 
 void * initializeKernelBinary()
@@ -91,16 +105,32 @@ void * initializeKernelBinary()
 
 int main()
 {
-
     char buffer[100];
+    int moduleIsChosen = 0;
+
 	ncPrint("[Kernel Main]");
 	ncNewline();
-	ncPrint("Loading IDT...");
-	ncNewline();
-	load_idt();
-	ncPrint("IDT Loaded");
-	ncNewline();
+
+	ncChangeOutput(STDERR);
 	ncPrint("Arquitectura de Computadoras");
+	ncChangeOutput(STDIN);
+	ncNewline();
+
+	//Carga del IDT
+	ncPrint("Loading IDT... ");
+	load_idt();
+	ncPrint("[Done]");
+
+	ncNewline();
+
+	ncPrint("Choose the module to be loaded: ");
+	ncNewline();
+	printModules();
+	//While para la decision del modulo
+	while(!moduleIsChosen){
+	    ncPrintOnAddress((char *) 0xB8000, itoa(ticks_elapsed(), buffer, 10));
+	}
+
 	ncNewline();
 	ncPrintDec(getSeconds());
 	ncPrintDec(getMinutes());

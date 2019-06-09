@@ -16,3 +16,7 @@ void handleSyscall(uint64_t rdi, uint64_t rsi, uint64_t rdx, uint64_t rcx, uint6
     ncPrintDec(rdi);
     ncNewline();
 }
+
+void write(){
+	
+}

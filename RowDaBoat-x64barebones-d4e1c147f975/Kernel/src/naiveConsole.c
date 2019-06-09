@@ -8,6 +8,7 @@ static uint8_t * currentVideo = (uint8_t*)0xB8000;
 static const uint32_t width = 80;
 static const uint32_t height = 25 ;
 static uint8_t * const limit = (uint8_t*)(0xB8000 + 80*2*25);
+static enum Outputs currentOutput = STDIN;
 
 void ncPrint(const char * string)
 {
@@ -17,11 +18,24 @@ void ncPrint(const char * string)
 		ncPrintChar(string[i]);
 }
 
+/*
+	Cambia el modo de video que se esta utilizando.
+	Usa el ENUM de Outputs definido en el naiveConsole.h
+	Hay que llamar a esta funcion para cambiarlo.
+	Parametros:
+		int - output: nuevo valor del modo de video
+*/
+void ncChangeOutput(int output){
+	if (output == STDIN || output == STDERR){
+		currentOutput = output;
+	}
+}
+
 void ncPrintChar(char character)
 {
 	*currentVideo = character;
 	currentVideo += 1;
-	*currentVideo = 2;
+	*currentVideo = currentOutput;
 	currentVideo += 1;
 }
 

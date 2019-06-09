@@ -123,3 +123,14 @@ _show:
 	mov rsp, rbp
 	pop rbp
 	ret
+
+_putchar:
+	push rbp
+	mov rbp, rsp
+
+
+	;int 80h					;hace la interrupcion para poder escribir en pantalla
+
+	mov rsp, rbp
+	pop rbp
+	ret

@@ -3,6 +3,8 @@
 
 #include <stdint.h>
 
+enum Outputs { STDIN = 2, STDERR = 4};
+
 void ncPrint(const char * string);
 void ncPrintChar(char character);
 void ncNewline();
@@ -12,5 +14,6 @@ void ncPrintBin(uint64_t value);
 void ncPrintBase(uint64_t value, uint32_t base);
 void ncClear();
 void ncPrintOnAddress(char * address, char * text);
+void ncChangeOutput(int output);
 
 #endif
