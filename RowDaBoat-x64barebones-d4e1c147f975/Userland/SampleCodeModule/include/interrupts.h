@@ -8,6 +8,6 @@
 #include <stdint.h>
 
 //siguiendo el protocolo de funcion para 64 bit
-//void syscall(uint64_t rdi, uint64_t rsi, uint64_t rdx, uint64_t rcx, uint64_t r8, uint64_t r9);
+void syscall(uint64_t rdi, uint64_t rsi, uint64_t rdx, uint64_t rcx, uint64_t r8, uint64_t r9);
 
 #endif //ARQUI_TPE_INTERRUPTS_H
