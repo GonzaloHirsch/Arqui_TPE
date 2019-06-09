@@ -7,6 +7,7 @@ GLOBAL _irq00Handler
 GLOBAL _irq01Handler
 
 EXTERN irqDispatcher
+EXTERN handleSyscall
 
 %macro pushState 0
 	push rax
@@ -64,6 +65,16 @@ _irq00Handler:
 
 _irq01Handler:
     irqHandlerMaster 1
+
+_irq80Handler:
+
+    call handleSyscall
+
+    ; signal pic EOI
+    mov al, 20h
+    out 20h, al
+
+    iretq
 
 _cli:
 	cli

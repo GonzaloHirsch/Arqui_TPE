@@ -7,6 +7,7 @@
 #include <time.h>
 #include <idtLoader.h>
 #include <interrupts.h>
+#include <syscall.h>
 
 extern uint8_t text;
 extern uint8_t rodata;

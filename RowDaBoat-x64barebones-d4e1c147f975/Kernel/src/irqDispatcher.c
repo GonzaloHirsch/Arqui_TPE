@@ -4,7 +4,6 @@
 #include <naiveConsole.h>
 #include <keyboard.h>
 
-
 void irqDispatcher(uint64_t irq);
 void int_20();
 void int_21();
