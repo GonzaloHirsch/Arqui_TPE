@@ -102,8 +102,9 @@ int main()
 	ncNewline();
 	ncPrint("Arquitectura de Computadoras");
 	ncNewline();
-
-	ncPrintDec(ticks_elapsed());
+	ncPrintDec(getSeconds());
+	ncPrintDec(getMinutes());
+	ncPrintDec(getHours());
 	ncNewline();
 	ncPrint("  Sample code module at 0x");
 	ncPrintHex((uint64_t)sampleCodeModuleAddress);

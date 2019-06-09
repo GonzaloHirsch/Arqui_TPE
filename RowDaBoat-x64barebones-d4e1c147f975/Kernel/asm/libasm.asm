@@ -1,5 +1,12 @@
 GLOBAL cpuVendor
+
 GLOBAL getSeconds
+GLOBAL getMinutes
+GLOBAL getHours
+GLOBAL getDays
+GLOBAL getMonths
+GLOBAL getYears
+
 GLOBAL getKeyboard
 
 section .text
@@ -32,11 +39,69 @@ getSeconds:
 	push rbp
 	mov rbp, rsp
 
-	mov al, 0
+	mov al, 0h
 	out 70h, al
 	in ax, 71h
 
-	;mov eax, 30h
+	mov rsp, rbp
+	pop rbp
+	ret
+
+getMinutes:
+	push rbp
+	mov rbp, rsp
+
+	mov al, 02h
+	out 70h, al
+	in ax, 71h
+
+	mov rsp, rbp
+	pop rbp
+	ret
+
+getHours:
+	push rbp
+	mov rbp, rsp
+
+	mov al, 04h
+	out 70h, al
+	in ax, 71h
+
+	mov rsp, rbp
+	pop rbp
+	ret
+
+getDays:
+	push rbp
+	mov rbp, rsp
+
+	mov al, 07h
+	out 70h, al
+	in ax, 71h
+
+	mov rsp, rbp
+	pop rbp
+	ret
+
+getMonths:
+	push rbp
+	mov rbp, rsp
+
+	mov al, 08h
+	out 70h, al
+	in ax, 71h
+
+	mov rsp, rbp
+	pop rbp
+	ret
+
+getYears:
+	push rbp
+	mov rbp, rsp
+
+	mov al, 09h
+	out 70h, al
+	in ax, 71h
 
 	mov rsp, rbp
 	pop rbp
