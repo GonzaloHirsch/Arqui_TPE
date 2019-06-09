@@ -11,29 +11,29 @@ static uint8_t * const limit = (uint8_t*)(0xB8000 + 80*2*25);
 
 void ncPrint(const char * string)
 {
-	int i;
+    int i;
 
-	for (i = 0; string[i] != 0; i++)
-		ncPrintChar(string[i]);
+    for (i = 0; string[i] != 0; i++)
+        ncPrintChar(string[i]);
 }
 
 void ncPrintChar(char character)
 {
-	*currentVideo = character;
-	currentVideo += 1;
-	*currentVideo = 2;
-	currentVideo += 1;
+    *currentVideo = character;
+    currentVideo += 1;
+    *currentVideo = 2;
+    currentVideo += 1;
 }
 
 void ncNewline()
 {
-	do
-	{
-		ncPrintChar(' ');
-	}
-	while((uint64_t)(currentVideo - video) % (width * 2) != 0);
-	//Esto es para empezar desde cero cuando te pasas al imprimir
-	if(currentVideo>limit) currentVideo = video;
+    do
+    {
+        ncPrintChar(' ');
+    }
+    while((uint64_t)(currentVideo - video) % (width * 2) != 0);
+    //Esto es para empezar desde cero cuando te pasas al imprimir
+    if(currentVideo>limit) currentVideo = video;
 }
 
 void ncPrintDec(uint64_t value)

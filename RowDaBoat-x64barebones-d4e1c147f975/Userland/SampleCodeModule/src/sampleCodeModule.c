@@ -1,5 +1,9 @@
 /* sampleCodeModule.c */
 
+#include <interrupts.h>
+#include <naiveConsole.h>
+
+
 char * v = (char*)0xB8000 + 79 * 2;
 
 static int var1 = 0;
@@ -10,6 +14,7 @@ int main() {
 	//All the following code may be removed 
 	*v = 'X';
 	*(v+1) = 0x74;
+    //syscall(2, 0, 0, 0, 0, 0);
 
 	//Test if BSS is properly set up
 	if (var1 == 0 && var2 == 0)
