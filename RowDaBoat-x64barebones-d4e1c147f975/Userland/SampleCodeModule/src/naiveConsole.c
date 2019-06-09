@@ -32,6 +32,7 @@ void ncNewline()
         ncPrintChar(' ');
     }
     while((uint64_t)(currentVideo - video) % (width * 2) != 0);
+    //Esto es para empezar desde cero cuando te pasas al imprimir
     if(currentVideo>limit) currentVideo = video;
 }
 

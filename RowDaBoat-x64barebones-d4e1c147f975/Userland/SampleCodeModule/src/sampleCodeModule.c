@@ -14,9 +14,8 @@ int main() {
 	//All the following code may be removed 
 	*v = 'X';
 	*(v+1) = 0x74;
-    syscall(2, 0, 0, 0, 0, 0);
+    //syscall(2, 0, 0, 0, 0, 0);
 
-	ncPrint("heytherebish");
 	//Test if BSS is properly set up
 	if (var1 == 0 && var2 == 0)
 		return 0xBEBEC17A;
