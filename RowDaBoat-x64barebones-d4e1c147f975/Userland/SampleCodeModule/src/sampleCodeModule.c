@@ -1,8 +1,8 @@
 /* sampleCodeModule.c */
-
-#include <interrupts.h>
+//#include <interrupts.h>
 #include <naiveConsole.h>
 #include <shell.h>
+#include <stdint.h>
 
 char * v = (char*)0xB8000 + 79 * 2;
 
@@ -11,7 +11,7 @@ static int var2 = 0;
 
 
 int main() {
-	ncPrint("ACA");
+	//ncPrint("ACA");
 	//All the following code may be removed 
 	/*
 	*v = 'X';
@@ -24,5 +24,5 @@ int main() {
 	*/
 	//return 0xDEADBEEF;
 	init_shell();
-	return 0;
+	return 1;
 }

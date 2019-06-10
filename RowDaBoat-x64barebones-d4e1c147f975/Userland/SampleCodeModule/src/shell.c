@@ -10,7 +10,9 @@ const char * commands[] = {"help", "snake", "shutdown", "verify", "time", "beep"
 
 
 void init_shell(void){
-	ncPrint("ACA");
+	ncClear();
+	ncPrint("You have entered userland");
+	
 	display_welcome_message();
 
 	int command = 1;
@@ -19,12 +21,15 @@ void init_shell(void){
 	int key;
 	//while para la shell y su funcionamiento
 	while(command != SHUTDOWN){
+		ncPrint("WHILE AWAY");
 		key = getKey();
+		ncPrintDec(key);
 		//En el caso de un enter
 		if (key == 29){
 			command = HELP;
 			handle_command(command);
 		} else {
+			writeKey(key);
 			commandBuff[commandBuffPos] = key;
 			commandBuffPos++;
 		}
@@ -58,8 +63,30 @@ void handle_command(int cmd){
 	}
 }
 
-void display_welcome_message(void){
-
+void display_welcome_message(void){  
+	ncNewline();                   
+	ncPrint("	                                         /$$  /$$$$$$   /$$$$$$");
+	ncNewline();
+	ncPrint("                                        |__/ /$$__  $$ /$$__  $$");
+	ncNewline();
+	ncPrint("  /$$$$$$   /$$$$$$   /$$$$$$  /$$   /$$ /$$| $$  \\ $$| $$  \\__/");
+	ncNewline();
+	ncPrint(" |____  $$ /$$__  $$ /$$__  $$| $$  | $$| $$| $$  | $$|  $$$$$$ ");
+	ncNewline();
+	ncPrint("  /$$$$$$$| $$  \\__/| $$  \\ $$| $$  | $$| $$| $$  | $$ \\____  $$");
+	ncNewline();
+	ncPrint(" /$$__  $$| $$      | $$  | $$| $$  | $$| $$| $$  | $$ /$$  \\ $$");
+	ncNewline();
+	ncPrint("|  $$$$$$$| $$      |  $$$$$$$|  $$$$$$/| $$|  $$$$$$/|  $$$$$$/");
+	ncNewline();
+	ncPrint(" \\_______/|__/       \\____  $$ \\______/ |__/ \\______/  \\______/ ");
+	ncNewline();
+	ncPrint("                          | $$                                  ");
+	ncNewline();
+	ncPrint("                          | $$    ");
+	ncNewline();
+	ncPrint("                          |__/   ");
+	ncNewline();
 }
 
 void display_help(void){

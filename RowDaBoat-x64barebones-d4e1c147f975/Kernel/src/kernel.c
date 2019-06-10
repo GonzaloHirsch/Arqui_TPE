@@ -42,6 +42,8 @@ void * getStackBase()
 }
 
 void goToUserland(){
+	ncPrint("Entering Userland...");
+	ncNewline();
 	((EntryPoint)sampleCodeModuleAddress)();
 }
 
@@ -95,18 +97,12 @@ void * initializeKernelBinary()
 	load_idt();
 	ncPrint("[Done]");
 	ncNewline();
-
-	ncPrint("Getting stack base...");
-	ncNewline();
-	void * stackBase = getStackBase();
-	ncPrint("[Done]");
-	ncNewline();
 	
 	ncPrint("Prepare to go to Userland...");
 	ncNewline();
 	goToUserland();
 
-	return 0;
+	return getStackBase();;
 }
 
 
