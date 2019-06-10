@@ -14,10 +14,20 @@ void init_shell(void){
 	display_welcome_message();
 
 	int command = 1;
+	char * commandBuff[100];
+	int commandBuffPos = 0;
 	int key;
 	//while para la shell y su funcionamiento
 	while(command != SHUTDOWN){
 		key = getKey();
+		//En el caso de un enter
+		if (key == 29){
+			command = HELP;
+			handle_command(command);
+		} else {
+			commandBuff[commandBuffPos] = key;
+			commandBuffPos++;
+		}
 		//Hacer un get de la tecla que se apreto
 
 		//Ver si es un enter
@@ -52,7 +62,7 @@ void display_welcome_message(){
 }
 
 void display_help(){
-	
+	ncPrint("YEAH");
 }
 
 void display_goodbye_message(){
