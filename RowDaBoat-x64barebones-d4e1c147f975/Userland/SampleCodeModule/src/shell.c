@@ -10,7 +10,7 @@ const char * commands[] = {"help", "snake", "shutdown", "verify", "time", "beep"
 
 
 void init_shell(void){
-
+	ncPrint("ACA");
 	display_welcome_message();
 
 	int command = 1;
@@ -41,6 +41,7 @@ void init_shell(void){
 void handle_command(int cmd){
 	switch(cmd){
 		case HELP:
+			display_help();
 		break;
 		case SNAKE:
 		break;
@@ -57,14 +58,14 @@ void handle_command(int cmd){
 	}
 }
 
-void display_welcome_message(){
+void display_welcome_message(void){
 
 }
 
-void display_help(){
+void display_help(void){
 	ncPrint("YEAH");
 }
 
-void display_goodbye_message(){
+void display_goodbye_message(void){
 
 }

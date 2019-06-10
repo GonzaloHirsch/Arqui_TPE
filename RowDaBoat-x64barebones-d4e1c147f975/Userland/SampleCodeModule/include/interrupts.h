@@ -1,9 +1,5 @@
-//
-// Created by root on 6/8/19.
-//
-
-#ifndef ARQUI_TPE_INTERRUPTS_H
-#define ARQUI_TPE_INTERRUPTS_H
+#ifndef INTERRUPTS_H
+#define INTERRUPTS_H
 
 #include <stdint.h>
 
@@ -16,6 +12,6 @@
 		uint64_t - rcx: Longitud del string
 		El resto quedan para que los usemos si los necesitamos, sino quedan en 0
 */
-void _int80h(uint64_t rdi, uint64_t rsi, uint64_t rdx, uint64_t rcx, uint64_t r8, uint64_t r9);
+void _int80(uint64_t rdi, uint64_t rsi, uint64_t rdx, uint64_t rcx, uint64_t r8, uint64_t r9);
 
-#endif //ARQUI_TPE_INTERRUPTS_H
+#endif

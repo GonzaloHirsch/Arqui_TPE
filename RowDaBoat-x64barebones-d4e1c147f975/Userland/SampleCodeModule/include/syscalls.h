@@ -3,6 +3,7 @@
 
 //Incluye a interrupts para poder hacer la llamada a la int 80
 #include <interrupts.h>
+#include <stdint.h>
 
 #define READ 1
 #define WRITE 2
@@ -10,9 +11,11 @@
 #define SNAKE 4
 #define TIME 5
 
-void sys_write(char * str, int length);
+void sys_write(int fd, const char *buf, int count);
 
-void sys_read();
+void sys_get_key(int fd, char *buf);
+
+void sys_read(int fd, char *buf, int count);
 
 void sys_beep();
 

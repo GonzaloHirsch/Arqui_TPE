@@ -5,17 +5,15 @@
 //Todo: agregar todos los syscalls
 
 void handleSyscall(uint64_t rdi, uint64_t rsi, uint64_t rdx, uint64_t rcx, uint64_t r8, uint64_t r9){
-
-	switch(*rdi){
+	switch(rdi){
 		case WRITE:
-			handle_sys_write(*rsi, rdx, *rcx);
+			handle_sys_write(rsi, (char *)rdx, rcx);
 		break;
 		case READ:
-			handle_sys_read(*rsi, rdx, *rcx);
+			handle_sys_read(rsi, (char *)rdx, rcx);
 		break;
-
 	}
-
+	ncPrintDec(WRITE);
     ncPrint("syscall no ");
     ncPrintDec(rdi);
     ncNewline();

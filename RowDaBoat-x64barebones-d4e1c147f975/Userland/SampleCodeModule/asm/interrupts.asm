@@ -1,4 +1,4 @@
-GLOBAL _int80h
+GLOBAL _int80
 
 section .text
 
@@ -39,7 +39,7 @@ section .text
 	pop rax
 %endmacro
 
-_int80h:
+_int80:
     pushState
     int 80h
     popState

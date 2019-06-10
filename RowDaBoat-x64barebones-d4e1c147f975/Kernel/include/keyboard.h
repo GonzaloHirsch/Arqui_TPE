@@ -16,6 +16,6 @@
 
 void printKey(void);
 int addChar(char c);
-int getChar(void)
+int getChar(void);
 
 #endif

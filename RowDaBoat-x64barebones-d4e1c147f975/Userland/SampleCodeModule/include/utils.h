@@ -2,7 +2,8 @@
 #define UTILS_H
 
 #include <stdint.h>
-#include <interrupts.h>
+#include <syscalls.h>
 
+int getKey();
 
 #endif 
