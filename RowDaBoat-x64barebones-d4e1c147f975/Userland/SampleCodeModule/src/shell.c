@@ -14,9 +14,10 @@ void init_shell(void){
 	display_welcome_message();
 
 	int command = 1;
-
+	int key;
 	//while para la shell y su funcionamiento
 	while(command != SHUTDOWN){
+		key = getKey();
 		//Hacer un get de la tecla que se apreto
 
 		//Ver si es un enter
