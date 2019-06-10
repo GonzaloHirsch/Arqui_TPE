@@ -1,9 +1,5 @@
-//
-// Created by root on 6/8/19.
-//
-
-#ifndef ARQUI_TPE_KEYBOARD_H
-#define ARQUI_TPE_KEYBOARD_H
+#ifndef KEYBOARD_H
+#define KEYBOARD_H
 
 #define BREAK_CODE_DIF          128
 
@@ -15,6 +11,11 @@
 #define LEFT_ARROW              135
 #define RIGHT_ARROW 136
 
-void printKey();
+#define EOF -1
+#define MAX_BUFFER_SIZE 100
 
-#endif //ARQUI_TPE_KEYBOARD_H
+void printKey(void);
+int addChar(char c);
+int getChar(void)
+
+#endif

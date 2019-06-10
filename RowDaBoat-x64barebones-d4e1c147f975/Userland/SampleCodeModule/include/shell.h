@@ -4,6 +4,21 @@
 #include <stdint.h>
 #include <naiveConsole.h>
 
+//Constantes para los comandos
+#define HELP = 0
+#define SNAKE = 1
+#define SHUTDOWN = 2
+#define VERIFY = 3
+#define TIME = 4
+#define BEEP = 5
+#define SLEEP = 6
+
+#define MAX_BUFF_SIZE 100
+
+static char * STDIN[MAX_BUFF_SIZE] = {0};
+static char * STDERR[MAX_BUFF_SIZE] = {0};
+static char * STDOUT[MAX_BUFF_SIZE] = {0};
+
 // void ncPrint(const char * string);
 // void ncPrintChar(char character);
 // void ncNewline();
