@@ -15,3 +15,5 @@ RowDaBoat-x64barebones-d4e1c147f975/Image/x64BareBonesImage\.vmdk
 *.vmdk
 
 *.img
+
+\.idea/

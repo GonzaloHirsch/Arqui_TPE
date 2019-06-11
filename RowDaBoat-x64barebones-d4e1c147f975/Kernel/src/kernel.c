@@ -8,6 +8,7 @@
 #include <idtLoader.h>
 #include <interrupts.h>
 #include <syscall.h>
+#include <videoDriver.h>
 
 extern uint8_t text;
 extern uint8_t rodata;
@@ -86,6 +87,46 @@ void * initializeKernelBinary()
 	ncPrint("[Done]");
 	ncNewline();
 	ncNewline();
+
+    ncPrint("[Initializing Graphics]");
+    ncNewline();
+
+    ncPrintHex(getVideoX());
+
+    initVideoDriver();
+
+    for (int i = 0; i < 500; ++i) {
+        for (int j = 0; j < 100; ++j) {
+            drawPixel(i,j,255,255,255);
+        }
+    }
+
+    for (int i = 0; i < 500; ++i) {
+        for (int j = 0; j < 100; ++j) {
+            drawPixel(i,j,66,217,244);
+        }
+    }
+    for (int i = 0; i < 500; ++i) {
+        for (int j = 0; j < 100; ++j) {
+            drawPixel(i,100+j,255,255,255);
+        }
+    }
+    for (int i = 0; i < 50; ++i) {
+        for (int j = 0; j < 50; ++j) {
+            drawPixel(i+225,125+j,255,255,60);
+        }
+    }
+    for (int i = 0; i < 500; ++i) {
+        for (int j = 0; j < 100; ++j) {
+            drawPixel(i,200+j,66,217,244);
+        }
+    }
+
+
+    ncPrint("[Done]");
+    ncNewline();
+    ncNewline();
+
 	return getStackBase();
 }
 
