@@ -7,7 +7,10 @@
 #include <time.h>
 #include <idtLoader.h>
 #include <interrupts.h>
+<<<<<<<<< Temporary merge branch 1:RowDaBoat-x64barebones-d4e1c147f975/Kernel/kernel.c
+=========
 #include <syscall.h>
+>>>>>>>>> Temporary merge branch 2:RowDaBoat-x64barebones-d4e1c147f975/Kernel/src/kernel.c
 
 extern uint8_t text;
 extern uint8_t rodata;
@@ -39,6 +42,10 @@ void * getStackBase()
 		+ PageSize * 8				//The size of the stack itself, 32KiB
 		- sizeof(uint64_t)			//Begin at the top of the stack
 	);
+}
+
+void goToUserland(){
+	((EntryPoint)sampleCodeModuleAddress)();
 }
 
 void * initializeKernelBinary()
@@ -85,14 +92,35 @@ void * initializeKernelBinary()
 
 	ncPrint("[Done]");
 	ncNewline();
+
+	ncPrint("Loading IDT...");
 	ncNewline();
-	return getStackBase();
+	load_idt();
+	ncPrint("[Done]");
+	ncNewline();
+
+	ncPrint("Getting stack base...");
+	ncNewline();
+	void * stackBase = getStackBase();
+	ncPrint("[Done]");
+	ncNewline();
+
+	ncPrint("Prepare to go to Userland...");
+	ncNewline();
+	goToUserland();
+
+	return 0;
 }
 
+
 int main()
+<<<<<<<<< Temporary merge branch 1:RowDaBoat-x64barebones-d4e1c147f975/Kernel/kernel.c
+{	
+=========
 {
 
     char buffer[100];
+>>>>>>>>> Temporary merge branch 2:RowDaBoat-x64barebones-d4e1c147f975/Kernel/src/kernel.c
 	ncPrint("[Kernel Main]");
 	ncNewline();
 	ncPrint("Loading IDT...");
@@ -102,7 +130,10 @@ int main()
 	ncNewline();
 	ncPrint("Arquitectura de Computadoras");
 	ncNewline();
-
+<<<<<<<<< Temporary merge branch 1:RowDaBoat-x64barebones-d4e1c147f975/Kernel/kernel.c
+	for (int i = 0; i < 2000000000; i++){
+		if ("sdfgsdf" == "dfghsdf"){
+}}
 	ncPrintDec(ticks_elapsed());
 
 	ncPrintDec(ticks_elapsed());

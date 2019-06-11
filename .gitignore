@@ -9,3 +9,9 @@ RowDaBoat-x64barebones-d4e1c147f975/Image/x64BareBonesImage\.img
 RowDaBoat-x64barebones-d4e1c147f975/Image/x64BareBonesImage\.qcow2
 
 RowDaBoat-x64barebones-d4e1c147f975/Image/x64BareBonesImage\.vmdk
+
+*.qcow2
+
+*.vmdk
+
+*.img
