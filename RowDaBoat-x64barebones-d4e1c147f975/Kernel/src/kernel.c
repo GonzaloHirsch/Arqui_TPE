@@ -104,6 +104,8 @@ int main()
 	ncNewline();
 
 	ncPrintDec(ticks_elapsed());
+
+	ncPrintDec(ticks_elapsed());
 	ncNewline();
 	ncPrint("  Sample code module at 0x");
 	ncPrintHex((uint64_t)sampleCodeModuleAddress);
