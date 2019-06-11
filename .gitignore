@@ -1,0 +1,12 @@
+
+\.DS_Store
+
+*.bin
+
+*.img
+
+*.qcow2
+
+*.vmdk
+
+*.o
