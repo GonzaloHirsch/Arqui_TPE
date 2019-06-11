@@ -1,7 +1,7 @@
 #include <shell.h>
 
-const char * commandMessages[] = {"help - Show available commands and their use", 
-								"snake - Initializes the Snake game", 
+const char * commandMessages[] = {"help - Show available commands and their use",
+								"snake - Initializes the Snake game",
 								"shutdown - Shuts down and exits the system",
 								"verify - Runs verification routines for system exceptions",
 								"time - Displays system date and time"};
@@ -12,7 +12,7 @@ const char * commands[] = {"help", "snake", "shutdown", "verify", "time", "beep"
 void init_shell(void){
 	ncClear();
 	ncPrint("You have entered userland");
-	
+
 	display_welcome_message();
 
 	int command = 1;
@@ -21,7 +21,7 @@ void init_shell(void){
 	int key;
 	//while para la shell y su funcionamiento
 	while(command != SHUTDOWN){
-		ncPrint("WHILE AWAY");
+		//ncPrint("WHILE AWAY");
 		key = getKey();
 		ncPrintDec(key);
 		//En el caso de un enter
@@ -63,8 +63,8 @@ void handle_command(int cmd){
 	}
 }
 
-void display_welcome_message(void){  
-	ncNewline();                   
+void display_welcome_message(void){
+	ncNewline();
 	ncPrint("	                                         /$$  /$$$$$$   /$$$$$$");
 	ncNewline();
 	ncPrint("                                        |__/ /$$__  $$ /$$__  $$");

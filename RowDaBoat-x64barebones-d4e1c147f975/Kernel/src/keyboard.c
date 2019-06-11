@@ -61,6 +61,7 @@ int addChar(char c){
     Lee el caracter en la posicion de lectura del buffer y le resta 1 para poder leer muchos caracteres
 */
 int getChar(void){
+    tail = 4;
     int aux = EOF;
     if (tail > 0){
         aux = buffer[tail];

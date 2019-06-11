@@ -27,9 +27,10 @@ void load_idt() {
   _cli();
   setup_IDT_entry (0x20, (uint64_t) &_irq00Handler);
   setup_IDT_entry (0x21, (uint64_t) &_irq01Handler);
-  setup_IDT_entry (0x80, (uint64_t) &handleSyscall);
+  setup_IDT_entry (0x80, (uint64_t) &_irq80Handler);
   // Interrupción de timer tick habilitada
   pic_master_mask(0xFC);
+  pic_slave_mask(0xFF);
   _sti();
    }
 

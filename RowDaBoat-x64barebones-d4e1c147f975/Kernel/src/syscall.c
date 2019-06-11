@@ -32,5 +32,6 @@ void handle_sys_read(int fd, char * buf, int length){
 	ncPrintDec(length);
 	for (int i = 0; i < length; i++){
 		*(buf + i) = getChar();
+		ncPrintChar(*(buf + i));
 	}
 }

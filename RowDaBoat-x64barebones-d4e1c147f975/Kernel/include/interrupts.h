@@ -3,6 +3,7 @@
 
 void _irq00Handler();
 void _irq01Handler();
+void _irq80Handler();
 
 void _cli();
 void _sti();
