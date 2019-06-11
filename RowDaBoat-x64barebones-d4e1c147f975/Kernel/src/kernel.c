@@ -7,10 +7,7 @@
 #include <time.h>
 #include <idtLoader.h>
 #include <interrupts.h>
-<<<<<<<<< Temporary merge branch 1:RowDaBoat-x64barebones-d4e1c147f975/Kernel/kernel.c
-=========
 #include <syscall.h>
->>>>>>>>> Temporary merge branch 2:RowDaBoat-x64barebones-d4e1c147f975/Kernel/src/kernel.c
 
 extern uint8_t text;
 extern uint8_t rodata;
@@ -98,9 +95,6 @@ void * initializeKernelBinary()
 
 
 int main()
-<<<<<<<<< Temporary merge branch 1:RowDaBoat-x64barebones-d4e1c147f975/Kernel/kernel.c
-{	
-=========
 {
 
     char buffer[100];
