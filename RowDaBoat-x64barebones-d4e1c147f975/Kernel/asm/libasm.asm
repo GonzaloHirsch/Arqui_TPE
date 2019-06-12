@@ -2,6 +2,11 @@ GLOBAL cpuVendor
 GLOBAL getSeconds
 GLOBAL getKeyboard
 
+GLOBAL getVideoBaseAddress
+GLOBAL getVideoX
+GLOBAL getVideoY
+GLOBAL getVideoDepth
+
 section .text
 	
 cpuVendor:
@@ -58,3 +63,43 @@ _show:
 	mov rsp, rbp
 	pop rbp
 	ret
+
+getVideoBaseAddress:
+    push rbp
+ 	mov rbp, rsp
+
+ 	mov ax, [0x5080]
+
+ 	mov rsp, rbp
+    	pop rbp
+    	ret
+
+getVideoX:
+    push rbp
+ 	mov rbp, rsp
+
+    mov ax, [5084h]
+
+ 	mov rsp, rbp
+    	pop rbp
+    	ret
+
+getVideoY:
+    push rbp
+ 	mov rbp, rsp
+
+    mov ax, [5086h]
+
+ 	mov rsp, rbp
+    	pop rbp
+    	ret
+
+getVideoDepth:
+    push rbp
+ 	mov rbp, rsp
+
+ 	mov ax, [0x5C25]
+
+ 	mov rsp, rbp
+    	pop rbp
+    	ret
