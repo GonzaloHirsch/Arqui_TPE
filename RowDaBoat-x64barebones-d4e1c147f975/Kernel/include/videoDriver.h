@@ -6,7 +6,8 @@
 #define ARQUI_TPE_VIDEODRIVER_H
 
 #include <stdint.h>
-#
+#include <lib.h>
+#include <pixelMap.h>
 
 // Struct taken from https://wiki.osdev.org/Getting_VBE_Mode_Info
 typedef struct __attribute__((packed)) {
@@ -34,9 +35,27 @@ typedef struct __attribute__((packed)) {
     uint16_t reserved2;
 } ModeInfoBlock;
 
+typedef struct Color{
+    int r;
+    int g;
+    int b;
+}Color;
+
+typedef struct Vector2{
+    int x;
+    int y;
+}Vector2;
+
 void initVideoDriver();
 
-void drawPixel(int x, int y, int r, int g, int b);
+void draw_pixel(Vector2 pos, Color color);
+void draw_rect(Vector2 pos, Vector2 size, Color color);
+void draw_char_with_background(Vector2 pos, char c, Color foreground, Color background);
+void draw_string_with_background(Vector2 pos, char * str, Color foreground, Color background);
+
+
+int getResX();
+int getResY();
 
 
 #endif //ARQUI_TPE_VIDEODRIVER_H
