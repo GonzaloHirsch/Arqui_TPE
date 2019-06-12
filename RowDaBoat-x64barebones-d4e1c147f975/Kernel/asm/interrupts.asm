@@ -5,6 +5,7 @@ GLOBAL pic_slave_mask
 
 GLOBAL _irq00Handler
 GLOBAL _irq01Handler
+GLOBAL _irq80Handler
 
 EXTERN irqDispatcher
 EXTERN handleSyscall

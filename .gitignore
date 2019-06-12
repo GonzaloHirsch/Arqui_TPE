@@ -1,12 +1,30 @@
+<<<<<<< HEAD
 
 \.DS_Store
 
 *.bin
 
 *.img
+=======
+\.DS_Store
+
+*.o
+
+*.bin
+
+RowDaBoat-x64barebones-d4e1c147f975/Image/x64BareBonesImage\.img
+
+RowDaBoat-x64barebones-d4e1c147f975/Image/x64BareBonesImage\.qcow2
+
+RowDaBoat-x64barebones-d4e1c147f975/Image/x64BareBonesImage\.vmdk
+>>>>>>> ribranch
 
 *.qcow2
 
 *.vmdk
 
+<<<<<<< HEAD
 *.o
+=======
+*.img
+>>>>>>> ribranch

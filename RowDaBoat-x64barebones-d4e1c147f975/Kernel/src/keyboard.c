@@ -7,7 +7,23 @@
 
 extern char read_key();
 
+/*
+    Buffer con los caracteres escritos
+    Lo dejamos 
+*/
 static char buffer[100]={0};
+/*
+    Posicion de la escritura en el buffer
+    HEAD se usa para operaciones destructivas en el buffer
+    Apunta al proximo
+*/
+static int head;
+/*
+    Posicion de la lectura en el buffer
+    TAIL se usa para operaciones no destructivas del buffer
+    Apunta al proximo
+*/
+static int tail;
 
 unsigned char keycodes[128] = {
         27,  '`', '1', '2', '3', '4', '5', '6', '7', '8', /* INDEX: 0 - 9 */
@@ -22,8 +38,34 @@ unsigned char keycodes[128] = {
         0,	/* All other keys are undefined */
 };
 
-void printKey(){
+void printKey(void){
 
     buffer[0] = keycodes[read_key()];
     ncPrint(buffer);
+}
+
+/*
+    Agrega un char al buffer
+    Si se va a pasar de la longitud del buffer, en el caso del max - 1, lo pone al principio
+*/
+int addChar(char c){
+    if (head < MAX_BUFFER_SIZE){
+        buffer[head] = c;
+        head = (head + 1) % MAX_BUFFER_SIZE;
+        return 1;
+    }
+    return 0;
+}
+
+/*
+    Lee el caracter en la posicion de lectura del buffer y le resta 1 para poder leer muchos caracteres
+*/
+int getChar(void){
+    int aux = EOF;
+    if (tail > 0){
+        aux = buffer[tail];
+        //Le saca el modulo para que de "vueltas" alrededor del buffer
+        tail = (tail + 1) % MAX_BUFFER_SIZE;
+    }
+    return aux;
 }
