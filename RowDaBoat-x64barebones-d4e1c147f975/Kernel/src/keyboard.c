@@ -1,7 +1,3 @@
-//
-// Created by root on 6/8/19.
-//
-
 #include <keyboard.h>
 #include <naiveConsole.h>
 
@@ -32,6 +28,8 @@ static int shift = 0;
     Flag de caps lock, empieza en falso
 */
 static int caps_lock = 0;
+
+static int full = 0;
 
 //Macro que shiftea al 1 index veces y le hace un and al binario para ver si esta prendido
 #define CHECKBYTE(binary, index) (binary & 1<<(index))
@@ -75,9 +73,11 @@ void keyboard_handler(void){
       //Es el bit numero 7 (el mas significativo)
       //Si esta prendido es que se solto la tecla
       if (CHECKBYTE(code, 7)){
-        //ncPrintDec(keycodes[(code - BREAK_CODE_DIF]);
+        //ncPrintChar(keycode_map[code - BREAK_CODE_DIF]);
+        code = code & 0xff;
+        int aux = code - BREAK_CODE_DIF;
         //Si se solto algun shift, se apaga el flag
-        if (keycode_map[code - BREAK_CODE_DIF] == RIGHT_SHIFT || keycode_map[code - BREAK_CODE_DIF] == LEFT_SHIFT){
+        if (keycode_map[aux] == RIGHT_SHIFT || keycode_map[aux] == LEFT_SHIFT){
           shift = 0;
         }
         return;
@@ -122,16 +122,14 @@ void keyboard_handler(void){
     Si se va a pasar de la longitud del buffer, en el caso del max - 1, lo pone al principio
 */
 int addChar(char c){
-    if (head < MAX_BUFFER_SIZE){
-        buffer[head] = c;
-        //ncPrint("Letter");
-        ncPrintChar(buffer[head]);
-        //ncPrint("Head");
-        //ncPrintDec(head);
-        //ncPrint("Tail");
-        //ncPrintDec(tail);
-        head = (head + 1) % MAX_BUFFER_SIZE;
-        return 1;
+    if (!full){
+      buffer[head] = c;
+      head = (head + 1) % MAX_BUFFER_SIZE;
+      if (head == tail && !full){
+        full = 1;
+      }
+      //ncPrintChar(buffer[head]);
+      return 1;
     }
     return 0;
 }
@@ -141,13 +139,15 @@ int addChar(char c){
 */
 int getChar(void){
     int aux = EOF;
-    //ncPrintDec(head);
-    //ncPrintDec(tail);
-    if (head != tail){
-        aux = buffer[tail];
-        ncPrintChar(aux);
-        //Le saca el modulo para que de "vueltas" alrededor del buffer
-        tail = (tail + 1) % MAX_BUFFER_SIZE;
+    //ncPrint("GET");
+    if (head != tail || (head == tail && full)){
+      aux = buffer[tail];
+      //ncPrintChar(aux);
+      //Le saca el modulo para que de "vueltas" alrededor del buffer
+      tail = (tail + 1) % MAX_BUFFER_SIZE;
+      if (full){
+        full = 0;
+      }
     }
     return aux;
 }

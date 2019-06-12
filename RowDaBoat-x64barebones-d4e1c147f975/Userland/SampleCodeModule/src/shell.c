@@ -15,22 +15,27 @@ void init_shell(void){
 	//Comando elegido
 	int command = 1;
 	//Buffer para el comando que se quiere escribir
-	char * commandBuff[100];
+	char commandBuff[100];
 	//Posicion en el buffer de comando
 	int commandBuffPos = 0;
 	//Tecla que se toca
-	int key;
+	char key;
 
 	//while para la shell y su funcionamiento
 	while(command != SHUTDOWN){
 		//ncPrint("WHILE AWAY");
-		//key = getKey();
+		key = getKey();
+		//ncPrintChar(key);
+		//writeKey(key);
 		//En el caso de un enter
-		if (key == "\\n"){
+		if (key == '\n'){
 			command = HELP;
 			handle_command(command);
+		} else if (key == '\b'){
+			//delete(key);
+			commandBuffPos--;
 		} else if (key != 0){
-			//writeKey(key);
+			writeKey(&key);
 			commandBuff[commandBuffPos] = key;
 			commandBuffPos++;
 		}
@@ -43,6 +48,10 @@ void init_shell(void){
 
 
 	display_goodbye_message();
+}
+
+int getCommand(char * buff){
+	
 }
 
 void handle_command(int cmd){

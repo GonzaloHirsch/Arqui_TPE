@@ -19,6 +19,10 @@ void ncPrint(const char * string)
 
 void ncPrintChar(char character)
 {
+
+if (character < 1)
+	return;
+
     *currentVideo = character;
     currentVideo += 1;
     *currentVideo = 2;

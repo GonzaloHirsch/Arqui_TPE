@@ -1,9 +1,9 @@
 #include <utils.h>
 
 char getKey(){
-	char * buff[1];
-	sys_get_key(0, buff);
-	return buff[0];
+	char buff;
+	sys_get_key(0, &buff);
+	return buff;
 }
 
 void writeKey(char * key){
