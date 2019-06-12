@@ -1,8 +1,9 @@
-GLOBAL syscall
+GLOBAL _int80
 
 section .text
 
-%macro pushState 0  ; fuente: RowDaBoat/Proyect Wyrm
+;fuente: RowDaBoat/Proyect Wyrm
+%macro pushState 0 	
 	push rax
 	push rbx
 	push rcx
@@ -38,9 +39,7 @@ section .text
 	pop rax
 %endmacro
 
-syscall:
-
-
+_int80:
     pushState
     int 80h
     popState

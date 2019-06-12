@@ -30,6 +30,7 @@ void load_idt() {
   setup_IDT_entry (0x80, (uint64_t) &_irq80Handler);
   // Interrupción de timer tick habilitada
   pic_master_mask(0xFC);
+  pic_slave_mask(0xFF);
   _sti();
    }
 
