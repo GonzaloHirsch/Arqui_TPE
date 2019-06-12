@@ -12,15 +12,16 @@ extern char read_key();
 static char buffer[100];
 
 void irqDispatcher(uint64_t irq) {
+  //ncPrint("Dispatcher");
     switch (irq) {
         case 0:
-        	int_20();
-			break;
+          int_20();
+		         break;
         case 1:
-            int_21();
-        break;
+          int_21();
+          break;
 	}
-	return; 
+	return;
 }
 
 void int_20() {
@@ -28,5 +29,7 @@ void int_20() {
 }
 
 void int_21() {
-    printKey();
+    keyboard_handler();
+    //printKey();
+    //ncPrint("Key");
 }

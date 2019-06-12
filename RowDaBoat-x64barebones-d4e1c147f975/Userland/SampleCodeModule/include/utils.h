@@ -4,6 +4,7 @@
 #include <stdint.h>
 #include <syscalls.h>
 
-int getKey();
+char getKey();
+void writeKey(char * key);
 
-#endif 
+#endif
