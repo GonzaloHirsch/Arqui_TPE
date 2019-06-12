@@ -98,7 +98,7 @@ void * initializeKernelBinary()
 
     initVideoDriver();
 
-    initConsole();
+    init_console();
 
     Vector2 pos = {0,0};
     Vector2 size = {100,100};
@@ -114,9 +114,13 @@ void * initializeKernelBinary()
     //print("HAHAHHOLA ESTO ES ALL CAPS");
     //print("m");
 
-    for (int i = 0; i < 129; ++i) {
-        print("%s\n%d","HOLA!",120);
+    for (int i = 0; i < 2000; ++i) {
+        print("%d-", i);
     }
+
+    //move_all_up();
+
+    //clear_line(47);
 
     ncPrint("[Done]");
     ncNewline();

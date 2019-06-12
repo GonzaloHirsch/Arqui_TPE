@@ -11,11 +11,17 @@
 #include <stdarg.h>
 #include <videoDriver.h>
 
-void initConsole();
+void init_console();
 
 void print(char * str, ...);
 
-void clearConsole();
+void move_line_up(unsigned int line);
+
+void clear_line(unsigned int line);
+
+void move_all_up();
+
+void clear_console();
 
 
 #endif //ARQUI_TPE_CONSOLE_H
