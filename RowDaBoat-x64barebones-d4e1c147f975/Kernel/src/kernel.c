@@ -1,5 +1,6 @@
 #include <stdint.h>
-#include <string.h>
+//#include <string.h>
+#include <strings.h>
 #include <lib.h>
 #include <moduleLoader.h>
 #include <naiveConsole.h>
@@ -8,6 +9,9 @@
 #include <idtLoader.h>
 #include <interrupts.h>
 #include <syscall.h>
+#include <videoDriver.h>
+#include <console.h>
+#include <pixelMap.h>
 
 extern uint8_t text;
 extern uint8_t rodata;
@@ -94,6 +98,38 @@ void * initializeKernelBinary()
 
 	ncPrint("Loading IDT...");
 	ncNewline();
+
+    ncPrint("[Initializing Graphics]");
+    ncNewline();
+
+    ncPrintHex(getVideoX());
+
+    initVideoDriver();
+
+    init_console();
+
+    Vector2 pos = {0,0};
+    Vector2 size = {100,100};
+
+    Color foreground = {255,255,255};
+    Color background = {255,0,0};
+
+    char * str = "This is a string";
+
+    char buf[2];
+
+    //draw_string_with_background(pos, buf, foreground, background);
+    //print("HAHAHHOLA ESTO ES ALL CAPS");
+    //print("m");
+
+    for (int i = 0; i < 2000; ++i) {
+        print("%d-", i);
+    }
+
+    //move_all_up();
+
+    //clear_line(47);
+
 	load_idt();
 	ncPrint("[Done]");
 	ncNewline();
