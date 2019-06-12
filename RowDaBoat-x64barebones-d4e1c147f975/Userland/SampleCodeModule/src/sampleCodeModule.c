@@ -20,9 +20,14 @@ int main() {
 
 	//Test if BSS is properly set up
 	if (var1 == 0 && var2 == 0)
-		return 0xBEBEC17A;
+		return 0xdeadbeef;
 	*/
 	//return 0xDEADBEEF;
+
 	init_shell();
+	int i = 0xFFFFFFFF;
+	i += 1;
+	i/=0;
+	ncPrint("hello, I'm a user");
 	return 1;
 }

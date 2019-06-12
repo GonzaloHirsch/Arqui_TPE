@@ -9,6 +9,9 @@ GLOBAL _irq80Handler
 
 GLOBAL _exception00Handler
 GLOBAL _exception06Handler
+GLOBAL _exception13Handler
+GLOBAL _exception14Handler
+
 
 EXTERN irqDispatcher
 EXTERN handleSyscall
@@ -93,6 +96,12 @@ _exception00Handler:
 _exception06Handler:
     exceptionHandlerMaster 6
 
+_exception13Handler:
+    exceptionHandlerMaster 13
+
+_exception14Handler:
+    exceptionHandlerMaster 14
+
 _cli:
 	cli
 	ret
@@ -117,3 +126,4 @@ pic_slave_mask:
     out	0A1h,al
     pop     rbp
     retn
+
