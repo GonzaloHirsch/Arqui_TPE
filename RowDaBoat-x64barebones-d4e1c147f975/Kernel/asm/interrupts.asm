@@ -7,8 +7,12 @@ GLOBAL _irq00Handler
 GLOBAL _irq01Handler
 GLOBAL _irq80Handler
 
+GLOBAL _exception00Handler
+GLOBAL _exception06Handler
+
 EXTERN irqDispatcher
 EXTERN handleSyscall
+EXTERN exceptionDispatcher
 
 %macro pushState 0
 	push rax
@@ -26,13 +30,9 @@ EXTERN handleSyscall
 	push r13
 	push r14
 	push r15
-	push fs
-	push gs
 %endmacro
 
 %macro	popState 0
-	pop gs
-	pop fs
 	pop r15
 	pop r14
 	pop r13
@@ -61,6 +61,16 @@ EXTERN handleSyscall
      iretq
 %endmacro
 
+%macro exceptionHandlerMaster 1
+    pushState
+        mov rdi, %1
+        call exceptionDispatcher
+        mov al, 20h
+        out 20h, al
+    popState
+    iretq
+%endmacro
+
 _irq00Handler:
     irqHandlerMaster 0
 
@@ -76,6 +86,12 @@ _irq80Handler:
     out 20h, al
 
     iretq
+
+_exception00Handler:
+    exceptionHandlerMaster 0
+
+_exception06Handler:
+    exceptionHandlerMaster 6
 
 _cli:
 	cli
