@@ -12,7 +12,7 @@ void sys_get_key(int fd, char *buf){
 	_int80(READ, fd, buf, 1, 0, 0);
 }
 
-void sys_write_key(int fd, const char *buf){
+void sys_write_key(int fd, const char * buf){
 	_int80(WRITE, fd, buf, 1, 0, 0);
 }
 

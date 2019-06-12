@@ -10,26 +10,32 @@ const char * commands[] = {"help", "snake", "shutdown", "verify", "time", "beep"
 
 
 void init_shell(void){
-	ncClear();
-	ncPrint("You have entered userland");
-
 	display_welcome_message();
 
+	//Comando elegido
 	int command = 1;
-	char * commandBuff[100];
+	//Buffer para el comando que se quiere escribir
+	char commandBuff[100];
+	//Posicion en el buffer de comando
 	int commandBuffPos = 0;
-	int key;
+	//Tecla que se toca
+	char key;
+
 	//while para la shell y su funcionamiento
 	while(command != SHUTDOWN){
 		//ncPrint("WHILE AWAY");
 		key = getKey();
-		ncPrintDec(key);
+		//ncPrintChar(key);
+		//writeKey(key);
 		//En el caso de un enter
-		if (key == 29){
+		if (key == '\n'){
 			command = HELP;
 			handle_command(command);
-		} else {
-			writeKey(key);
+		} else if (key == '\b'){
+			//delete(key);
+			commandBuffPos--;
+		} else if (key != 0){
+			writeKey(&key);
 			commandBuff[commandBuffPos] = key;
 			commandBuffPos++;
 		}
@@ -40,7 +46,12 @@ void init_shell(void){
 		//Ver si matchea con alguno de los comandos
 	}
 
+
 	display_goodbye_message();
+}
+
+int getCommand(char * buff){
+	
 }
 
 void handle_command(int cmd){
@@ -64,6 +75,7 @@ void handle_command(int cmd){
 }
 
 void display_welcome_message(void){
+	ncClear();
 	ncNewline();
 	ncPrint("	                                         /$$  /$$$$$$   /$$$$$$");
 	ncNewline();

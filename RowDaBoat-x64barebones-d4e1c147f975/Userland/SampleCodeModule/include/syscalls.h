@@ -13,6 +13,8 @@
 
 void sys_write(int fd, const char *buf, int count);
 
+void sys_write_key(int fd, const char * buf);
+
 void sys_get_key(int fd, char *buf);
 
 void sys_read(int fd, char *buf, int count);

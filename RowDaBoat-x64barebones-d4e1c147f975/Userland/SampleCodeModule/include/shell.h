@@ -16,10 +16,6 @@
 
 #define MAX_BUFF_SIZE 100
 
-static char * STDIN[MAX_BUFF_SIZE] = {0};
-static char * STDERR[MAX_BUFF_SIZE] = {0};
-static char * STDOUT[MAX_BUFF_SIZE] = {0};
-
 void init_shell(void);
 
 void handle_command(int cmd);
