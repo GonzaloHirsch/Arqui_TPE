@@ -45,6 +45,12 @@ void * getStackBase()
 	);
 }
 
+void goToUserland(){
+	ncPrint("Entering Userland...");
+	ncNewline();
+	((EntryPoint)sampleCodeModuleAddress)();
+}
+
 void * initializeKernelBinary()
 {
 	char buffer[10];
@@ -89,6 +95,8 @@ void * initializeKernelBinary()
 
 	ncPrint("[Done]");
 	ncNewline();
+
+	ncPrint("Loading IDT...");
 	ncNewline();
 
     ncPrint("[Initializing Graphics]");
@@ -122,24 +130,25 @@ void * initializeKernelBinary()
 
     //clear_line(47);
 
-    ncPrint("[Done]");
-    ncNewline();
-    ncNewline();
+	load_idt();
+	ncPrint("[Done]");
+	ncNewline();
+	
+	ncPrint("Prepare to go to Userland...");
+	ncNewline();
+	goToUserland();
 
-	return getStackBase();
+	return getStackBase();;
 }
+
 
 int main()
 {
-
+/*
     char buffer[100];
 	ncPrint("[Kernel Main]");
 	ncNewline();
-	ncPrint("Loading IDT...");
-	ncNewline();
-	load_idt();
-	ncPrint("IDT Loaded");
-	ncNewline();
+
 	ncPrint("Arquitectura de Computadoras");
 	ncNewline();
 
@@ -165,5 +174,7 @@ int main()
 	ncNewline();
 
 	ncPrint("[Finished]");
+	*/
 	return 0;
 }
+
