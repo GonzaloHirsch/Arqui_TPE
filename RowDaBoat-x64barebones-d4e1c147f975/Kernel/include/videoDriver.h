@@ -8,6 +8,7 @@
 #include <stdint.h>
 #include <lib.h>
 #include <pixelMap.h>
+#include <types.h>
 
 // Struct taken from https://wiki.osdev.org/Getting_VBE_Mode_Info
 typedef struct __attribute__((packed)) {
@@ -34,17 +35,6 @@ typedef struct __attribute__((packed)) {
     uint32_t reserved1;
     uint16_t reserved2;
 } ModeInfoBlock;
-
-typedef struct Color{
-    int r;
-    int g;
-    int b;
-}Color;
-
-typedef struct Vector2{
-    int x;
-    int y;
-}Vector2;
 
 void initVideoDriver();
 
