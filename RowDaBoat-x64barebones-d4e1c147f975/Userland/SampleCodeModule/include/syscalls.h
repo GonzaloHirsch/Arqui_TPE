@@ -25,6 +25,6 @@ void sys_snake();
 
 void sys_draw();
 
-void sys_time();
+void sys_time(char * buf);
 
 #endif

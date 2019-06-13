@@ -3,6 +3,7 @@
 
 #include <stdint.h>
 #include <keyboard.h>
+#include <lib.h>
 
 #define READ 1
 #define WRITE 2

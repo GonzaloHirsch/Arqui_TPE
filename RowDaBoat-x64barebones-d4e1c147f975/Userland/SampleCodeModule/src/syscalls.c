@@ -20,8 +20,8 @@ void sys_beep(){
 	//_int80();
 }
 
-void sys_time(){
-	//_int80();
+void sys_time(char * buf){
+	_int80(TIME, 0, buf, 0, 0, 0);
 }
 
 void sys_snake(){

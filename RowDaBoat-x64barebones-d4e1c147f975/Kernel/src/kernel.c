@@ -103,7 +103,7 @@ void * initializeKernelBinary()
     ncNewline();
 
     ncPrintHex(getVideoX());
-
+/*
     initVideoDriver();
 
     init_console();
@@ -129,11 +129,11 @@ void * initializeKernelBinary()
     //move_all_up();
 
     //clear_line(47);
-
+*/
 	load_idt();
 	ncPrint("[Done]");
 	ncNewline();
-	
+
 	ncPrint("Prepare to go to Userland...");
 	ncNewline();
 	goToUserland();
@@ -177,4 +177,3 @@ int main()
 	*/
 	return 0;
 }
-
