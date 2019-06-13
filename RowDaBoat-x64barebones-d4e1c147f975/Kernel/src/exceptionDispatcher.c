@@ -4,6 +4,7 @@
 #include <naiveConsole.h>
 #include <interrupts.h>
 #include <lib.h>
+#include <time.h>
 
 static void divZeroError();
 static void invalidOpcodeError();
@@ -11,21 +12,33 @@ static void protectionFault();
 static void pageFault();
 static void tBI(); //(to Be Implemented
 
+extern void goToUserland();
 
 static void (*exceptionsArray[])() = {divZeroError, tBI, tBI, tBI, tBI, tBI, invalidOpcodeError, tBI, tBI, tBI, tBI, tBI, tBI, protectionFault, pageFault};
 
 
 
 void exceptionDispatcher(uint64_t type){
-ncClear();
+
+   // char buffer[100];
+
+
     _cli();
-    ncPrintOnAddress((char*)(0xB8000 + 80*2*4), "Hola");
-    ncPrintOnAddress((char *)(0xB8000 + 80*2*2), itoa(type));
-    ncPrintOnAddress((char *)(0xB8000) ,"Dispatching exception");
+    ncClear();
+    // ncPrintOnAddress((char*)(0xB8000 + 80*2*4), "Hola");
+   //ncPrintOnAddress((char *)(0xB8000 + 80*2*2), itoa(type, buffer, 10));
+   // ncPrintOnAddress((char *)(0xB8000) ,"Dispatching exception");
     (*exceptionsArray[type])();
+    ncNewline();
    printRegisters();
 
+
+
+    sleep(1000);
+    ncClear();
     _sti();
+    goToUserland();
+
 }
 
 
@@ -36,19 +49,23 @@ void tBI(){
 
 static void divZeroError(){
 
-    ncPrintOnAddress((char *)(0xB8000 + 80*2*12 + 80-20*2) ,"Division By Zero");
+    ncPrint("Division By Zero");
+    //ncPrintOnAddress((char *)(0xB8000 + 80*2 + 80-20*2) ,"Division By Zero");
 
 }
 
 static void invalidOpcodeError(){
 
-    ncPrintOnAddress((char *)(0xB8000 + 80*2*12 + 80-20*2), "Invalid Opcode");
+    ncPrint("Invalid Opcode");
+   // ncPrintOnAddress((char *)(0xB8000 + 80*2 + 80-20*2), "Invalid Opcode");
 }
 
 static void protectionFault(){
-    ncPrintOnAddress((char *)(0xB8000 + 80*2*12 + 80-20*2), "Protection Fault");
+    ncPrint("Protection Fault");
+   // ncPrintOnAddress((char *)(0xB8000 + 80*2 + 80-20*2), "Protection Fault");
 }
 
 void pageFault(){
-    ncPrintOnAddress((char *)(0xB8000 + 80*2*12 + 80-20*2), "Page Fault");
+    ncPrint("Page Fault");
+    //ncPrintOnAddress((char *)(0xB8000 + 80*2 + 80-20*2), "Page Fault");
 }

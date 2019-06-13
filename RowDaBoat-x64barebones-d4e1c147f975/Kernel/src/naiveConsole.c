@@ -73,7 +73,7 @@ void ncPrintOnAddress(char * address, char * text){
     while(*text != 0){
 
         *(address+i) = *text;
-        *(address+i+1) = 0x74;
+        *(address+i+1) = 0x02;
 
         i+=2;
         text++;

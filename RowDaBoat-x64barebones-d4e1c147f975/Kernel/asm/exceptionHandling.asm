@@ -2,8 +2,9 @@ GLOBAL printRegisters
 
 extern goToUserland
 extern ncNewline
+extern ncPrintDec
 extern ncPrint
-
+extern sleep
 
 section .text
 
@@ -46,63 +47,120 @@ section .text
 printRegisters:
 
     pushState
-    mov rdi, rax
+    mov rdi, regax
     call ncPrint
+    popState
+
+    pushState
+    mov rdi, rax
+    call ncPrintDec
     call ncNewline
     popState
 
+pushState
+    mov rdi, regbx
+    call ncPrint
+    popState
     pushState
     mov rdi, rbx
-    call ncPrint
+    call ncPrintDec
     call ncNewline
     popState
 
+pushState
+    mov rdi, regcx
+    call ncPrint
+    popState
     pushState
     mov rdi, rcx
-    call ncPrint
+    call ncPrintDec
     call ncNewline
     popState
 
+
+pushState
+    mov rdi, regdx
+    call ncPrint
+    popState
     pushState
     mov rdi, rdx
-    call ncPrint
+    call ncPrintDec
     call ncNewline
     popState
 
+
+pushState
+    mov rdi, regbp
+    call ncPrint
+    popState
     pushState
     mov rdi, rbp
-    call ncPrint
+    call ncPrintDec
     call ncNewline
     popState
 
+pushState
+    mov rdi, regsp
+    call ncPrint
+    popState
     pushState
     mov rdi, rsp
-    call ncPrint
+    call ncPrintDec
     call ncNewline
     popState
 
+
+pushState
+    mov rdi, regdi
+    call ncPrint
+    popState
     pushState
     mov rdi, rdi
-    call ncPrint
+    call ncPrintDec
     call ncNewline
     popState
 
+pushState
+    mov rdi, regsi
+    call ncPrint
+    popState
     pushState
     mov rdi, rsi
-    call ncPrint
+    call ncPrintDec
     call ncNewline
     popState
 
+pushState
+    mov rdi, reg8
+    call ncPrint
+    popState
     pushState
     mov rdi, r8
-    call ncPrint
+    call ncPrintDec
     call ncNewline
     popState
 
+pushState
+    mov rdi, reg9
+    call ncPrint
+    popState
     pushState
     mov rdi, r9
-    call ncPrint
+    call ncPrintDec
     call ncNewline
     popState
 
     ret
+
+section .rodata ;Esto es para los nombres de los registros...
+
+regax db "RAX: ", 0
+regbx db "RBX: ", 0
+regcx db "RCX: ", 0
+regdx db "RDX: ", 0
+regbp db "RBP: ", 0
+regsp db "RSP: ", 0
+regdi db "RDI: ", 0
+regsi db "RSI: ", 0
+reg8 db "R8: ", 0
+reg9 db "R9: ", 0

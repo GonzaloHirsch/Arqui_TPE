@@ -1,8 +1,12 @@
 #ifndef TIME_H
 #define TIME_H
 
+#define REGULAR_TICK_TIME 55
+
 void timer_handler();
 int ticks_elapsed(); 
+void sleep(uint64_t millis);
+
 
 /*
 void ncPrint(const char * string);

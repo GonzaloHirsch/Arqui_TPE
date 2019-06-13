@@ -2,6 +2,8 @@ GLOBAL _cli
 GLOBAL _sti
 GLOBAL pic_master_mask
 GLOBAL pic_slave_mask
+GLOBAL halt
+
 
 GLOBAL _irq00Handler
 GLOBAL _irq01Handler
@@ -110,6 +112,10 @@ _cli:
 _sti:
 	sti
 	ret
+
+halt:   ;necesito el halt
+    hlt
+    ret
 
 pic_master_mask:
 	push rbp

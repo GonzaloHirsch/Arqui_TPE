@@ -14,6 +14,7 @@ void _exception14Handler();
 
 void _cli();
 void _sti();
+void halt();
 
 void pic_master_mask(uint8_t mask);
 
