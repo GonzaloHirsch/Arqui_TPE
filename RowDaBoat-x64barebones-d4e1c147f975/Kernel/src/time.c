@@ -35,5 +35,4 @@ void sleep(uint64_t millis){
        halt();
     }
     ncPrintOnAddress((char *)(0xB800 + 80*2*15 + 120 + (i%5)*2), "Done");
-    _cli();
 }

@@ -150,10 +150,9 @@ pushState
     call ncNewline
     popState
 
-sti
-
 mov rdi, 1000
-call sleep
+call sleep      ;dar tiempo para que se puedan leer los registros
+
 
 ret
 

@@ -28,7 +28,7 @@ int main() {
 	int i = 0xFFFFFFFF;
 	i += 1;
 	ncPrintOnAddress((char *)(0xB8000 + 80*2*12), "hello, I'm a user");
-	//i/=0;
+	i/=0;
 	//ncPrint("hello, I'm a user");
 	return 1;
 }
