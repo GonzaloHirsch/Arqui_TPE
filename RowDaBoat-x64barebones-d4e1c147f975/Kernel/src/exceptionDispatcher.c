@@ -5,6 +5,7 @@
 #include <interrupts.h>
 #include <lib.h>
 #include <time.h>
+#include <kernel.h>
 
 static void divZeroError();
 static void invalidOpcodeError();
@@ -12,11 +13,8 @@ static void protectionFault();
 static void pageFault();
 static void tBI(); //(to Be Implemented
 
-extern void goToUserland();
 
 static void (*exceptionsArray[])() = {divZeroError, tBI, tBI, tBI, tBI, tBI, invalidOpcodeError, tBI, tBI, tBI, tBI, tBI, tBI, protectionFault, pageFault};
-
-
 
 void exceptionDispatcher(uint64_t type){
 
@@ -30,13 +28,10 @@ void exceptionDispatcher(uint64_t type){
    // ncPrintOnAddress((char *)(0xB8000) ,"Dispatching exception");
     (*exceptionsArray[type])();
     ncNewline();
+    ncClear();
+
    printRegisters();
 
-
-
-    sleep(1000);
-    ncClear();
-    _sti();
     goToUserland();
 
 }

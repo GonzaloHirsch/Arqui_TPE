@@ -150,7 +150,12 @@ pushState
     call ncNewline
     popState
 
-    ret
+sti
+
+mov rdi, 1000
+call sleep
+
+ret
 
 section .rodata ;Esto es para los nombres de los registros...
 
