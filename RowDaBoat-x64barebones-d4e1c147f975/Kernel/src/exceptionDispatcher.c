@@ -23,7 +23,7 @@ ncClear();
     ncPrintOnAddress((char *)(0xB8000 + 80*2*2), itoa(type));
     ncPrintOnAddress((char *)(0xB8000) ,"Dispatching exception");
     (*exceptionsArray[type])();
-    printAllRegisters();
+   printRegisters();
 
     _sti();
 }

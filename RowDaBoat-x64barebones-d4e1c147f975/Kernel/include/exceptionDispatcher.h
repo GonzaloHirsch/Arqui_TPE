@@ -8,7 +8,7 @@
 #include <stdint.h>
 
 void exceptionDispatcher(uint64_t type);
-void printAllRegisters();
+void printRegisters();
 
 
 #endif //ARQUI_TPE_EXCEPTIONDISPATCHER_H
