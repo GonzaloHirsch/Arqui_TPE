@@ -13,9 +13,9 @@ void init_shell(void){
 	display_welcome_message();
 
 	//Comando elegido
-	int command = 1;
+	int command = INVALID_COMMAND;
 	//Buffer para el comando que se quiere escribir
-	char commandBuff[100];
+	char commandBuff[MAX_BUFF_SIZE] = {0};
 	//Posicion en el buffer de comando
 	int commandBuffPos = 0;
 	//Tecla que se toca
@@ -27,10 +27,22 @@ void init_shell(void){
 		key = getKey();
 		//ncPrintChar(key);
 		//writeKey(key);
-		//En el caso de un enter
-		if (key == '\n'){
-			command = HELP;
+
+		//En el caso de que se pase de la cantidad de caracteres
+		if (commandBuffPos == MAX_BUFF_SIZE){
+			command = INVALID_COMMAND;
 			handle_command(command);
+		}
+
+		//En el caso de que aprete enter
+		if (key == '\n'){
+			//ncPrint("Enter-");
+			//ncPrint(commandBuff);
+			commandBuff[commandBuffPos] = 0;
+			command = getCommand(commandBuff);
+			//ncPrintHex(command);
+			handle_command(command);
+			commandBuffPos = 0;
 		} else if (key == '\b'){
 			//delete(key);
 			commandBuffPos--;
@@ -50,11 +62,24 @@ void init_shell(void){
 	display_goodbye_message();
 }
 
-int getCommand(char * buff){
-	
+int getCommand(char * cmd){
+	//Itero el array de comandos para ver cual es el que se elige
+	int result = INVALID_COMMAND;
+	for (int i = 0; i < 7 && result == INVALID_COMMAND; i++){
+		//En el caso de que sean iguales
+		// ncPrint(cmd);
+		// ncPrint("-");
+		// ncPrint(commands[i]);
+		if (!strcmp(cmd, commands[i])){
+			//ncPrint("EQU");
+			result = i;
+		}
+	}
+	return result;
 }
 
 void handle_command(int cmd){
+	//ncPrintDec(cmd);
 	switch(cmd){
 		case HELP:
 			display_help();
@@ -66,10 +91,14 @@ void handle_command(int cmd){
 		case VERIFY:
 		break;
 		case TIME:
+			display_time();
 		break;
 		case BEEP:
 		break;
 		case SLEEP:
+		break;
+		case INVALID_COMMAND:
+			display_invalid_command();
 		break;
 	}
 }
@@ -102,7 +131,31 @@ void display_welcome_message(void){
 }
 
 void display_help(void){
-	ncPrint("YEAH");
+	ncPrint("help - Displays available commands and their usage");
+	ncNewline();
+	ncPrint("snake - Initiates the snake game");
+	ncNewline();
+	ncPrint("shutdown - Shuts down the system");
+	ncNewline();
+	ncPrint("verify - Runs system verification routines and informs the results");
+	ncNewline();
+	ncPrint("time - Displays current system time");
+	ncNewline();
+	ncPrint("beep - Makes the system go Beep!");
+	ncNewline();
+	ncPrint("sleep - Makes the system sleep for 5 seconds");
+	ncNewline();
+}
+
+void display_time(){
+	char * time = getTime();
+	ncPrint(time);
+	ncNewline();
+}
+
+void display_invalid_command(void){
+	ncPrint("Invalid command, type \'help\' to view system commands");
+	ncNewline();
 }
 
 void display_goodbye_message(void){

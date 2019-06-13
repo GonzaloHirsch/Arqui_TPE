@@ -3,10 +3,11 @@
 
 #define REGULAR_TICK_TIME 55
 
-void timer_handler();
-int ticks_elapsed(); 
-void sleep(uint64_t millis);
+//#include <lib.h>
 
+void timer_handler();
+int ticks_elapsed();
+void sleep(uint64_t millis);
 
 /*
 void ncPrint(const char * string);

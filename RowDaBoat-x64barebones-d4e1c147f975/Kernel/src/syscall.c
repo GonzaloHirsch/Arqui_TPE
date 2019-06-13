@@ -14,6 +14,10 @@ void handleSyscall(uint64_t rdi, uint64_t rsi, uint64_t rdx, uint64_t rcx, uint6
 		//ncPrint("READ");
 			handle_sys_read(rsi, (char *)rdx, rcx);
 		break;
+		case TIME:
+		//ncPrint("READ");
+			handle_sys_time((char *)rdx);
+		break;
 	}
 	// ncPrintDec(READ);
 
@@ -34,4 +38,9 @@ void handle_sys_read(int fd, char * buf, int length){
 		*(buf + i) = getChar();
 		//ncPrintChar(*(buf + i));
 	}
+}
+
+void handle_sys_time(char * buff){
+	int seconds = getSeconds();
+	itoa(seconds, buff, 10);
 }

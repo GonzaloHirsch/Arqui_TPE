@@ -6,6 +6,7 @@
 #include <utils.h>
 
 //Constantes para los comandos
+#define INVALID_COMMAND -1
 #define HELP 0
 #define SNAKE 1
 #define SHUTDOWN 2
