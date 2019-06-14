@@ -14,7 +14,7 @@
 #define RIGHT_ARROW 136
 
 #define EOF 0
-#define MAX_BUFFER_SIZE 100
+#define MAX_BUFFER_SIZE 750
 
 void printKey(void);
 int addChar(char c);
