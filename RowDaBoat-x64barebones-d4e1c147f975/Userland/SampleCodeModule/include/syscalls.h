@@ -10,6 +10,8 @@
 #define BEEP 3
 #define SNAKE 4
 #define TIME 5
+#define SLEEP 6
+#define DATE 7
 
 void sys_write(int fd, const char *buf, int count);
 
@@ -19,12 +21,16 @@ void sys_get_key(int fd, char *buf);
 
 void sys_read(int fd, char *buf, int count);
 
-void sys_beep();
+void sys_sleep(int ticks);
 
-void sys_snake();
+void sys_beep(void);
 
-void sys_draw();
+void sys_snake(void);
 
-void sys_time();
+void sys_draw(void);
+
+void sys_time(char * buf);
+
+void sys_date(char * buf);
 
 #endif

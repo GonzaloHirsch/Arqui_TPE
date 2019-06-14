@@ -28,8 +28,7 @@ static void * const sampleDataModuleAddress = (void*)0x500000;
 
 typedef int (*EntryPoint)();
 
-extern char read_key();
-
+//extern char read_key();
 
 void clearBSS(void * bssAddress, uint64_t bssSize)
 {
@@ -46,8 +45,8 @@ void * getStackBase()
 }
 
 void goToUserland(){
-	ncPrint("Entering Userland...");
-	ncNewline();
+	//ncPrint("Entering Userland...");
+	//ncNewline();
 	((EntryPoint)sampleCodeModuleAddress)();
 }
 
@@ -103,7 +102,7 @@ void * initializeKernelBinary()
     ncNewline();
 
     ncPrintHex(getVideoX());
-
+/*
     initVideoDriver();
 
     init_console();
@@ -129,11 +128,11 @@ void * initializeKernelBinary()
     //move_all_up();
 
     //clear_line(47);
-
+*/
 	load_idt();
 	ncPrint("[Done]");
 	ncNewline();
-	
+
 	ncPrint("Prepare to go to Userland...");
 	ncNewline();
 	goToUserland();
@@ -177,4 +176,3 @@ int main()
 	*/
 	return 0;
 }
-
