@@ -4,12 +4,10 @@
 
 static unsigned long ticks = 0;
 
-
 void timer_handler();
 int ticks_elapsed();
 
 void timer_handler() {
-	//ncPrintDec(ticks);
   ticks++;
 }
 

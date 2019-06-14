@@ -13,7 +13,7 @@
 #define READ 1
 #define WRITE 2
 #define BEEP 3
-#define SNAKE 4
+#define TICKS 4
 #define TIME 5
 #define SLEEP 6
 #define DATE 7
@@ -27,6 +27,8 @@ void handle_sys_write(int fd, const char * buf, int length);
 void handle_sys_read(int fd, char * buf, int length);
 
 void handle_sys_beep(void);
+
+void handle_sys_get_ticks(int * ticks);
 
 void handle_sys_sleep(int ticks);
 

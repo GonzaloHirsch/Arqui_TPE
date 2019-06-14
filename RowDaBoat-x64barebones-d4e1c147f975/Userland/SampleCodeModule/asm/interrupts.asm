@@ -1,9 +1,13 @@
 GLOBAL _int80
 
+GLOBAL _sti
+GLOBAL _hlt
+GLOBAL _cli
+
 section .text
 
 ;fuente: RowDaBoat/Proyect Wyrm
-%macro pushState 0 	
+%macro pushState 0
 	push rax
 	push rbx
 	push rcx
@@ -44,3 +48,17 @@ _int80:
     int 80h
     popState
     ret
+
+_hlt:
+	sti
+	hlt
+	ret
+
+_cli:
+	cli
+	ret
+
+
+_sti:
+	sti
+	ret

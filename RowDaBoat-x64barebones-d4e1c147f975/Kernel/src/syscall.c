@@ -39,11 +39,19 @@ void handleSyscall(uint64_t rdi, uint64_t rsi, uint64_t rdx, uint64_t rcx, uint6
 		//ncPrint("SLEEP");
 			handle_sys_draw_pixel(rsi, rdx, rcx, r8, r9);
 		break;
+		case TICKS:
+		//ncPrint("SLEEP");
+			handle_sys_get_ticks((int *)rdx);
+		break;
 	}
 }
 
 void handle_sys_write(int fd, const char * buf, int length){
 	print_N(buf, length);
+}
+
+void handle_sys_get_ticks(int * ticks){
+	*(ticks) = ticks_elapsed();
 }
 
 void handle_sys_clear_console(void){
