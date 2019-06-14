@@ -107,6 +107,7 @@ void handle_command(int cmd){
 			display_help();
 		break;
 		case SNAKE:
+		initSnakeGame();
 		break;
 
 		//Retorna y sale del while, y no se puede hacer nada mas

@@ -6,6 +6,7 @@
 #include <naiveConsole.h>
 #include <irqDispatcher.h>
 #include <time.h>
+#include <keyboard.h>
 #include <idtLoader.h>
 #include <interrupts.h>
 #include <syscall.h>

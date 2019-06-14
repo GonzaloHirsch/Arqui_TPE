@@ -1,5 +1,7 @@
 #include <keyboard.h>
 #include <naiveConsole.h>
+#include <console.h>
+#include <lib.h>
 
 extern char read_key();
 
@@ -141,7 +143,12 @@ int getChar(void){
     int aux = EOF;
     //ncPrint("GET");
     if (head != tail || (head == tail && full)){
+
       aux = buffer[tail];
+
+      // char s[10];
+      // itoa(aux, s, 10);
+      // print(s);
       //ncPrintChar(aux);
       //Le saca el modulo para que de "vueltas" alrededor del buffer
       tail = (tail + 1) % MAX_BUFFER_SIZE;
