@@ -1,6 +1,7 @@
 #include <syscall.h>
 #include <naiveConsole.h>
 #include <stdint.h>
+#include <console.h>
 
 //Todo: agregar todos los syscalls
 
@@ -39,9 +40,7 @@ void handleSyscall(uint64_t rdi, uint64_t rsi, uint64_t rdx, uint64_t rcx, uint6
 }
 
 void handle_sys_write(int fd, const char * buf, int length){
-	for(int i = 0; i < length; i++){
-		ncPrintChar(*(buf + i));
-	}
+	print_N(buf, length);
 }
 
 void handle_sys_read(int fd, char * buf, int length){
