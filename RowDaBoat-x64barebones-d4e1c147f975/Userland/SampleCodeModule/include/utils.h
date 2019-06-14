@@ -2,8 +2,17 @@
 #define UTILS_H
 
 #include <stdint.h>
+#include <stdarg.h>
 #include <syscalls.h>
 #include <naiveConsole.h>
+
+#define MAX_BUFFER 100
+
+char getChar(void);
+void putChar(char c);
+void printf(char * str, ...);
+
+char* itoa(int value, char* buffer, int base);
 
 char getKey(void);
 void writeKey(char * key);

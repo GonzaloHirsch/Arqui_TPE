@@ -52,7 +52,7 @@ uint64_t * init_shell(void){
 			ncNewline();
 			ncPrint("arquiOS@ITBA: ");
 		} else if (key == '\b'){
-			//delete(key);
+			writeKey(&key);
 			commandBuffPos--;
 		} else if (key != 0){
 			writeKey(&key);
@@ -115,6 +115,7 @@ void handle_command(int cmd){
 			display_date();
 		break;
 		case TIME:
+			//printf("%d", 10);
 			display_time();
 		break;
 		case BEEP:
@@ -154,6 +155,10 @@ void display_welcome_message(void){
 	ncNewline();
 	ncPrint("                                |__/   ");
 	ncNewline();
+	ncPrint("Welcome to arquiOS");
+	ncNewline();
+	ncPrint("Type in \"help\" to discover all available commands");
+	ncNewline();
 }
 
 void display_help(void){
@@ -166,6 +171,8 @@ void display_help(void){
 	ncPrint("verify - Runs system verification routines and informs the results");
 	ncNewline();
 	ncPrint("time - Displays current system time");
+	ncNewline();
+	ncPrint("date - Displays current system date");
 	ncNewline();
 	ncPrint("beep - Makes the system go Beep!");
 	ncNewline();

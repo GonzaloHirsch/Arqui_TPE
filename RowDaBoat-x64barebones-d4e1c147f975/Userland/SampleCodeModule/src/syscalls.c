@@ -32,6 +32,14 @@ void sys_sleep(int ticks){
 	_int80(SLEEP, 0, 0, ticks, 0, 0);
 }
 
+void sys_draw_pixel(int x, int y, int r, int g, int b){
+	_int80(DRAW_PIXEL, x, y, r, g, b);
+}
+
+void sys_clear_console(void){
+	_int80(CLEAR, 0, 0, 0, 0, 0);
+}
+
 void sys_snake(void){
 	//_int80();
 }
