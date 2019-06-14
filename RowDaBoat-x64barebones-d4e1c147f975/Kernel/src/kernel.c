@@ -104,7 +104,6 @@ void * initializeKernelBinary()
     ncPrintHex(getVideoX());
 
     initVideoDriver();
-
     init_console();
 
     Vector2 pos = {0,0};
@@ -130,6 +129,7 @@ void * initializeKernelBinary()
 
     //clear_line(47);
 
+	print("Video Driver Loaded\nLoading IDT\n");
 	load_idt();
 	ncPrint("[Done]");
 	ncNewline();
@@ -175,7 +175,7 @@ int main()
 	ncNewline();
 
 	ncPrint("[Finished]");
-
+    */
 	return 0;
- */
+
 }

@@ -12,6 +12,8 @@
 #define TIME 5
 #define SLEEP 6
 #define DATE 7
+#define CLEAR 8
+#define DRAW_PIXEL 9
 
 void sys_write(int fd, const char *buf, int count);
 
@@ -27,7 +29,9 @@ void sys_beep(void);
 
 void sys_snake(void);
 
-void sys_draw(void);
+void sys_draw_pixel(int x, int y, int r, int g, int b);
+
+void sys_clear_console(void);
 
 void sys_time(char * buf);
 
