@@ -80,7 +80,7 @@ void handle_sys_date(char * buff){
 	}
 
 	*(buff + 5) = '/';
-
+	//int century = get_time(CENTURY);
 	int year = get_time(YEAR);
 	year = 2000 + year;
 	itoa(year, buff + 6, 10);

@@ -45,8 +45,8 @@ void * getStackBase()
 }
 
 void goToUserland(){
-	ncPrint("Entering Userland...");
-	ncNewline();
+	//ncPrint("Entering Userland...");
+	//ncNewline();
 	((EntryPoint)sampleCodeModuleAddress)();
 }
 

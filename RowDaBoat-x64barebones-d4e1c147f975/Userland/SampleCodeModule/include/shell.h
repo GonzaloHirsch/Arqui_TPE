@@ -18,7 +18,10 @@
 
 #define MAX_BUFF_SIZE 100
 
-void init_shell(void);
+//Address original que devolvia el samplecoremodule
+#define RETURN_ADRESS 0xDEADC0DE
+
+uint64_t * init_shell(void);
 
 void handle_command(int cmd);
 

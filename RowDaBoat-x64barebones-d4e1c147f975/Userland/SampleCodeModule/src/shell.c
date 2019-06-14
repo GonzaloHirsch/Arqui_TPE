@@ -9,7 +9,7 @@ const char * commandMessages[] = {"help - Show available commands and their use"
 const char * commands[] = {"help", "snake", "shutdown", "verify", "time", "beep", "sleep", "date"};
 const int commandCount = 8;
 
-void init_shell(void){
+uint64_t * init_shell(void){
 	display_welcome_message();
 
 	ncPrint("arquiOS@ITBA: ");
@@ -68,6 +68,8 @@ void init_shell(void){
 
 
 	display_goodbye_message();
+
+	return (uint64_t *) RETURN_ADRESS;
 }
 
 void clear_buffer(char * buff){
@@ -100,10 +102,15 @@ void handle_command(int cmd){
 		break;
 		case SNAKE:
 		break;
+
+		//Retorna y sale del while, y no se puede hacer nada mas
 		case SHUTDOWN:
+		return;
 		break;
 		case VERIFY:
 		break;
+
+		//Imprime la fecha de hoy
 		case DATE:
 			display_date();
 		break;
@@ -125,27 +132,27 @@ void handle_command(int cmd){
 void display_welcome_message(void){
 	ncClear();
 	ncNewline();
-	ncPrint("	                                         /$$  /$$$$$$   /$$$$$$");
+	ncPrint("                                               /$$  /$$$$$$   /$$$$$$");
 	ncNewline();
-	ncPrint("                                        |__/ /$$__  $$ /$$__  $$");
+	ncPrint("                                              |__/ /$$__  $$ /$$__  $$");
 	ncNewline();
-	ncPrint("  /$$$$$$   /$$$$$$   /$$$$$$  /$$   /$$ /$$| $$  \\ $$| $$  \\__/");
+	ncPrint("        /$$$$$$   /$$$$$$   /$$$$$$  /$$   /$$ /$$| $$  \\ $$| $$  \\__/");
 	ncNewline();
-	ncPrint(" |____  $$ /$$__  $$ /$$__  $$| $$  | $$| $$| $$  | $$|  $$$$$$ ");
+	ncPrint("       |____  $$ /$$__  $$ /$$__  $$| $$  | $$| $$| $$  | $$|  $$$$$$ ");
 	ncNewline();
-	ncPrint("  /$$$$$$$| $$  \\__/| $$  \\ $$| $$  | $$| $$| $$  | $$ \\____  $$");
+	ncPrint("        /$$$$$$$| $$  \\__/| $$  \\ $$| $$  | $$| $$| $$  | $$ \\____  $$");
 	ncNewline();
-	ncPrint(" /$$__  $$| $$      | $$  | $$| $$  | $$| $$| $$  | $$ /$$  \\ $$");
+	ncPrint("       /$$__  $$| $$      | $$  | $$| $$  | $$| $$| $$  | $$ /$$  \\ $$");
 	ncNewline();
-	ncPrint("|  $$$$$$$| $$      |  $$$$$$$|  $$$$$$/| $$|  $$$$$$/|  $$$$$$/");
+	ncPrint("      |  $$$$$$$| $$      |  $$$$$$$|  $$$$$$/| $$|  $$$$$$/|  $$$$$$/");
 	ncNewline();
-	ncPrint(" \\_______/|__/       \\____  $$ \\______/ |__/ \\______/  \\______/ ");
+	ncPrint("       \\_______/|__/       \\____  $$ \\______/ |__/ \\______/  \\______/ ");
 	ncNewline();
-	ncPrint("                          | $$                                  ");
+	ncPrint("                                | $$                                  ");
 	ncNewline();
-	ncPrint("                          | $$    ");
+	ncPrint("                                | $$    ");
 	ncNewline();
-	ncPrint("                          |__/   ");
+	ncPrint("                                |__/   ");
 	ncNewline();
 }
 
