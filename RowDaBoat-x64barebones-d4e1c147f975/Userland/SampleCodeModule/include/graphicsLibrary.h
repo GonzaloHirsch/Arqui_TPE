@@ -1,5 +1,5 @@
-#ifndef INTERRUPTS_H
-#define INTERRUPTS_H
+#ifndef GRAPHICS_LIBRARY_H
+#define GRAPHICS_LIBRARY_H
 
 #include <syscalls.h>
 #include <types.h>
