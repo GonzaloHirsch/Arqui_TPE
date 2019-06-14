@@ -1,13 +1,5 @@
 #include <graphicsLibrary.h>
 
-void print(const char * str){
-  sys_write(1, str, strlen(str));
-}
-
-void printN(const char * str, int length){
-  sys_write(1,str,length);
-}
-
 void drawPixel(Vector2 pos, Color color){
   //sys_draw_pixel(pos.x, pos.y, color.r, color.g, color.b);
 }
@@ -19,4 +11,33 @@ void drawRect(Vector2 start, Vector2 size, Color color){
       drawPixel(aux, color);
     }
   }
+}
+
+void clearScreen(){
+  //sys_clear_screen();
+}
+
+void draw_char_with_background(Vector2 pos, char c, Color foreground, Color background){
+    char * cMap = pixel_map(c);
+    for (int j = 0; j < CHAR_HEIGHT; ++j) {
+        for (int i = 0; i < CHAR_WIDTH; ++i) {
+            Vector2 aux = {(pos.x*(CHAR_WIDTH))+i, (pos.y*CHAR_HEIGHT)+j};
+            if((cMap[j] >> (CHAR_WIDTH - i - 1)) & 1)
+                drawPixel(aux,foreground);
+            else
+                drawPixel(aux, background);
+        }
+
+    }
+
+}
+
+void drawString(Vector2 pos, char * str, Color foreground, Color background){
+    Vector2 auxPos = {pos.x,pos.y};
+
+    while((*str) != 0) {
+        draw_char_with_background(auxPos, (*str), foreground, background);
+        auxPos.x++;
+        str++;
+    }
 }

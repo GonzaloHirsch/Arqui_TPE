@@ -5,7 +5,6 @@
 #include <console.h>
 
 static Color background = {29,29,29};
-//static Color background = {0,0,0};
 static Color foreground = {255,255,255};
 
 static Vector2 cursor = {0,0};
