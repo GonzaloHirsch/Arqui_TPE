@@ -2,7 +2,7 @@ GLOBAL printRegisters
 
 extern goToUserland
 extern ncNewline
-extern ncPrintDec
+extern ncPrintHex
 extern ncPrint
 extern sleep
 
@@ -53,7 +53,7 @@ printRegisters:
 
     pushState
     mov rdi, rax
-    call ncPrintDec
+    call ncPrintHex
     call ncNewline
     popState
 
@@ -63,7 +63,7 @@ pushState
     popState
     pushState
     mov rdi, rbx
-    call ncPrintDec
+    call ncPrintHex
     call ncNewline
     popState
 
@@ -73,7 +73,7 @@ pushState
     popState
     pushState
     mov rdi, rcx
-    call ncPrintDec
+    call ncPrintHex
     call ncNewline
     popState
 
@@ -84,7 +84,7 @@ pushState
     popState
     pushState
     mov rdi, rdx
-    call ncPrintDec
+    call ncPrintHex
     call ncNewline
     popState
 
@@ -95,7 +95,7 @@ pushState
     popState
     pushState
     mov rdi, rbp
-    call ncPrintDec
+    call ncPrintHex
     call ncNewline
     popState
 
@@ -105,7 +105,7 @@ pushState
     popState
     pushState
     mov rdi, rsp
-    call ncPrintDec
+    call ncPrintHex
     call ncNewline
     popState
 
@@ -116,7 +116,7 @@ pushState
     popState
     pushState
     mov rdi, rdi
-    call ncPrintDec
+    call ncPrintHex
     call ncNewline
     popState
 
@@ -126,7 +126,7 @@ pushState
     popState
     pushState
     mov rdi, rsi
-    call ncPrintDec
+    call ncPrintHex
     call ncNewline
     popState
 
@@ -136,7 +136,7 @@ pushState
     popState
     pushState
     mov rdi, r8
-    call ncPrintDec
+    call ncPrintHex
     call ncNewline
     popState
 
@@ -146,7 +146,7 @@ pushState
     popState
     pushState
     mov rdi, r9
-    call ncPrintDec
+    call ncPrintHex
     call ncNewline
     popState
 
