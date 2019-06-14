@@ -7,7 +7,7 @@ extern char read_key();
     Buffer con los caracteres escritos
     Lo dejamos
 */
-static char buffer[100]={0};
+static char buffer[MAX_BUFFER_SIZE]={0};
 /*
     Posicion de la escritura en el buffer
     HEAD se usa para operaciones destructivas en el buffer
