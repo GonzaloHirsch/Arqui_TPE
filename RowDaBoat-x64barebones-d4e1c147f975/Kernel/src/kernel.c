@@ -101,10 +101,34 @@ void * initializeKernelBinary()
     ncPrint("[Initializing Graphics]");
     ncNewline();
 
+    ncPrintHex(getVideoX());
+/*
     initVideoDriver();
+
     init_console();
 
-	print("Video Driver Loaded\nLoading IDT\n");
+    Vector2 pos = {0,0};
+    Vector2 size = {100,100};
+
+    Color foreground = {255,255,255};
+    Color background = {255,0,0};
+
+    char * str = "This is a string";
+
+    char buf[2];
+
+    //draw_string_with_background(pos, buf, foreground, background);
+    //print("HAHAHHOLA ESTO ES ALL CAPS");
+    //print("m");
+
+    for (int i = 0; i < 2000; ++i) {
+        print("%d-", i);
+    }
+
+    //move_all_up();
+
+    //clear_line(47);
+*/
 	load_idt();
 	ncPrint("[Done]");
 	ncNewline();

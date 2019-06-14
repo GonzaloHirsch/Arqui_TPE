@@ -8,13 +8,12 @@
 #include <types.h>
 #include <pixelMap.h>
 #include <strings.h>
+#include <stdarg.h>
 #include <videoDriver.h>
 
 void init_console();
 
-void print(char * str);
-
-void print_N(char * str, int length);
+void print(char * str, ...);
 
 void move_line_up(unsigned int line);
 

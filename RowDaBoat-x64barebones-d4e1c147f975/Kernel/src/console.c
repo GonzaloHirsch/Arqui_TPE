@@ -4,23 +4,17 @@
 
 #include <console.h>
 
+#define MAX_BUFFER 100
+
 static Color background = {29,29,29};
 //static Color background = {0,0,0};
 static Color foreground = {255,255,255};
 
 static Vector2 cursor = {0,0};
 
-int get_max_cursorY(){
-    return getVideoY() / CHAR_HEIGHT;
-}
-
-int get_max_cursorX(){
-    return getVideoX() / CHAR_WIDTH;
-}
-
-
 void init_console(){
     clear_console();
+    print("%d - %d - %d", get_max_line(), getVideoY);
 }
 
 void new_line(){
@@ -28,53 +22,51 @@ void new_line(){
     cursor.x=0;
 }
 
-void backspace(){
-  if(cursor.y == 0 && cursor.x == 0){
-    return;
-  } else if(cursor.x == 0){
-    cursor.x = get_max_cursorX()-1;
-    cursor.y--;
-  }
 
-  draw_char_with_background(cursor, ' ', background, background);
-}
+void print(char * str, ...){
+    va_list list;
+    va_start(list, str);
+    int i = 0;
+    while(str[i] != 0){
+        if(str[i] == '%' && str[i-1] != '\\'){
+            char buffer[MAX_BUFFER] = {0};
+            switch (str[i+1]) {
+                case 'd':
+                    int_to_string((int) va_arg(list,int), buffer, 10);
+                    print(buffer);
+                    i++;
+                    break;
+                case 's':
+                    print(va_arg(list,char*));
+                    i++;
+                    break;
+            }
+        }
+        else {
+            switch(str[i]) {
+                case '\n':
+                    new_line();
+                    break;
+                case '\t':
+                    cursor.x+=4;
+                    break;
+                default:
+                    draw_char_with_background(cursor, str[i], foreground, background);
+                    cursor.x++;
+                    break;
+            }
+        }
 
-void print_char(char c){
-  switch(c) {
-    case '\n':
-      new_line();
-      break;
-    case '\t':
-      cursor.x+=4;
-      break;
-    case '\b':
-      backspace();
-      break;
-    default:
-      draw_char_with_background(cursor, c, foreground, background);
-      cursor.x++;
-      break;
-    }
 
-    if(cursor.x >= getVideoX()/CHAR_WIDTH){
-      cursor.x = 0;
-      cursor.y++;
-    }
-    if(cursor.y >= getVideoY()/CHAR_HEIGHT){
-      move_all_up();
-      cursor.y--;
-    }
-}
-
-void print(char * str){
-    for(int i = 0; str[i] != 0; i++){
-      print_char(str[i]);
-    }
-}
-
-void print_N(char * str, int length){
-  for(int i = 0; i < length; i++){
-        print_char(str[i]);
+        if(cursor.x >= getVideoX()/CHAR_WIDTH){
+            cursor.x = 0;
+            cursor.y++;
+        }
+        if(cursor.y >= getVideoY()/CHAR_HEIGHT){
+            move_all_up();
+            cursor.y--;
+        }
+        i++;
     }
 }
 
@@ -85,6 +77,7 @@ void move_line_up(unsigned int line){
     for(int j = 0; j < CHAR_HEIGHT; j++){
         for (int i = 0; i < getResX(); ++i)
         {
+            Color color = {0,255,0};
             get_pixel(posGet, &c);
             draw_pixel(posDraw, c);
             posGet.x++;
@@ -98,10 +91,10 @@ void move_line_up(unsigned int line){
 }
 
 void move_all_up(){
-    for(int i = 1; i < get_max_cursorY(); i++){
+    for(int i = 1; i < get_max_line(); i++){
         move_line_up(i);
     }
-    clear_line(get_max_cursorY()-1);
+    clear_line(get_max_line()-1);
 }
 
 void clear_line(unsigned int line){
@@ -119,8 +112,10 @@ void clear_line(unsigned int line){
 
 
 void clear_console(){
-    Vector2 size = {getResX(), getResY()};
+    Vector2 size = {getVideoX(), getVideoY()};
     draw_rect(ZeroVector, size, background);
-    cursor.x = 0;
-    cursor.y = 0;
+}
+
+int get_max_line(){
+    return getResY() / CHAR_HEIGHT;
 }

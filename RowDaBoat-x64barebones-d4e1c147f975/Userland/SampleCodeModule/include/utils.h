@@ -8,7 +8,6 @@
 char getKey(void);
 void writeKey(char * key);
 int strcmp(const char * stra, const char * strb);
-int strlen(const char * str);
 void makeSound(void);
 void goToSleep(int ticks);
 char * getTime(void);
