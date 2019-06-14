@@ -11,4 +11,8 @@ void exceptionDispatcher(uint64_t type);
 void printRegisters();
 
 
+void setVerifying();
+void clearVerifying();
+void setExceptionAssert();
+
 #endif //ARQUI_TPE_EXCEPTIONDISPATCHER_H

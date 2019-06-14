@@ -12,6 +12,7 @@
 #include <videoDriver.h>
 #include <console.h>
 #include <pixelMap.h>
+#include <verifications.h>
 
 extern uint8_t text;
 extern uint8_t rodata;
@@ -124,6 +125,7 @@ void * initializeKernelBinary()
     for (int i = 0; i < 20; ++i) {
         print("%d-", i);
     }
+
 
     //move_all_up();
 

@@ -6,11 +6,15 @@
 
 #define MAX_BUFFER 100
 
-static Color background = {29,29,29};
-//static Color background = {0,0,0};
-static Color foreground = {255,255,255};
 
-static Color errorForeground = {255,0,0};
+Color background = {29,29,29};
+
+Color foreground = {255,255,255};
+
+Color errorForeground = {255,0,0};
+
+Color okForeground = {0, 255, 0};
+
 
 static Vector2 cursor = {0,0};
 
@@ -26,7 +30,7 @@ void new_line(){
     cursor.x=0;
 }
 
-static void printWithColors(Color chosenForeground, Color chosenBackground, char * str, va_list list){
+void printWithColors(Color chosenForeground, Color chosenBackground, char * str, va_list list){
 
     int i = 0;
     while(str[i] != 0){

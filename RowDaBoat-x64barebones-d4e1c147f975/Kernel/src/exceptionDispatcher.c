@@ -7,31 +7,49 @@
 #include <time.h>
 #include <console.h>
 
+
 static void divZeroError();
 static void invalidOpcodeError();
 static void protectionFault();
 static void pageFault();
-static void tBI(); //(to Be Implemented
+static void doubleFault();
+static void tBI(); //to Be Implemented
+
+static int verifying = 0;
+static int exceptionAssert = 0;
 
 extern void goToUserland();
 
-static void (*exceptionsArray[])() = {divZeroError, tBI, tBI, tBI, tBI, tBI, invalidOpcodeError, tBI, tBI, tBI, tBI, tBI, tBI, protectionFault, pageFault};
+static void (*exceptionsArray[])() = {divZeroError, tBI, tBI, tBI, tBI, tBI, invalidOpcodeError, tBI, doubleFault, tBI, tBI, tBI, tBI, protectionFault, pageFault};
 
 void exceptionDispatcher(uint64_t type){
 
+    if(verifying){
 
+        print("\nHere\n");
 
-    _cli();
-    sleep(1000);
+        if(exceptionAssert == type){
+            print("Exception %d: OK\n", type);
+        }
+        else{
+            printError("Error: Expected %d but got %d\n", exceptionAssert, type);
+        }
+    }
+    else {
+        _cli();
+        sleep(1000);
 
-   //Lo que sigue es para el modo vesa
-   clear_console();
-   print("\n");
-    (*exceptionsArray[type])();
-   printRegisters();
-   _sti();
-   goToUserland();
+        //Lo que sigue es para el modo vesa
+        clear_console();
+        print("\n");
+        (*exceptionsArray[type])();
+        printRegisters();
 
+        print("\n\nRebooting to userland");
+        _sti();
+        sleep(2000);
+        goToUserland();
+    }
 }
 
 
@@ -55,6 +73,20 @@ static void protectionFault(){
     printError("Exception 13: Protection Fault\n");
 }
 
-void pageFault(){
+static void pageFault(){
     printError("Exception 14: Page Fault\n");
+}
+
+static void doubleFault(){
+    printError("Exception 8: Double Fault\n");
+}
+
+void setVerifying(){
+    verifying = 1;
+}
+void clearVerifying(){
+    verifying = 0;
+}
+void setExceptionAssert(int i){
+    exceptionAssert = i;
 }

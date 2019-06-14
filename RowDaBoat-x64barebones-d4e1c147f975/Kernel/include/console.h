@@ -13,6 +13,8 @@
 
 void init_console();
 
+void printWithColors(Color chosenForeground, Color chosenBackground, char * str, va_list list);
+
 void print(char * str, ...);
 
 void printInteger(uint64_t dec);
