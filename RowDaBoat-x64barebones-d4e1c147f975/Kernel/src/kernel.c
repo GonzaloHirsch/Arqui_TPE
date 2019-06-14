@@ -28,8 +28,7 @@ static void * const sampleDataModuleAddress = (void*)0x500000;
 
 typedef int (*EntryPoint)();
 
-extern char read_key();
-
+//extern char read_key();
 
 void clearBSS(void * bssAddress, uint64_t bssSize)
 {
