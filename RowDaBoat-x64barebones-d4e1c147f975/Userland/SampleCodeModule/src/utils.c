@@ -1,18 +1,24 @@
 #include <utils.h>
 
-char getKey(){
+char getKey(void){
 	char buff;
 	sys_get_key(0, &buff);
 	return buff;
 }
 
-char * getTime(){
+char * getTime(void){
 	char * buff;
 	sys_time(buff);
 	return buff;
 }
 
-void makeSound(){
+char * getDate(void){
+	char * buff;
+	sys_date(buff);
+	return buff;
+}
+
+void makeSound(void){
 	sys_beep();
 }
 

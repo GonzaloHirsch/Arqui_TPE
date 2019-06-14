@@ -14,6 +14,7 @@
 #define TIME 4
 #define BEEP 5
 #define SLEEP 6
+#define DATE 7
 
 #define MAX_BUFF_SIZE 100
 
@@ -27,14 +28,16 @@ void display_help(void);
 
 void display_goodbye_message(void);
 
-// void ncPrint(const char * string);
-// void ncPrintChar(char character);
-// void ncNewline();
-// void ncPrintDec(uint64_t value);
-// void ncPrintHex(uint64_t value);
-// void ncPrintBin(uint64_t value);
-// void ncPrintBase(uint64_t value, uint32_t base);
-// void ncClear();
-// void ncPrintOnAddress(char * address, char * text);
+void clear_buffer(char * buff);
+
+void display_time(void);
+
+void display_date(void);
+
+void make_sound(void);
+
+void sleep(void);
+
+void display_invalid_command(void);
 
 #endif

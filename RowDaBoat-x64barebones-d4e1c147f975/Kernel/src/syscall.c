@@ -26,6 +26,10 @@ void handleSyscall(uint64_t rdi, uint64_t rsi, uint64_t rdx, uint64_t rcx, uint6
 		//ncPrint("SLEEP");
 			handle_sys_sleep(rcx);
 		break;
+		case DATE:
+		//ncPrint("SLEEP");
+			handle_sys_date((char *)rdx);
+		break;
 	}
 	// ncPrintDec(READ);
 
@@ -54,6 +58,34 @@ void handle_sys_sleep(int ticks){
 
 void handle_sys_beep(){
 	beep();
+}
+
+void handle_sys_date(char * buff){
+	int day = get_time(DAY_OF_MONTH);
+	if (day < 10){
+		itoa(0, buff, 10);
+		itoa(day, buff + 1, 10);
+	} else{
+		itoa(day, buff, 10);
+	}
+
+	*(buff + 2) = '/';
+
+	int month = get_time(MONTH);
+	if (month < 10){
+		itoa(0, buff + 3, 10);
+		itoa(month, buff + 4, 10);
+	} else{
+		itoa(month, buff + 3, 10);
+	}
+
+	*(buff + 5) = '/';
+
+	int year = get_time(YEAR);
+	year = 2000 + year;
+	itoa(year, buff + 6, 10);
+	*(buff + 10) = 0;
+	//ncPrint(buff);
 }
 
 void handle_sys_time(char * buff){

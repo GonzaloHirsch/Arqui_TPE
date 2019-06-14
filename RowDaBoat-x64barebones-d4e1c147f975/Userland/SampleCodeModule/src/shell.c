@@ -6,8 +6,8 @@ const char * commandMessages[] = {"help - Show available commands and their use"
 								"verify - Runs verification routines for system exceptions",
 								"time - Displays system date and time"};
 
-const char * commands[] = {"help", "snake", "shutdown", "verify", "time", "beep", "sleep"};
-
+const char * commands[] = {"help", "snake", "shutdown", "verify", "time", "beep", "sleep", "date"};
+const int commandCount = 8;
 
 void init_shell(void){
 	display_welcome_message();
@@ -79,7 +79,7 @@ void clear_buffer(char * buff){
 int getCommand(char * cmd){
 	//Itero el array de comandos para ver cual es el que se elige
 	int result = INVALID_COMMAND;
-	for (int i = 0; i < 7 && result == INVALID_COMMAND; i++){
+	for (int i = 0; i < commandCount && result == INVALID_COMMAND; i++){
 		//En el caso de que sean iguales
 		// ncPrint(cmd);
 		// ncPrint("-");
@@ -103,6 +103,9 @@ void handle_command(int cmd){
 		case SHUTDOWN:
 		break;
 		case VERIFY:
+		break;
+		case DATE:
+			display_date();
 		break;
 		case TIME:
 			display_time();
@@ -163,17 +166,23 @@ void display_help(void){
 	ncNewline();
 }
 
-void display_time(){
+void display_time(void){
 	char * time = getTime();
 	ncPrint(time);
 	ncNewline();
 }
 
-void make_sound(){
+void display_date(void){
+	char * date = getDate();
+	ncPrint(date);
+	ncNewline();
+}
+
+void make_sound(void){
 	makeSound();
 }
 
-void sleep(){
+void sleep(void){
 	goToSleep(50);
 }
 
