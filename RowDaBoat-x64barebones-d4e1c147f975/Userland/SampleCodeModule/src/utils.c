@@ -16,6 +16,10 @@ void makeSound(){
 	sys_beep();
 }
 
+void goToSleep(int ticks){
+	sys_sleep(ticks);
+}
+
 void writeKey(char * key){
 	sys_write_key(0, key);
 }

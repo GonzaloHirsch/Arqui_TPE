@@ -33,6 +33,6 @@ void nosound() {
  //Make a beep
  void beep() {
  	 play_sound(800);	//800 esta buena
- 	 timer_wait(4);	//10 ticks, son como 550ms
+ 	 timer_wait(4);		//4 ticks, son como 220ms
  	 nosound();
  }

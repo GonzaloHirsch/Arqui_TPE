@@ -22,6 +22,10 @@ void handleSyscall(uint64_t rdi, uint64_t rsi, uint64_t rdx, uint64_t rcx, uint6
 		//ncPrint("READ");
 			handle_sys_beep();
 		break;
+		case SLEEP:
+		//ncPrint("SLEEP");
+			handle_sys_sleep(rcx);
+		break;
 	}
 	// ncPrintDec(READ);
 
@@ -42,6 +46,10 @@ void handle_sys_read(int fd, char * buf, int length){
 		*(buf + i) = getChar();
 		//ncPrintChar(*(buf + i));
 	}
+}
+
+void handle_sys_sleep(int ticks){
+	timer_wait(ticks);
 }
 
 void handle_sys_beep(){

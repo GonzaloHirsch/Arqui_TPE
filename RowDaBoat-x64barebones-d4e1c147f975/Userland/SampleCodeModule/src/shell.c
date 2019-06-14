@@ -111,6 +111,7 @@ void handle_command(int cmd){
 			make_sound();
 		break;
 		case SLEEP:
+			sleep();
 		break;
 		case INVALID_COMMAND:
 			display_invalid_command();
@@ -170,6 +171,10 @@ void display_time(){
 
 void make_sound(){
 	makeSound();
+}
+
+void sleep(){
+	goToSleep(50);
 }
 
 void display_invalid_command(void){
