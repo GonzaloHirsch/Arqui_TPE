@@ -5,16 +5,33 @@
 
 static unsigned long ticks = 0;
 
+
 void timer_handler();
 int ticks_elapsed();
 
 void timer_handler() {
 	//ncPrintDec(ticks);
-     ticks++;
+  ticks++;
 }
 
 int ticks_elapsed(){
 	return ticks;
+}
+
+void set_time(){
+  write_port(0x70, 0x0B);
+  uint8_t aux = read_port(0x71);
+  aux = aux | 0x04;
+  write_port(0x71, aux);
+}
+
+int get_time(int selector){
+  _cli();
+  set_time();
+  write_port(0x70, selector_to_register[selector]);
+  int aux = read_port(0x71);
+  _sti();
+  return aux;
 }
 
 void sleep(uint64_t millis){

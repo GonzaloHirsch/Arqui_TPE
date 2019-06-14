@@ -17,11 +17,15 @@ void sys_write_key(int fd, const char * buf){
 }
 
 void sys_beep(){
-	//_int80();
+	_int80(BEEP, 0, 0, 0, 0, 0);
 }
 
 void sys_time(char * buf){
 	_int80(TIME, 0, buf, 0, 0, 0);
+}
+
+void sys_sleep(int ticks){
+	_int80(SLEEP, 0, 0, ticks, 0, 0);
 }
 
 void sys_snake(){
