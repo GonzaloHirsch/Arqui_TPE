@@ -171,3 +171,17 @@ int strcmp(const char * stra, const char * strb){
 	//ncPrintDec(result);
 	return result;
 }
+
+int strlen(const char * str){
+	int i = 0;
+	for(;str[i] != 0; i++);
+	return i;
+}
+
+void print(const char * str){
+  sys_write(1, str, strlen(str));
+}
+
+void printN(const char * str, int length){
+  sys_write(1,str,length);
+}
