@@ -1,6 +1,7 @@
 #include <sound.h>
 #include <stdint.h>
 #include <naiveConsole.h>
+#include <time.h>
 
 /*
   Este codigo sale de OSDEV
@@ -33,6 +34,6 @@ void nosound() {
  //Make a beep
  void beep() {
  	 play_sound(800);	//800 esta buena
- 	 timer_wait(4);		//4 ticks, son como 220ms
+ 	 sleep(4);		//4 ticks, son como 220ms
  	 nosound();
  }

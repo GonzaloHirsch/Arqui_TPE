@@ -31,6 +31,7 @@ static int selector_to_register[] = {SECONDS_REGISTER, MINUTES_REGISTER, HOURS_R
 void timer_handler();
 int ticks_elapsed();
 void sleep(uint64_t millis);
+void timer_wait(int ticks);
 
 /*
 void ncPrint(const char * string);

@@ -19,18 +19,10 @@ static void (*exceptionsArray[])() = {divZeroError, tBI, tBI, tBI, tBI, tBI, inv
 
 void exceptionDispatcher(uint64_t type){
 
-   // char buffer[100];
 
 
     _cli();
     sleep(1000);
-   /*
-    ncClear();
-    // printOnAddress((char*)(0xB8000 + 80*2*4), "Hola");
-   //printOnAddress((char *)(0xB8000 + 80*2*2), itoa(type, buffer, 10));
-   // printOnAddress((char *)(0xB8000) ,"Dispatching exception");
-    ncNewline();
-*/
 
    //Lo que sigue es para el modo vesa
    clear_console();
@@ -50,23 +42,19 @@ void tBI(){
 
 static void divZeroError(){
 
-    printError("Division By Zero\n");
-    //printOnAddress((char *)(0xB8000 + 80*2 + 80-20*2) ,"Division By Zero");
+    printError("Exception 0: Division By Zero\n");
 
 }
 
 static void invalidOpcodeError(){
 
-    printError("Invalid Opcode\n");
-   // printOnAddress((char *)(0xB8000 + 80*2 + 80-20*2), "Invalid Opcode");
+    printError("Exception 6: Invalid Opcode\n");
 }
 
 static void protectionFault(){
-    printError("Protection Fault\n");
-   // printOnAddress((char *)(0xB8000 + 80*2 + 80-20*2), "Protection Fault");
+    printError("Exception 13: Protection Fault\n");
 }
 
 void pageFault(){
-    printError("Page Fault\n");
-    //printOnAddress((char *)(0xB8000 + 80*2 + 80-20*2), "Page Fault");
+    printError("Exception 14: Page Fault\n");
 }
