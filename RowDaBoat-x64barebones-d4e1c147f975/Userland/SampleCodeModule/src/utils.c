@@ -12,6 +12,48 @@ void putChar(char c){
 	sys_write(0, &c, 1);
 }
 
+int scanf(const char * str, ...){
+    va_list list;
+    va_start(list, str);
+    int i = 0;
+		//ncPrint(str);
+
+		char newStr[MAX_BUFFER] = {0};
+		int len = 0;
+
+    while(str[i] != 0){
+    	if(str[i] == '%' && (i == 0 || str[i-1] != '\\')){
+				//ncPrintDec(i);
+				//ncPrint("-");
+            char buffer[MAX_BUFFER] = {0};
+            switch (str[i+1]) {
+                case 'd':
+										//ncPrintDec(va_arg(list,int));
+                    itoa((int) va_arg(list,int), buffer, 10);
+                    len += concat((newStr + len), buffer);
+                    i += 2;
+                    break;
+                case 's':
+										len += concat((newStr + len), va_arg(list,char*));
+                    i += 2;
+                    break;
+										default:
+										i += 2;
+										break;
+            }
+        }
+        else {
+            newStr[len] = str[i];
+						len++;
+						i++;
+        }
+    }
+
+		newStr[len] = 0;
+		len++;
+		sys_write(0, newStr, len);
+}
+
 void printf(char * str, ...){
     va_list list;
     va_start(list, str);

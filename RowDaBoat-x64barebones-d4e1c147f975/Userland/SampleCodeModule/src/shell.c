@@ -108,22 +108,19 @@ void handle_command(int cmd){
 		break;
 		case SNAKE:
 		break;
-
 		//Retorna y sale del while, y no se puede hacer nada mas
 		case SHUTDOWN:
 		return;
 		break;
 		case VERIFY:
 		break;
-
 		//Imprime la fecha de hoy
 		case DATE:
 			display_date();
 		break;
 		case TIME:
-
-			//drawRect(pos, size, color);
-			display_time();
+			printf("Hola %d", "Jorge");
+			//display_time();
 		break;
 		case BEEP:
 			make_sound();
