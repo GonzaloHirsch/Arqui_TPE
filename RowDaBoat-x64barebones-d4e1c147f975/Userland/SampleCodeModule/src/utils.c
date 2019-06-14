@@ -18,11 +18,11 @@ int scanf(const char * fmt, ...){
 
 		char str[MAX_BUFFER] = {0};
 		int len = 0;
-		char key;
+		char key = 0;
 
 		print("ANTES WHILE");
 		//Le habilita al usuario a escribir hasta el enter
-		while((key = getKey()) != '\n'){
+		while((key = getKey() & 0xFF) != '\n'){
 			if (key == '\b'){
 				str[len - 1] = 0;
 				len--;
