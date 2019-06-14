@@ -28,8 +28,7 @@ static void * const sampleDataModuleAddress = (void*)0x500000;
 
 typedef int (*EntryPoint)();
 
-extern int read_key();
-
+//extern char read_key();
 
 void clearBSS(void * bssAddress, uint64_t bssSize)
 {
@@ -46,8 +45,8 @@ void * getStackBase()
 }
 
 void goToUserland(){
-	ncPrint("Entering Userland...");
-	ncNewline();
+	//ncPrint("Entering Userland...");
+	//ncNewline();
 	((EntryPoint)sampleCodeModuleAddress)();
 }
 

@@ -6,10 +6,10 @@ const char * commandMessages[] = {"help - Show available commands and their use"
 								"verify - Runs verification routines for system exceptions",
 								"time - Displays system date and time"};
 
-const char * commands[] = {"help", "snake", "shutdown", "verify", "time", "beep", "sleep"};
+const char * commands[] = {"help", "snake", "shutdown", "verify", "time", "beep", "sleep", "date"};
+const int commandCount = 8;
 
-
-void init_shell(void){
+uint64_t * init_shell(void){
 	display_welcome_message();
 
 	ncPrint("arquiOS@ITBA: ");
@@ -68,6 +68,8 @@ void init_shell(void){
 
 
 	display_goodbye_message();
+
+	return (uint64_t *) RETURN_ADRESS;
 }
 
 void clear_buffer(char * buff){
@@ -79,7 +81,7 @@ void clear_buffer(char * buff){
 int getCommand(char * cmd){
 	//Itero el array de comandos para ver cual es el que se elige
 	int result = INVALID_COMMAND;
-	for (int i = 0; i < 7 && result == INVALID_COMMAND; i++){
+	for (int i = 0; i < commandCount && result == INVALID_COMMAND; i++){
 		//En el caso de que sean iguales
 		// ncPrint(cmd);
 		// ncPrint("-");
@@ -100,9 +102,17 @@ void handle_command(int cmd){
 		break;
 		case SNAKE:
 		break;
+
+		//Retorna y sale del while, y no se puede hacer nada mas
 		case SHUTDOWN:
+		return;
 		break;
 		case VERIFY:
+		break;
+
+		//Imprime la fecha de hoy
+		case DATE:
+			display_date();
 		break;
 		case TIME:
 			display_time();
@@ -122,27 +132,27 @@ void handle_command(int cmd){
 void display_welcome_message(void){
 	ncClear();
 	ncNewline();
-	ncPrint("	                                         /$$  /$$$$$$   /$$$$$$");
+	ncPrint("                                               /$$  /$$$$$$   /$$$$$$");
 	ncNewline();
-	ncPrint("                                        |__/ /$$__  $$ /$$__  $$");
+	ncPrint("                                              |__/ /$$__  $$ /$$__  $$");
 	ncNewline();
-	ncPrint("  /$$$$$$   /$$$$$$   /$$$$$$  /$$   /$$ /$$| $$  \\ $$| $$  \\__/");
+	ncPrint("        /$$$$$$   /$$$$$$   /$$$$$$  /$$   /$$ /$$| $$  \\ $$| $$  \\__/");
 	ncNewline();
-	ncPrint(" |____  $$ /$$__  $$ /$$__  $$| $$  | $$| $$| $$  | $$|  $$$$$$ ");
+	ncPrint("       |____  $$ /$$__  $$ /$$__  $$| $$  | $$| $$| $$  | $$|  $$$$$$ ");
 	ncNewline();
-	ncPrint("  /$$$$$$$| $$  \\__/| $$  \\ $$| $$  | $$| $$| $$  | $$ \\____  $$");
+	ncPrint("        /$$$$$$$| $$  \\__/| $$  \\ $$| $$  | $$| $$| $$  | $$ \\____  $$");
 	ncNewline();
-	ncPrint(" /$$__  $$| $$      | $$  | $$| $$  | $$| $$| $$  | $$ /$$  \\ $$");
+	ncPrint("       /$$__  $$| $$      | $$  | $$| $$  | $$| $$| $$  | $$ /$$  \\ $$");
 	ncNewline();
-	ncPrint("|  $$$$$$$| $$      |  $$$$$$$|  $$$$$$/| $$|  $$$$$$/|  $$$$$$/");
+	ncPrint("      |  $$$$$$$| $$      |  $$$$$$$|  $$$$$$/| $$|  $$$$$$/|  $$$$$$/");
 	ncNewline();
-	ncPrint(" \\_______/|__/       \\____  $$ \\______/ |__/ \\______/  \\______/ ");
+	ncPrint("       \\_______/|__/       \\____  $$ \\______/ |__/ \\______/  \\______/ ");
 	ncNewline();
-	ncPrint("                          | $$                                  ");
+	ncPrint("                                | $$                                  ");
 	ncNewline();
-	ncPrint("                          | $$    ");
+	ncPrint("                                | $$    ");
 	ncNewline();
-	ncPrint("                          |__/   ");
+	ncPrint("                                |__/   ");
 	ncNewline();
 }
 
@@ -163,17 +173,23 @@ void display_help(void){
 	ncNewline();
 }
 
-void display_time(){
+void display_time(void){
 	char * time = getTime();
 	ncPrint(time);
 	ncNewline();
 }
 
-void make_sound(){
+void display_date(void){
+	char * date = getDate();
+	ncPrint(date);
+	ncNewline();
+}
+
+void make_sound(void){
 	makeSound();
 }
 
-void sleep(){
+void sleep(void){
 	goToSleep(50);
 }
 
