@@ -18,7 +18,7 @@ void setup_IDT_entry (int index, uint64_t offset) {
    idt[index].access = ACS_INT;
    idt[index].offset_m = (offset >> 16) & 0xFFFF;
    idt[index].offset_h = (offset >> 32) & 0xFFFFFFFF;
-   idt[index].other_cero = 0;
+   idt[index].other_cero = (uint64_t) 0;
 }
 
 

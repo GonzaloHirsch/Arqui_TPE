@@ -33,8 +33,9 @@ void sys_draw_pixel(int x, int y, int r, int g, int b);
 
 void sys_clear_console(void);
 
-void sys_time(char * buf);
+//void sys_time(char * buf);
+int sys_time(int selector);
 
-void sys_date(char * buf);
+// void sys_date(char * buf);
 
 #endif

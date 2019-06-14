@@ -73,8 +73,8 @@ _irq80Handler:
     call handleSyscall
 
     ; signal pic EOI
-    mov al, 20h
-    out 20h, al
+    ;mov al, 20h
+    ;out 20h, al
 
     iretq
 

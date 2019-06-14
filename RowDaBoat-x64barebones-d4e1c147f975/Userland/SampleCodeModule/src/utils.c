@@ -237,15 +237,78 @@ char getKey(void){
 	return buff;
 }
 
+// char * getTime(void){
+// 	char * buff;
+// 	sys_time(buff);
+// 	return buff;
+// }
+
 char * getTime(void){
+	int seconds = sys_time(SECONDS);
+	int minutes = sys_time(MINUTES);
+	int hours = sys_time(HOURS);
+
 	char * buff;
-	sys_time(buff);
+
+	if (hours < 10){
+		itoa(0, buff, 10);
+		itoa(hours, buff + 1, 10);
+	} else{
+		itoa(hours, buff, 10);
+	}
+
+	*(buff + 2) = ':';
+
+	if (minutes < 10){
+		itoa(0, buff + 3, 10);
+		itoa(minutes, buff + 4, 10);
+	} else{
+		itoa(minutes, buff + 3, 10);
+	}
+
+	*(buff + 5) = ':';
+
+	if (seconds < 10){
+		itoa(0, buff + 6, 10);
+		itoa(minutes, buff + 7, 10);
+	} else{
+		itoa(minutes, buff + 6, 10);
+	}
+	*(buff + 8) = 0;
+
 	return buff;
 }
 
 char * getDate(void){
+	int day = sys_time(DAY_OF_MONTH);
+	int month = sys_time(MONTH);
+	int year = sys_time(YEAR);
 	char * buff;
-	sys_date(buff);
+
+	if (day < 10){
+		itoa(0, buff, 10);
+		itoa(day, buff + 1, 10);
+	} else{
+		itoa(day, buff, 10);
+	}
+
+	*(buff + 2) = '/';
+
+	if (month < 10){
+		itoa(0, buff + 3, 10);
+		itoa(month, buff + 4, 10);
+	} else{
+		itoa(month, buff + 3, 10);
+	}
+
+	*(buff + 5) = '/';
+	//int century = get_time(CENTURY);
+
+	year = 2000 + year;
+	itoa(year, buff + 6, 10);
+	
+	*(buff + 10) = 0;
+
 	return buff;
 }
 

@@ -5,7 +5,7 @@
 
 //Todo: agregar todos los syscalls
 
-void handleSyscall(uint64_t rdi, uint64_t rsi, uint64_t rdx, uint64_t rcx, uint64_t r8, uint64_t r9){
+uint64_t handleSyscall(uint64_t rdi, uint64_t rsi, uint64_t rdx, uint64_t rcx, uint64_t r8, uint64_t r9){
 	switch(rdi){
 		case WRITE:
 		//ncPrint("WRITE");
@@ -17,7 +17,7 @@ void handleSyscall(uint64_t rdi, uint64_t rsi, uint64_t rdx, uint64_t rcx, uint6
 		break;
 		case TIME:
 		//ncPrint("READ");
-			handle_sys_time((char *)rdx);
+			return handle_sys_time(rsi);
 		break;
 		case BEEP:
 		//ncPrint("READ");
@@ -40,6 +40,7 @@ void handleSyscall(uint64_t rdi, uint64_t rsi, uint64_t rdx, uint64_t rcx, uint6
 			handle_sys_draw_pixel(rsi, rdx, rcx, r8, r9);
 		break;
 	}
+	return 0;
 }
 
 void handle_sys_write(int fd, const char * buf, int length){
@@ -100,8 +101,13 @@ void handle_sys_date(char * buff){
 	//ncPrint(buff);
 }
 
-void handle_sys_time(char * buff){
+int handle_sys_time(uint64_t selector){
+	return get_time(selector);
+	/*
+	int seconds = get_time(SECONDS);
+	int minutes = get_time(MINUTES);
 	int hours = get_time(HOURS);
+
 	if (hours < 10){
 		itoa(0, buff, 10);
 		itoa(hours, buff + 1, 10);
@@ -111,7 +117,6 @@ void handle_sys_time(char * buff){
 
 	*(buff + 2) = ':';
 
-	int minutes = get_time(MINUTES);
 	if (minutes < 10){
 		itoa(0, buff + 3, 10);
 		itoa(minutes, buff + 4, 10);
@@ -121,7 +126,6 @@ void handle_sys_time(char * buff){
 
 	*(buff + 5) = ':';
 
-	int seconds = get_time(SECONDS);
 	if (seconds < 10){
 		itoa(0, buff + 6, 10);
 		itoa(minutes, buff + 7, 10);
@@ -130,4 +134,5 @@ void handle_sys_time(char * buff){
 	}
 	*(buff + 8) = 0;
 	//ncPrint(buff);
+	*/
 }

@@ -122,9 +122,9 @@ void handle_command(int cmd){
 		case TIME:
 			//printf("Hola %d", "Jorge");
 
-			scanf("%d", &h);
-			printf("%d", h);
-			//display_time();
+			//scanf("%d", &h);
+			//printf("%d", h);
+			display_time();
 		break;
 		case BEEP:
 			make_sound();
@@ -171,15 +171,11 @@ void display_help(void){
 }
 
 void display_time(void){
-	char * time = getTime();
-	print(time);
-	ncNewline();
+	print(getTime());
 }
 
 void display_date(void){
-	char * date = getDate();
-	print(date);
-	ncNewline();
+	print(getDate());
 }
 
 void make_sound(void){

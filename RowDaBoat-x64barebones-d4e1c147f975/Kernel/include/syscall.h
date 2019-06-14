@@ -20,7 +20,7 @@
 #define CLEAR 8
 #define DRAW_PIXEL 9
 
-void handleSyscall(uint64_t rdi, uint64_t rsi, uint64_t rdx, uint64_t rcx, uint64_t r8, uint64_t r9);
+uint64_t handleSyscall(uint64_t rdi, uint64_t rsi, uint64_t rdx, uint64_t rcx, uint64_t r8, uint64_t r9);
 
 void handle_sys_write(int fd, const char * buf, int length);
 
@@ -32,7 +32,7 @@ void handle_sys_sleep(int ticks);
 
 void handle_sys_date(char * buff);
 
-void handle_sys_time(char * buff);
+int handle_sys_time(uint64_t selector);
 
 void handle_sys_clear_console(void);
 

@@ -7,6 +7,15 @@
 #include <naiveConsole.h>
 #include <graphicsLibrary.h>
 
+#define SECONDS 0
+#define MINUTES 1
+#define HOURS 2
+#define WEEKDAY 3
+#define DAY_OF_MONTH 4
+#define MONTH 5
+#define YEAR 6
+#define CENTURY 7
+
 #define MAX_BUFFER 100
 
 char getChar(void);
