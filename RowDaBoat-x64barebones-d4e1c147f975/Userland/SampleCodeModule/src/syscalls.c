@@ -16,18 +16,26 @@ void sys_write_key(int fd, const char * buf){
 	_int80(WRITE, fd, buf, 1, 0, 0);
 }
 
-void sys_beep(){
+void sys_beep(void){
+	_int80(BEEP, 0, 0, 0, 0, 0);
+}
+
+void sys_time(char * buf){
+	_int80(TIME, 0, buf, 0, 0, 0);
+}
+
+void sys_date(char * buf){
+	_int80(DATE, 0, buf, 0, 0, 0);
+}
+
+void sys_sleep(int ticks){
+	_int80(SLEEP, 0, 0, ticks, 0, 0);
+}
+
+void sys_snake(void){
 	//_int80();
 }
 
-void sys_time(){
-	//_int80();
-}
-
-void sys_snake(){
-	//_int80();
-}
-
-void sys_draw(){
+void sys_draw(void){
 	//_int80();
 }

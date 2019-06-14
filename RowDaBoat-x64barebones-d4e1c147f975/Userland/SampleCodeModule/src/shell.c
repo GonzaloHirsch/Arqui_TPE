@@ -6,16 +6,17 @@ const char * commandMessages[] = {"help - Show available commands and their use"
 								"verify - Runs verification routines for system exceptions",
 								"time - Displays system date and time"};
 
-const char * commands[] = {"help", "snake", "shutdown", "verify", "time", "beep", "sleep"};
+const char * commands[] = {"help", "snake", "shutdown", "verify", "time", "beep", "sleep", "date"};
+const int commandCount = 8;
 
-
-void init_shell(void){
+uint64_t * init_shell(void){
 	display_welcome_message();
 
+	ncPrint("arquiOS@ITBA: ");
 	//Comando elegido
-	int command = 1;
+	int command = INVALID_COMMAND;
 	//Buffer para el comando que se quiere escribir
-	char commandBuff[100];
+	char commandBuff[MAX_BUFF_SIZE] = {0};
 	//Posicion en el buffer de comando
 	int commandBuffPos = 0;
 	//Tecla que se toca
@@ -27,10 +28,29 @@ void init_shell(void){
 		key = getKey();
 		//ncPrintChar(key);
 		//writeKey(key);
-		//En el caso de un enter
-		if (key == '\n'){
-			command = HELP;
+
+		//En el caso de que se pase de la cantidad de caracteres
+		if (commandBuffPos == MAX_BUFF_SIZE){
+			command = INVALID_COMMAND;
 			handle_command(command);
+			//clear_buffer(commandBuff);
+		}
+
+		//En el caso de que aprete enter
+		if (key == '\n'){
+			// ncPrint("-");
+			// ncPrint(commandBuff);
+			// ncPrint("-");
+			ncNewline();
+			commandBuff[commandBuffPos] = 0;
+			command = getCommand(commandBuff);
+			//ncPrint(commandBuff);
+			//ncPrintHex(command);
+			handle_command(command);
+			//clear_buffer(commandBuff);
+			commandBuffPos = 0;
+			ncNewline();
+			ncPrint("arquiOS@ITBA: ");
 		} else if (key == '\b'){
 			//delete(key);
 			commandBuffPos--;
@@ -48,28 +68,63 @@ void init_shell(void){
 
 
 	display_goodbye_message();
+
+	return (uint64_t *) RETURN_ADRESS;
 }
 
-int getCommand(char * buff){
-	
+void clear_buffer(char * buff){
+	for (int i = 0; i < MAX_BUFF_SIZE; i++){
+		buff[i] = 0;
+	}
+}
+
+int getCommand(char * cmd){
+	//Itero el array de comandos para ver cual es el que se elige
+	int result = INVALID_COMMAND;
+	for (int i = 0; i < commandCount && result == INVALID_COMMAND; i++){
+		//En el caso de que sean iguales
+		// ncPrint(cmd);
+		// ncPrint("-");
+		// ncPrint(commands[i]);
+		if (!strcmp(cmd, commands[i])){
+			//ncPrint("EQU");
+			result = i;
+		}
+	}
+	return result;
 }
 
 void handle_command(int cmd){
+	//ncPrintDec(cmd);
 	switch(cmd){
 		case HELP:
 			display_help();
 		break;
 		case SNAKE:
 		break;
+
+		//Retorna y sale del while, y no se puede hacer nada mas
 		case SHUTDOWN:
+		return;
 		break;
 		case VERIFY:
 		break;
+
+		//Imprime la fecha de hoy
+		case DATE:
+			display_date();
+		break;
 		case TIME:
+			display_time();
 		break;
 		case BEEP:
+			make_sound();
 		break;
 		case SLEEP:
+			sleep();
+		break;
+		case INVALID_COMMAND:
+			display_invalid_command();
 		break;
 	}
 }
@@ -77,32 +132,70 @@ void handle_command(int cmd){
 void display_welcome_message(void){
 	ncClear();
 	ncNewline();
-	ncPrint("	                                         /$$  /$$$$$$   /$$$$$$");
+	ncPrint("                                               /$$  /$$$$$$   /$$$$$$");
 	ncNewline();
-	ncPrint("                                        |__/ /$$__  $$ /$$__  $$");
+	ncPrint("                                              |__/ /$$__  $$ /$$__  $$");
 	ncNewline();
-	ncPrint("  /$$$$$$   /$$$$$$   /$$$$$$  /$$   /$$ /$$| $$  \\ $$| $$  \\__/");
+	ncPrint("        /$$$$$$   /$$$$$$   /$$$$$$  /$$   /$$ /$$| $$  \\ $$| $$  \\__/");
 	ncNewline();
-	ncPrint(" |____  $$ /$$__  $$ /$$__  $$| $$  | $$| $$| $$  | $$|  $$$$$$ ");
+	ncPrint("       |____  $$ /$$__  $$ /$$__  $$| $$  | $$| $$| $$  | $$|  $$$$$$ ");
 	ncNewline();
-	ncPrint("  /$$$$$$$| $$  \\__/| $$  \\ $$| $$  | $$| $$| $$  | $$ \\____  $$");
+	ncPrint("        /$$$$$$$| $$  \\__/| $$  \\ $$| $$  | $$| $$| $$  | $$ \\____  $$");
 	ncNewline();
-	ncPrint(" /$$__  $$| $$      | $$  | $$| $$  | $$| $$| $$  | $$ /$$  \\ $$");
+	ncPrint("       /$$__  $$| $$      | $$  | $$| $$  | $$| $$| $$  | $$ /$$  \\ $$");
 	ncNewline();
-	ncPrint("|  $$$$$$$| $$      |  $$$$$$$|  $$$$$$/| $$|  $$$$$$/|  $$$$$$/");
+	ncPrint("      |  $$$$$$$| $$      |  $$$$$$$|  $$$$$$/| $$|  $$$$$$/|  $$$$$$/");
 	ncNewline();
-	ncPrint(" \\_______/|__/       \\____  $$ \\______/ |__/ \\______/  \\______/ ");
+	ncPrint("       \\_______/|__/       \\____  $$ \\______/ |__/ \\______/  \\______/ ");
 	ncNewline();
-	ncPrint("                          | $$                                  ");
+	ncPrint("                                | $$                                  ");
 	ncNewline();
-	ncPrint("                          | $$    ");
+	ncPrint("                                | $$    ");
 	ncNewline();
-	ncPrint("                          |__/   ");
+	ncPrint("                                |__/   ");
 	ncNewline();
 }
 
 void display_help(void){
-	ncPrint("YEAH");
+	ncPrint("help - Displays available commands and their usage");
+	ncNewline();
+	ncPrint("snake - Initiates the snake game");
+	ncNewline();
+	ncPrint("shutdown - Shuts down the system");
+	ncNewline();
+	ncPrint("verify - Runs system verification routines and informs the results");
+	ncNewline();
+	ncPrint("time - Displays current system time");
+	ncNewline();
+	ncPrint("beep - Makes the system go Beep!");
+	ncNewline();
+	ncPrint("sleep - Makes the system sleep for 5 seconds");
+	ncNewline();
+}
+
+void display_time(void){
+	char * time = getTime();
+	ncPrint(time);
+	ncNewline();
+}
+
+void display_date(void){
+	char * date = getDate();
+	ncPrint(date);
+	ncNewline();
+}
+
+void make_sound(void){
+	makeSound();
+}
+
+void sleep(void){
+	goToSleep(50);
+}
+
+void display_invalid_command(void){
+	ncPrint("Invalid command, type \'help\' to view system commands");
+	ncNewline();
 }
 
 void display_goodbye_message(void){
