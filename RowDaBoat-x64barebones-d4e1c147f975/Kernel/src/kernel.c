@@ -103,7 +103,7 @@ void * initializeKernelBinary()
     ncNewline();
 
     ncPrintHex(getVideoX());
-/*
+
     initVideoDriver();
 
     init_console();
@@ -122,14 +122,14 @@ void * initializeKernelBinary()
     //print("HAHAHHOLA ESTO ES ALL CAPS");
     //print("m");
 
-    for (int i = 0; i < 2000; ++i) {
+    for (int i = 0; i < 20; ++i) {
         print("%d-", i);
     }
 
     //move_all_up();
 
     //clear_line(47);
-*/
+
 	load_idt();
 	ncPrint("[Done]");
 	ncNewline();

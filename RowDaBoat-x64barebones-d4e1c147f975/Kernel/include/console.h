@@ -15,6 +15,10 @@ void init_console();
 
 void print(char * str, ...);
 
+void printInteger(uint64_t dec);
+
+void printError(char * str, ...);
+
 void move_line_up(unsigned int line);
 
 void clear_line(unsigned int line);

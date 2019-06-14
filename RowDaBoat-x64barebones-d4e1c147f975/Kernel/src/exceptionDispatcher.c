@@ -5,6 +5,7 @@
 #include <interrupts.h>
 #include <lib.h>
 #include <time.h>
+#include <console.h>
 
 static void divZeroError();
 static void invalidOpcodeError();
@@ -23,13 +24,18 @@ void exceptionDispatcher(uint64_t type){
 
     _cli();
     sleep(1000);
+   /*
     ncClear();
-    // ncPrintOnAddress((char*)(0xB8000 + 80*2*4), "Hola");
-   //ncPrintOnAddress((char *)(0xB8000 + 80*2*2), itoa(type, buffer, 10));
-   // ncPrintOnAddress((char *)(0xB8000) ,"Dispatching exception");
-    (*exceptionsArray[type])();
+    // printOnAddress((char*)(0xB8000 + 80*2*4), "Hola");
+   //printOnAddress((char *)(0xB8000 + 80*2*2), itoa(type, buffer, 10));
+   // printOnAddress((char *)(0xB8000) ,"Dispatching exception");
     ncNewline();
+*/
 
+   //Lo que sigue es para el modo vesa
+   clear_console();
+   print("\n");
+    (*exceptionsArray[type])();
    printRegisters();
    _sti();
    goToUserland();
@@ -38,29 +44,29 @@ void exceptionDispatcher(uint64_t type){
 
 
 void tBI(){
-    ncPrint("Exception yet to be implemented");
+    printError("Exception yet to be implemented\n");
 }
 
 
 static void divZeroError(){
 
-    ncPrint("Division By Zero");
-    //ncPrintOnAddress((char *)(0xB8000 + 80*2 + 80-20*2) ,"Division By Zero");
+    printError("Division By Zero\n");
+    //printOnAddress((char *)(0xB8000 + 80*2 + 80-20*2) ,"Division By Zero");
 
 }
 
 static void invalidOpcodeError(){
 
-    ncPrint("Invalid Opcode");
-   // ncPrintOnAddress((char *)(0xB8000 + 80*2 + 80-20*2), "Invalid Opcode");
+    printError("Invalid Opcode\n");
+   // printOnAddress((char *)(0xB8000 + 80*2 + 80-20*2), "Invalid Opcode");
 }
 
 static void protectionFault(){
-    ncPrint("Protection Fault");
-   // ncPrintOnAddress((char *)(0xB8000 + 80*2 + 80-20*2), "Protection Fault");
+    printError("Protection Fault\n");
+   // printOnAddress((char *)(0xB8000 + 80*2 + 80-20*2), "Protection Fault");
 }
 
 void pageFault(){
-    ncPrint("Page Fault");
-    //ncPrintOnAddress((char *)(0xB8000 + 80*2 + 80-20*2), "Page Fault");
+    printError("Page Fault\n");
+    //printOnAddress((char *)(0xB8000 + 80*2 + 80-20*2), "Page Fault");
 }

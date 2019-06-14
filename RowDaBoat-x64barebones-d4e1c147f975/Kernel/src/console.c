@@ -10,7 +10,11 @@ static Color background = {29,29,29};
 //static Color background = {0,0,0};
 static Color foreground = {255,255,255};
 
+static Color errorForeground = {255,0,0};
+
 static Vector2 cursor = {0,0};
+
+int get_max_line();
 
 void init_console(){
     clear_console();
@@ -22,10 +26,8 @@ void new_line(){
     cursor.x=0;
 }
 
+static void printWithColors(Color chosenForeground, Color chosenBackground, char * str, va_list list){
 
-void print(char * str, ...){
-    va_list list;
-    va_start(list, str);
     int i = 0;
     while(str[i] != 0){
         if(str[i] == '%' && str[i-1] != '\\'){
@@ -51,7 +53,7 @@ void print(char * str, ...){
                     cursor.x+=4;
                     break;
                 default:
-                    draw_char_with_background(cursor, str[i], foreground, background);
+                    draw_char_with_background(cursor, str[i], chosenForeground, chosenBackground);
                     cursor.x++;
                     break;
             }
@@ -68,6 +70,26 @@ void print(char * str, ...){
         }
         i++;
     }
+}
+
+void print(char * str, ...){
+
+    va_list list;
+    va_start(list, str);
+    printWithColors(foreground, background, str, list);
+    va_end(list);
+}
+
+void printInteger(uint64_t dec){
+    print("%d", dec);
+}
+
+void printError(char * str, ...){
+
+    va_list list;
+    va_start(list, str);
+    printWithColors(errorForeground, background, str, list);
+    va_end(list);
 }
 
 void move_line_up(unsigned int line){
@@ -114,6 +136,8 @@ void clear_line(unsigned int line){
 void clear_console(){
     Vector2 size = {getVideoX(), getVideoY()};
     draw_rect(ZeroVector, size, background);
+    cursor.x = 0;
+    cursor.y = 0;
 }
 
 int get_max_line(){

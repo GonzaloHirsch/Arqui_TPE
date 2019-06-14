@@ -1,9 +1,10 @@
 GLOBAL printRegisters
 
 extern goToUserland
-extern ncNewline
-extern ncPrintHex
-extern ncPrint
+;extern ncNewline
+extern printInteger
+extern printError
+extern print
 extern sleep
 
 section .text
@@ -46,109 +47,121 @@ section .text
 
 printRegisters:
 
+
     pushState
     mov rdi, regax
-    call ncPrint
-    popState
-
+    call printError
+popState
     pushState
     mov rdi, rax
-    call ncPrintHex
-    call ncNewline
-    popState
+    call printInteger
+    mov rdi, newline
+call print
+popState
 
-pushState
+    ;"RBX: "
+    pushState
     mov rdi, regbx
-    call ncPrint
-    popState
+    call printError
+popState
+    ;(El valor de rbx)
     pushState
     mov rdi, rbx
-    call ncPrintHex
-    call ncNewline
-    popState
+    call printInteger
+    mov rdi, newline
+call print
+popState
 
 pushState
     mov rdi, regcx
-    call ncPrint
-    popState
+    call printError
+popState
     pushState
     mov rdi, rcx
-    call ncPrintHex
-    call ncNewline
-    popState
+    call printInteger
+    mov rdi, newline
+call print
+popState
 
 
 pushState
     mov rdi, regdx
-    call ncPrint
-    popState
+    call printError
+popState
     pushState
     mov rdi, rdx
-    call ncPrintHex
-    call ncNewline
-    popState
+    call printInteger
+    mov rdi, newline
+call print
+popState
 
 
 pushState
     mov rdi, regbp
-    call ncPrint
-    popState
+    call printError
+popState
     pushState
     mov rdi, rbp
-    call ncPrintHex
-    call ncNewline
-    popState
+    call printInteger
+    mov rdi, newline
+call print
+popState
 
 pushState
     mov rdi, regsp
-    call ncPrint
-    popState
+    call printError
+popState
     pushState
     mov rdi, rsp
-    call ncPrintHex
-    call ncNewline
-    popState
+    call printInteger
+    mov rdi, newline
+call print
+popState
 
 
 pushState
     mov rdi, regdi
-    call ncPrint
-    popState
+    call printError
+popState
     pushState
     mov rdi, rdi
-    call ncPrintHex
-    call ncNewline
-    popState
+    call printInteger
+    mov rdi, newline
+call print
+popState
 
 pushState
     mov rdi, regsi
-    call ncPrint
-    popState
+    call printError
+popState
     pushState
     mov rdi, rsi
-    call ncPrintHex
-    call ncNewline
-    popState
+    call printInteger
+    mov rdi, newline
+call print
+popState
 
 pushState
     mov rdi, reg8
-    call ncPrint
-    popState
+    call printError
+popState
     pushState
     mov rdi, r8
-    call ncPrintHex
-    call ncNewline
-    popState
+    call printInteger
+    mov rdi, newline
+call print
+popState
 
 pushState
     mov rdi, reg9
-    call ncPrint
-    popState
+    call printError
+popState
     pushState
     mov rdi, r9
-    call ncPrintHex
-    call ncNewline
-    popState
+    call printInteger
+    mov rdi, newline
+call print
+popState
 
 mov rdi, 1000
 call sleep      ;dar tiempo para que se puedan leer los registros
@@ -168,3 +181,4 @@ regdi db "RDI: ", 0
 regsi db "RSI: ", 0
 reg8 db "R8: ", 0
 reg9 db "R9: ", 0
+newline db 10, 0
