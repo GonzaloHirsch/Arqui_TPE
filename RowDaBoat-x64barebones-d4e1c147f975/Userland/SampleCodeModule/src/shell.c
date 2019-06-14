@@ -102,6 +102,7 @@ void handle_command(int cmd){
 	Vector2 pos = {100,100};
 	Vector2 size = {250,250};
 	Color color = {0,255,0};
+	int h;
 	switch(cmd){
 		case HELP:
 			display_help();
@@ -119,7 +120,10 @@ void handle_command(int cmd){
 			display_date();
 		break;
 		case TIME:
-			printf("Hola %d", "Jorge");
+			//printf("Hola %d", "Jorge");
+
+			scanf("%d", &h);
+			printf("%d", h);
 			//display_time();
 		break;
 		case BEEP:

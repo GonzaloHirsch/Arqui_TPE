@@ -33,6 +33,8 @@ void backspace(){
   } else if(cursor.x == 0){
     cursor.x = get_max_cursorX()-1;
     cursor.y--;
+  } else {
+    cursor.x--;
   }
 
   draw_char_with_background(cursor, ' ', background, background);

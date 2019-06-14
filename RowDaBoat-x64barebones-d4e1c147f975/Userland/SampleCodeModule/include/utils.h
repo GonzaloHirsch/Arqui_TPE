@@ -5,14 +5,20 @@
 #include <stdarg.h>
 #include <syscalls.h>
 #include <naiveConsole.h>
+#include <graphicsLibrary.h>
 
 #define MAX_BUFFER 100
 
 char getChar(void);
 void putChar(char c);
 void printf(char * str, ...);
+int scanf(const char * fmt, ...);
 
 char* itoa(int value, char* buffer, int base);
+
+int atoi(const char* buffer, int len);
+
+int isNumeric(char c);
 
 char getKey(void);
 

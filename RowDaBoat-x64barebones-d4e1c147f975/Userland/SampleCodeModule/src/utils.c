@@ -12,46 +12,91 @@ void putChar(char c){
 	sys_write(0, &c, 1);
 }
 
-int scanf(const char * str, ...){
+int scanf(const char * fmt, ...){
     va_list list;
-    va_start(list, str);
-    int i = 0;
-		//ncPrint(str);
+    va_start(list, fmt);
 
-		char newStr[MAX_BUFFER] = {0};
+		char str[MAX_BUFFER] = {0};
 		int len = 0;
+		char key;
 
-    while(str[i] != 0){
-    	if(str[i] == '%' && (i == 0 || str[i-1] != '\\')){
-				//ncPrintDec(i);
-				//ncPrint("-");
-            char buffer[MAX_BUFFER] = {0};
-            switch (str[i+1]) {
-                case 'd':
-										//ncPrintDec(va_arg(list,int));
-                    itoa((int) va_arg(list,int), buffer, 10);
-                    len += concat((newStr + len), buffer);
-                    i += 2;
-                    break;
-                case 's':
-										len += concat((newStr + len), va_arg(list,char*));
-                    i += 2;
-                    break;
-										default:
-										i += 2;
-										break;
-            }
-        }
-        else {
-            newStr[len] = str[i];
-						len++;
-						i++;
+		print("ANTES WHILE");
+		//Le habilita al usuario a escribir hasta el enter
+		while((key = getKey()) != '\n'){
+			if (key == '\b'){
+				str[len - 1] = 0;
+				len--;
+			} else {
+				if (len < MAX_BUFFER){
+					str[len++] = key;
+				}
+			}
+			putChar(key);
+		}
+
+		int i = 0;
+		int pos = 0;
+		int matches = 0;
+		int j = 0;
+
+		int aux;
+print("DESPUES WHILE");
+		//Lee el formato
+    while(fmt[i] != 0){
+    	if(fmt[i] == '%'){
+        switch (str[i+1]) {
+          case 'd':
+						matches++;
+						int * ptrD = va_arg(list, int*);
+						char num[15] = {0};
+						j = 0;
+						//Itera el string que fue input
+						while(str[pos] != ' ' || str[pos] != '\n' || str[pos] != 0 || str[pos] != '\t'){
+							if (!isNumeric(str[pos])){
+								num[j++] = str[pos++];
+							} else {
+								return -1;
+							}
+						}
+						aux = atoi(num, j);
+						ptrD = &aux;
+            i += 2;
+            break;
+
+          case 's':
+					matches++;
+						char * ptrS = va_arg(list, char*);
+						j = 0;
+						char buffer[MAX_BUFFER] = {0};
+
+						while(str[pos] != ' ' || str[pos] != '\n' || str[pos] != 0 || str[pos] != '\t'){
+							buffer[j++] = str[pos++];
+						}
+
+						ptrS = buffer;
+            i += 2;
+            break;
+
+					case 'c':
+					matches++;
+					char * ptrC = va_arg(list, char*);
+					j = 0;
+
+					if(str[pos] != ' ' || str[pos] != '\n' || str[pos] != 0 || str[pos] != '\t'){
+						ptrC = (str + pos);
+						pos++;
+					}
+
+					i += 2;
+					break;
+          }
         }
     }
-
-		newStr[len] = 0;
-		len++;
-		sys_write(0, newStr, len);
+print("DESPUES DESPUES WHILE");
+		// newStr[len] = 0;
+		// len++;
+		// sys_write(0, newStr, len);
+		return matches;
 }
 
 void printf(char * str, ...){
@@ -122,6 +167,25 @@ char* reverse(char *buffer, int i, int j)
 	return buffer;
 }
 
+int atoi(const char* buffer, int len){
+	int i = 0;
+	int result = 0;
+	while(buffer[i] != 0){
+		result += (pow(10, len) * (buffer[i] - 48));
+		i++;
+		len--;
+	}
+	return result;
+}
+
+int pow(int base, int exponent){
+	int result = 1;
+	for (int i = 0; i < exponent; i++){
+		result = result * base;
+	}
+	return result;
+}
+
 // Iterative function to implement itoa() function in C
 char* itoa(int value, char* buffer, int base)
 {
@@ -162,6 +226,10 @@ char* itoa(int value, char* buffer, int base)
 }
 
 /* ------------------------------- */
+
+int isNumeric(char c){
+	return '0' <= c || c <= '9';
+}
 
 char getKey(void){
 	char buff;
