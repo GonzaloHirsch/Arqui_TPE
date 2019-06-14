@@ -12,6 +12,7 @@ const char * commands[] = {"help", "snake", "shutdown", "verify", "time", "beep"
 void init_shell(void){
 	display_welcome_message();
 
+	ncPrint("arquiOS@ITBA: ");
 	//Comando elegido
 	int command = INVALID_COMMAND;
 	//Buffer para el comando que se quiere escribir
@@ -32,17 +33,24 @@ void init_shell(void){
 		if (commandBuffPos == MAX_BUFF_SIZE){
 			command = INVALID_COMMAND;
 			handle_command(command);
+			//clear_buffer(commandBuff);
 		}
 
 		//En el caso de que aprete enter
 		if (key == '\n'){
-			//ncPrint("Enter-");
-			//ncPrint(commandBuff);
+			// ncPrint("-");
+			// ncPrint(commandBuff);
+			// ncPrint("-");
+			ncNewline();
 			commandBuff[commandBuffPos] = 0;
 			command = getCommand(commandBuff);
+			//ncPrint(commandBuff);
 			//ncPrintHex(command);
 			handle_command(command);
+			//clear_buffer(commandBuff);
 			commandBuffPos = 0;
+			ncNewline();
+			ncPrint("arquiOS@ITBA: ");
 		} else if (key == '\b'){
 			//delete(key);
 			commandBuffPos--;
@@ -60,6 +68,12 @@ void init_shell(void){
 
 
 	display_goodbye_message();
+}
+
+void clear_buffer(char * buff){
+	for (int i = 0; i < MAX_BUFF_SIZE; i++){
+		buff[i] = 0;
+	}
 }
 
 int getCommand(char * cmd){
@@ -94,6 +108,7 @@ void handle_command(int cmd){
 			display_time();
 		break;
 		case BEEP:
+			make_sound();
 		break;
 		case SLEEP:
 		break;
@@ -151,6 +166,10 @@ void display_time(){
 	char * time = getTime();
 	ncPrint(time);
 	ncNewline();
+}
+
+void make_sound(){
+	makeSound();
 }
 
 void display_invalid_command(void){

@@ -1,5 +1,6 @@
 GLOBAL _cli
 GLOBAL _sti
+GLOBAL _hlt
 GLOBAL pic_master_mask
 GLOBAL pic_slave_mask
 
@@ -76,6 +77,12 @@ _irq80Handler:
     out 20h, al
 
     iretq
+
+;Espera a que la proxima interrupcion ocurra
+_hlt:
+	sti
+	hlt
+	ret
 
 _cli:
 	cli

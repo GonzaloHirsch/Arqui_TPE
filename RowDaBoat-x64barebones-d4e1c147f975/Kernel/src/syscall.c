@@ -18,6 +18,10 @@ void handleSyscall(uint64_t rdi, uint64_t rsi, uint64_t rdx, uint64_t rcx, uint6
 		//ncPrint("READ");
 			handle_sys_time((char *)rdx);
 		break;
+		case BEEP:
+		//ncPrint("READ");
+			handle_sys_beep();
+		break;
 	}
 	// ncPrintDec(READ);
 
@@ -40,7 +44,38 @@ void handle_sys_read(int fd, char * buf, int length){
 	}
 }
 
+void handle_sys_beep(){
+	beep();
+}
+
 void handle_sys_time(char * buff){
-	int seconds = getSeconds();
-	itoa(seconds, buff, 10);
+	int hours = get_time(HOURS);
+	if (hours < 10){
+		itoa(0, buff, 10);
+		itoa(hours, buff + 1, 10);
+	} else{
+		itoa(hours, buff, 10);
+	}
+
+	*(buff + 2) = ':';
+
+	int minutes = get_time(MINUTES);
+	if (minutes < 10){
+		itoa(0, buff + 3, 10);
+		itoa(minutes, buff + 4, 10);
+	} else{
+		itoa(minutes, buff + 3, 10);
+	}
+
+	*(buff + 5) = ':';
+
+	int seconds = get_time(SECONDS);
+	if (seconds < 10){
+		itoa(0, buff + 6, 10);
+		itoa(minutes, buff + 7, 10);
+	} else{
+		itoa(minutes, buff + 6, 10);
+	}
+	*(buff + 8) = 0;
+	//ncPrint(buff);
 }

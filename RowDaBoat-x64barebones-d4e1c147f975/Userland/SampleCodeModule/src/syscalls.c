@@ -17,7 +17,7 @@ void sys_write_key(int fd, const char * buf){
 }
 
 void sys_beep(){
-	//_int80();
+	_int80(BEEP, 0, 0, 0, 0, 0);
 }
 
 void sys_time(char * buf){

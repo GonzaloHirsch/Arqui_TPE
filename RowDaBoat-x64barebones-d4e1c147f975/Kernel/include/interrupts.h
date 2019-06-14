@@ -7,6 +7,7 @@ void _irq80Handler();
 
 void _cli();
 void _sti();
+void _hlt();
 
 void pic_master_mask(uint8_t mask);
 

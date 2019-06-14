@@ -8,8 +8,12 @@ char getKey(){
 
 char * getTime(){
 	char * buff;
-	sys_time(&buff);
+	sys_time(buff);
 	return buff;
+}
+
+void makeSound(){
+	sys_beep();
 }
 
 void writeKey(char * key){
@@ -18,12 +22,20 @@ void writeKey(char * key){
 
 int strcmp(const char * stra, const char * strb){
 	int result = 0;
-	for (int i = 0; *(stra + i) != 0 &&  *(strb + i) != 0 && !result; i++){
+	int i;
+	for (i = 0; *(stra + i) != 0 && *(strb + i) != 0 && !result; i++){
 		if (*(stra + i) < *(strb + i)){
-			result = -1;
+			return -1;
 		} else if (*(stra + i) > *(strb + i)){
-			result = 1;
+			return 1;
 		}
+	}
+	if (*(stra + i) == 0 && *(strb + i) == 0 && result != 0){
+		return 0;
+	} else if (*(stra + i) != 0 && *(strb + i) == 0){
+		return 1;
+	} else if (*(stra + i) == 0 && *(strb + i) != 0){
+		return -1;
 	}
 	//ncPrintDec(result);
 	return result;
