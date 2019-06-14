@@ -1,7 +1,7 @@
 #include <graphicsLibrary.h>
 
 void drawPixel(Vector2 pos, Color color){
-  //sys_draw_pixel(pos.x, pos.y, color.r, color.g, color.b);
+  sys_draw_pixel(pos.x, pos.y, color.r, color.g, color.b);
 }
 
 void drawRect(Vector2 start, Vector2 size, Color color){
@@ -14,7 +14,7 @@ void drawRect(Vector2 start, Vector2 size, Color color){
 }
 
 void clearScreen(){
-  //sys_clear_screen();
+  sys_clear_console();
 }
 
 void draw_char_with_background(Vector2 pos, char c, Color foreground, Color background){

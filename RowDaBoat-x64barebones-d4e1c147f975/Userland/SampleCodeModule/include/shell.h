@@ -4,6 +4,8 @@
 #include <stdint.h>
 #include <naiveConsole.h>
 #include <utils.h>
+#include <graphicsLibrary.h>
+#include <types.h>
 
 //Constantes para los comandos
 #define INVALID_COMMAND -1
@@ -15,8 +17,9 @@
 #define BEEP 5
 #define SLEEP 6
 #define DATE 7
+#define CLEAR 8
 
-#define MAX_BUFF_SIZE 100
+#define MAX_BUFF_SIZE 750
 
 //Address original que devolvia el samplecoremodule
 #define RETURN_ADRESS 0xDEADC0DE

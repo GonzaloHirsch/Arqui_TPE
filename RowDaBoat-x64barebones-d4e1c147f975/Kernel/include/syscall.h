@@ -7,6 +7,8 @@
 #include <io_read.h>
 #include <sound.h>
 #include <console.h>
+#include <videoDriver.h>
+#include <types.h>
 
 #define READ 1
 #define WRITE 2
@@ -25,6 +27,8 @@ void handle_sys_write(int fd, const char * buf, int length);
 void handle_sys_read(int fd, char * buf, int length);
 
 void handle_sys_beep(void);
+
+void handle_sys_sleep(int ticks);
 
 void handle_sys_date(char * buff);
 

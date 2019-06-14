@@ -21,7 +21,7 @@ void handleSyscall(uint64_t rdi, uint64_t rsi, uint64_t rdx, uint64_t rcx, uint6
 		break;
 		case BEEP:
 		//ncPrint("READ");
-			handle_sys_beep(void);
+			handle_sys_beep();
 		break;
 		case SLEEP:
 		//ncPrint("SLEEP");
@@ -33,7 +33,7 @@ void handleSyscall(uint64_t rdi, uint64_t rsi, uint64_t rdx, uint64_t rcx, uint6
 		break;
 		case CLEAR:
 		//ncPrint("SLEEP");
-			handle_sys_clear_console(void);
+			handle_sys_clear_console();
 		break;
 		case DRAW_PIXEL:
 		//ncPrint("SLEEP");
@@ -47,11 +47,13 @@ void handle_sys_write(int fd, const char * buf, int length){
 }
 
 void handle_sys_clear_console(void){
-
+	clear_console();
 }
 
 void handle_sys_draw_pixel(int x, int y, int r, int g, int b){
-
+	Vector2 auxPos = {x,y};
+	Color auxColor = {r,g,b};
+	draw_pixel(auxPos, auxColor);
 }
 
 void handle_sys_read(int fd, char * buf, int length){
