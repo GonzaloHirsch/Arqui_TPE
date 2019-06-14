@@ -15,41 +15,34 @@ static void pageFault();
 static void doubleFault();
 static void tBI(); //to Be Implemented
 
-static int verifying = 0;
-static int exceptionAssert = 0;
+RegisterSet cRV;
 
 extern void goToUserland();
 
 static void (*exceptionsArray[])() = {divZeroError, tBI, tBI, tBI, tBI, tBI, invalidOpcodeError, tBI, doubleFault, tBI, tBI, tBI, tBI, protectionFault, pageFault};
 
+void retrieveRegisters();
+void printRegistersAccurate();
+
+
 void exceptionDispatcher(uint64_t type){
 
-    if(verifying){
 
-        print("\nHere\n");
 
-        if(exceptionAssert == type){
-            print("Exception %d: OK\n", type);
-        }
-        else{
-            printError("Error: Expected %d but got %d\n", exceptionAssert, type);
-        }
-    }
-    else {
         _cli();
-        sleep(1000);
 
-        //Lo que sigue es para el modo vesa
+        retrieveRegisters();        //Obtengo los registros antes de llamar a cualquier
+                                    //otra funcion desde aca.
+
         clear_console();
         print("\n");
         (*exceptionsArray[type])();
-        printRegisters();
+        printRegistersAccurate();
 
         print("\n\nRebooting to userland");
         _sti();
         sleep(2000);
         goToUserland();
-    }
 }
 
 
@@ -81,12 +74,41 @@ static void doubleFault(){
     printError("Exception 8: Double Fault\n");
 }
 
-void setVerifying(){
-    verifying = 1;
+void retrieveRegisters(){
+
+    __asm__ volatile ("mov %%rax, %0;"
+    : "=a" (cRV.rax)
+    );
+    __asm__ volatile ( "mov %%rbx, %0;"
+    : "=a" (cRV.rbx)
+    );
+    __asm__ volatile ( "mov %%rcx, %0;"
+    : "=a" (cRV.rcx)
+    );
+    __asm__ volatile ( "mov %%rdx, %0;"
+    : "=a" (cRV.rdx)
+    );
+    __asm__ volatile ( "mov %%rdi, %0;"
+    : "=a" (cRV.rdi)
+    );
+    __asm__ volatile ( "mov %%rsi, %0;"
+    : "=a" (cRV.rsi)
+    );
+    __asm__ volatile ( "mov %%rbp, %0;"
+    : "=a" (cRV.rbp)
+    );
+    __asm__ volatile ( "mov %%rsp, %0;"
+    : "=a" (cRV.rsp)
+    );
+    __asm__ volatile ( "mov %%r8, %0;"
+    : "=a" (cRV.r8)
+    );
+    __asm__ volatile ( "mov %%r9, %0;"
+    : "=a" (cRV.r9)
+    );
 }
-void clearVerifying(){
-    verifying = 0;
-}
-void setExceptionAssert(int i){
-    exceptionAssert = i;
+
+void printRegistersAccurate(){
+
+    printError("RAX: %d\nRBX: %d\nRCX: %d\nRDX: %d\nRDI: %d\nRSI: %d\nRBP: %d\nRSP: %d\nR8: %d\nR9: %d\n", cRV.rax, cRV.rbx,cRV.rcx, cRV.rdx,cRV.rdi, cRV.rsi,cRV.rbp, cRV.rsp,cRV.r8, cRV.r9);
 }

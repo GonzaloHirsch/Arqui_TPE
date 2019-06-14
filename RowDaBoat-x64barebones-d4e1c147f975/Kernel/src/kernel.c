@@ -12,7 +12,6 @@
 #include <videoDriver.h>
 #include <console.h>
 #include <pixelMap.h>
-#include <verifications.h>
 
 extern uint8_t text;
 extern uint8_t rodata;
@@ -135,11 +134,12 @@ void * initializeKernelBinary()
 	ncPrint("[Done]");
 	ncNewline();
 
+
 	ncPrint("Prepare to go to Userland...");
 	ncNewline();
 	goToUserland();
 
-	return getStackBase();;
+	return getStackBase();
 }
 
 
@@ -175,6 +175,7 @@ int main()
 	ncNewline();
 
 	ncPrint("[Finished]");
-	*/
+
 	return 0;
+ */
 }

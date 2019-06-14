@@ -5,6 +5,7 @@
 #ifndef ARQUI_TPE_VERIFICATIONS_H
 #define ARQUI_TPE_VERIFICATIONS_H
 
-int verifyExceptions();
+void verifyDivZero();
+void verifyInvOpcode();
 
 #endif //ARQUI_TPE_VERIFICATIONS_H

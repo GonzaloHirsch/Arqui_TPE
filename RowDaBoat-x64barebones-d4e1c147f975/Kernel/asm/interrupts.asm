@@ -19,6 +19,9 @@ EXTERN irqDispatcher
 EXTERN handleSyscall
 EXTERN exceptionDispatcher
 
+Extern printInteger
+extern print
+
 %macro pushState 0
 	push rax
 	push rbx
@@ -77,7 +80,7 @@ EXTERN exceptionDispatcher
         mov al, 20h
         out 20h, al
     popState
-    iretq
+  iretq
 %endmacro
 
 _irq00Handler:

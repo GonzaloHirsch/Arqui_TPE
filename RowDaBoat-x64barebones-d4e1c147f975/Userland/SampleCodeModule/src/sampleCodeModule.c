@@ -25,6 +25,13 @@ int main() {
 	//return 0xDEADBEEF;
 
 	//init_shell();
+
+	/* Prueba para excepciones
+	uint64_t invalid= 0xFFFFFFFFFFFF;
+    uint64_t * ptr = &invalid;
+    ((void(*)())ptr)();
+    */
+
 	int i = 0xFFFFFFFF;
 	i += 1;
 	ncPrintOnAddress((char *)(0xB8000 + 80*2*12), "hello, I'm a user");
