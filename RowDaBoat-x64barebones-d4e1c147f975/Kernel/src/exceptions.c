@@ -16,6 +16,7 @@ static void doubleFault();
 static void tBI(); //to Be Implemented
 
 RegisterSet cRV;
+ExceptionStackFrame eSF;
 
 extern void goToUserland();
 
@@ -41,12 +42,20 @@ void exceptionDispatcher(uint64_t type){
 
         _cli();
 
+        //uso este extended assembly para no ir a otra funcion
+        //y tener un lio en el stack. Todavia tengo 8 bytes del
+        //retAddr de exceptionDispatcher.
+        __asm__ volatile ("mov 32(%%rsp), %0;"
+        : "=a" (eSF.rip)
+        );
+
         retrieveRegisters();        //Obtengo los registros antes de llamar a cualquier
                                     //otra funcion desde aca.
 
         clear_console();
         print("\n");
         (*exceptionsArray[type])();
+        printError("RIP: %d\n", eSF.rip);
         printRegistersAccurate();
 
         print("\n\nRebooting to userland");

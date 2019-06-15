@@ -104,6 +104,7 @@ void handle_command(int cmd){
 	Color color = {0,255,0};
 	int h = 15;
     char buffer[10]={0};
+    char c = 10;
 
     switch(cmd){
 		case HELP:
@@ -122,11 +123,10 @@ void handle_command(int cmd){
 			display_date();
 		break;
 		case TIME:
-		    h/=0;
 			//printf("Hola %d", "Jorge");
-			scanf("%s", &buffer);
-			printf("%s", buffer);
-			//display_time();
+			scanf("%s hola%c %d", &buffer, &c, &h);
+			printf("Recibido: %s %c %d", buffer, c, h);
+			display_time();
 		break;
 		case BEEP:
 			make_sound();

@@ -23,7 +23,6 @@ int scanf(const char * fmt, ...){
 		int len = 0;                //la longitud del str
 		char key = 0;               //current key
 
-		print("\nANTES WHILE\n");
 		//Le habilita al usuario a escribir hasta el enter, solo caracteres mayores a ascii 10
 
 		while((key = getKey() & 0xFF) != '\n'){
@@ -46,20 +45,18 @@ int scanf(const char * fmt, ...){
 
 		int aux;
 
-		print("\nDESPUES WHILE\n");
 		//Lee el formato
     while(fmt[i] != 0 && str[pos]!=0){
     	if(fmt[i] == '%'){
         switch (fmt[i+1]) {
 
             case 'd':
-                        printf("matcheo un d\n");
 						matches++;
 						int * ptrD = va_arg(list, int*);
 						char num[15] = {0};
 						j = 0;
 						//Itera el string que fue input
-						while(str[pos] != ' ' || str[pos] != '\n' || str[pos] != 0 || str[pos] != '\t'){
+						while(str[pos] != ' ' && str[pos] != '\n' && str[pos] != 0 && str[pos] != '\t'){
 						    if (isNumeric(str[pos])){
 								num[j++] = str[pos++];
 							} else {
@@ -75,13 +72,12 @@ int scanf(const char * fmt, ...){
                     break;
 
             case 's':
-                        printf("matcheo un s\n");
                         matches++;
 						char * ptrS = va_arg(list, char*);
 						j = 0;
 						char buffer[MAX_BUFFER] = {0};
 
-						while(str[pos] != ' ' || str[pos] != '\n' || str[pos] != 0 || str[pos] != '\t'){
+						while(str[pos] != ' ' && str[pos] != '\n' && str[pos] != 0 && str[pos] != '\t'){
 							buffer[j++] = str[pos++];
 						}
                         buffer[j]=0; //me aseguro de que termino el str
@@ -90,13 +86,12 @@ int scanf(const char * fmt, ...){
                     break;
 
             case 'c':
-                        printf("matcheo un c\n");
 					matches++;
 					char * ptrC = va_arg(list, char*);
 					j = 0;
 
-					if(str[pos] != ' ' || str[pos] != '\n' || str[pos] != 0 || str[pos] != '\t'){
-						ptrC = (str + pos);
+					if(str[pos] != ' ' && str[pos] != '\n' && str[pos] != 0 && str[pos] != '\t'){
+						*ptrC = *(str + pos);
 						pos++;
 					}
 
@@ -104,21 +99,21 @@ int scanf(const char * fmt, ...){
 					break;
 
             default:
-                    printf("matcheo un default\n");
+
                     break;
 
           }
         }
     	else {
-            printf("matcheo nada\n");
-    	    i++;
+            if(str[pos++]==fmt[i++]);
+            else return matches;
     	}
     }
-print("\nDESPUES DESPUES WHILE\n");
+
 		// newStr[len] = 0;
 		// len++;
 		// sys_write(0, newStr, len);
-		printf("%s: %s\n", fmt, str);
+		//printf("%s: %s\n", fmt, str);
 		return matches;
 }
 
@@ -147,9 +142,15 @@ void printf(char * str, ...){
 										len += concat((newStr + len), va_arg(list,char*));
                     i += 2;
                     break;
-										default:
-										i += 2;
-										break;
+                /* Todo: debuggear
+                case 'c':
+                    newStr[len++] = (char) va_arg(list, char);
+                    i +=2;
+                    break;
+                */
+                default:
+                    i += 2;
+                    break;
             }
         }
         else {
