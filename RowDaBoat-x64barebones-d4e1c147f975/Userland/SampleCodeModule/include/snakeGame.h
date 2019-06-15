@@ -8,6 +8,7 @@
 #include <utils.h>
 #include <interrupts.h>
 #include <snakeBody.h>
+#include <syscalls.h>
 
 int initSnakeGame();
 
