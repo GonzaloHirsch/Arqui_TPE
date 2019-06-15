@@ -81,7 +81,7 @@ void handle_sys_beep(){
 }
 
 void handle_sys_over_clock(int rate){
-	_over_clock(rate);
+	over_clock(rate);
 }
 
 int handle_sys_time(uint64_t selector){
