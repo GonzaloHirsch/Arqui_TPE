@@ -34,11 +34,21 @@ void drawBorder(){
   drawRect(auxStart, hor, BORDER_COLOR);
 }
 
+static Color header = {43,87,151};
+
 void drawHeader(){
   Vector2 size = {1080, 16};
-  Color color = {43,87,151};
-  drawRect(ZeroVector, size, color);
-  drawString(ZeroVector, "Esc --> EXIT  WASD --> MOVE" , COLOR_WHITE, color);
+  drawRect(ZeroVector, size, header);
+  drawString(ZeroVector, "Esc --> EXIT  WASD --> MOVE" , COLOR_WHITE, header);
+}
+
+void drawPoints(int p){
+  Vector2 pos = {50, 0};
+  drawString(pos, "Points: " , COLOR_WHITE, header);
+  pos.x += 8;
+  char buf[10];
+  itoa(p, buf, 10);
+  drawString(pos,buf , COLOR_WHITE, header);
 }
 
 void drawCell(Vector2 cell, Color color) {

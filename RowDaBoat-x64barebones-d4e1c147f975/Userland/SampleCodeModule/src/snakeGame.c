@@ -54,7 +54,8 @@ void Update(){
     isRunning = 0;
     winner = 0;
   }
-  updateSnake(); 
+  updateSnake();
+  drawPoints((int)frame); 
 }
 
 
