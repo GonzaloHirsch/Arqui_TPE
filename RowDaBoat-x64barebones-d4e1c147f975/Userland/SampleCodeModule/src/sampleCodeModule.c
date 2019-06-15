@@ -25,7 +25,7 @@ int main() {
 	*/
 	//return 0xDEADBEEF;
 
-	//init_shell();
+	init_shell();
 
 	/*Prueba para excepciones
 	uint64_t invalid= 0xFFFFFFFFFFFF;
@@ -33,8 +33,8 @@ int main() {
     ((void(*)())ptr)();
     */
 
-	int i = 0xFFFFFFFF;
-	i += 1;
-	i/=0;
+	//int i = 0xFFFFFFFF;
+	//i += 1;
+	//i/=0;
 	return 1;
 }
