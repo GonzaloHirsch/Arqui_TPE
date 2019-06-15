@@ -65,9 +65,12 @@ void sleep(uint64_t millis){
     ncPrintOnAddress((char *)(0xB800 + 80*2*15 + 120 + (i%5)*2), "Done");
 }
 
-void timer_wait(int ticks){
-    int x = ticks_elapsed();
-    while(x-ticks_elapsed() < ticks){
-        halt();
-    }
+void timer_wait(int expectedTicks){
+  //Prepara para que pueda recibir iterrupciones
+  _sti();
+  expectedTicks = ticks + expectedTicks;
+  while (ticks < expectedTicks){
+    //Le dice que puede ser interrumpido
+    halt();
+  }
 }
