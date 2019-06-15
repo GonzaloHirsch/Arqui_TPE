@@ -12,59 +12,77 @@ void putChar(char c){
 	sys_write(0, &c, 1);
 }
 
+
+
 int scanf(const char * fmt, ...){
     va_list list;
     va_start(list, fmt);
 
-		char str[MAX_BUFFER] = {0};
-		int len = 0;
-		char key;
 
-		print("ANTES WHILE");
-		//Le habilita al usuario a escribir hasta el enter
-		while((key = getKey()) != '\n'){
+		char str[MAX_BUFFER];       //donde se almacena lo que el usuario escribe
+		int len = 0;                //la longitud del str
+		char key = 0;               //current key
+
+		print("\nANTES WHILE\n");
+		//Le habilita al usuario a escribir hasta el enter, solo caracteres mayores a ascii 10
+
+		while((key = getKey() & 0xFF) != '\n'){
 			if (key == '\b'){
 				str[len - 1] = 0;
 				len--;
 			} else {
-				if (len < MAX_BUFFER){
+				if (key >= 10 && len < MAX_BUFFER){
 					str[len++] = key;
+                    putChar(key);
 				}
 			}
-			putChar(key);
 		}
 
-		int i = 0;
-		int pos = 0;
-		int matches = 0;
-		int j = 0;
+		str[len]=0;
+		int i = 0;          //el cursor para el string de fmt
+		int pos = 0;        //el cursor para el string str recien obtenido
+		int matches = 0;    //cant de params que matchean
+		int j = 0;          //cursor para string auxiliar
 
 		int aux;
-print("DESPUES WHILE");
+        print(str);
+
+		print("\nDESPUES WHILE\n");
 		//Lee el formato
-    while(fmt[i] != 0){
+    while(fmt[i] != 0 && str[pos]!=0){
     	if(fmt[i] == '%'){
-        switch (str[i+1]) {
-          case 'd':
+        switch (fmt[i+1]) {
+
+            case 'd':
+                        printf("matcheo un d\n");
 						matches++;
 						int * ptrD = va_arg(list, int*);
+                    (*ptrD)++;
 						char num[15] = {0};
 						j = 0;
 						//Itera el string que fue input
-						while(str[pos] != ' ' || str[pos] != '\n' || str[pos] != 0 || str[pos] != '\t'){
-							if (!isNumeric(str[pos])){
+						/*while(str[pos] != ' ' || str[pos] != '\n' || str[pos] != 0 || str[pos] != '\t'){
+							printf("%s\n", str);
+						    if (isNumeric(str[pos])){
 								num[j++] = str[pos++];
 							} else {
-								return -1;
+                                printf("%s\n", str);
+                                aux = atoi(num, j);
+                                *ptrD = aux;
+                                return -1;
 							}
+						}*/
+						while(isNumeric(str[pos])){
+						    num[j++] = str[pos++];
 						}
 						aux = atoi(num, j);
-						ptrD = &aux;
-            i += 2;
-            break;
+						*ptrD = aux;
+                    i += 2;
+                    break;
 
-          case 's':
-					matches++;
+            case 's':
+                        printf("matcheo un s\n");
+                        matches++;
 						char * ptrS = va_arg(list, char*);
 						j = 0;
 						char buffer[MAX_BUFFER] = {0};
@@ -74,10 +92,11 @@ print("DESPUES WHILE");
 						}
 
 						ptrS = buffer;
-            i += 2;
-            break;
+                    i += 2;
+                    break;
 
-					case 'c':
+            case 'c':
+                        printf("matcheo un c\n");
 					matches++;
 					char * ptrC = va_arg(list, char*);
 					j = 0;
@@ -89,13 +108,23 @@ print("DESPUES WHILE");
 
 					i += 2;
 					break;
+
+            default:
+                    printf("matcheo un default\n");
+                    break;
+
           }
         }
+    	else {
+            printf("matcheo nada\n");
+    	    i++;
+    	}
     }
-print("DESPUES DESPUES WHILE");
+print("\nDESPUES DESPUES WHILE\n");
 		// newStr[len] = 0;
 		// len++;
 		// sys_write(0, newStr, len);
+		printf("%s: %s\n", fmt, str);
 		return matches;
 }
 
@@ -170,7 +199,10 @@ char* reverse(char *buffer, int i, int j)
 int atoi(const char* buffer, int len){
 	int i = 0;
 	int result = 0;
-	while(buffer[i] != 0){
+
+	printf("atoi\n%s\n", buffer);
+
+	while(buffer[i] != 0/';'){
 		result += (pow(10, len) * (buffer[i] - 48));
 		i++;
 		len--;

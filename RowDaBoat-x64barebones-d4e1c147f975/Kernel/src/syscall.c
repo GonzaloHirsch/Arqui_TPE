@@ -47,7 +47,8 @@ uint64_t handleSyscall(uint64_t rdi, uint64_t rsi, uint64_t rdx, uint64_t rcx, u
 }
 
 void handle_sys_write(int fd, const char * buf, int length){
-	print_N(buf, length);
+
+    print_N(buf, length);
 }
 
 void handle_sys_get_ticks(int * ticks){
