@@ -11,6 +11,7 @@ static int snakeLength;
 
 void onExit();
 void nextFrame();
+void drawHeader();
 
 void resetVariables(){
   winner = 1;
