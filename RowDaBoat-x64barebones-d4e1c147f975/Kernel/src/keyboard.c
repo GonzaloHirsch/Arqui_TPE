@@ -52,7 +52,7 @@ unsigned char keycode_map[128] = {
 
 //Key codes con la tecla shift apretada
 unsigned char alternative_keycode_map[128] = {
-  0,'~','!','@','#','$','%',94, '&', '*', '(', ')', 95,'+', '\b', '\t', /* shift + tab not defined in normal aasci*/
+  0,'~','!','\"','#','$','%',94, '&', '*', '(', ')', 95,'+', '\b', '\t', /* shift + tab not defined in normal aasci*/
   'Q','W','E','R','T','Y', 'U', 'I', 'O', 'P', '{', '}', '\n', 0,
   'A', 'B', 'C', 'D', 'F', 'G', 'H', 'J', 'K', 'L', ':',
   '~', LEFT_SHIFT, '|', 'Z', 'X', 'C', 'V', 'B', 'N',
@@ -75,7 +75,7 @@ void keyboard_handler(void){
       //Es el bit numero 7 (el mas significativo)
       //Si esta prendido es que se solto la tecla
       if (CHECKBYTE(code, 7)){
-        //ncPrintChar(keycode_map[code - BREAK_CODE_DIF]);
+        //Le hace un AND porque sino viene con bits prendidos extra
         code = code & 0xff;
         int aux = code - BREAK_CODE_DIF;
         //Si se solto algun shift, se apaga el flag
@@ -86,7 +86,6 @@ void keyboard_handler(void){
       }
 
       //Verifica si apretaste el caps lock, para ver si lo apagaste o prendiste
-      //ALGO PARA VER; QUE PASA SI EMPIEZA CON EL LOCK PRENDIDO
       if (keycode_map[code] == CAPS_LOCK){
         caps_lock = !(caps_lock);
         return;
@@ -130,7 +129,6 @@ int addChar(char c){
       if (head == tail && !full){
         full = 1;
       }
-      //ncPrintChar(buffer[head]);
       return 1;
     }
     return 0;
@@ -141,15 +139,8 @@ int addChar(char c){
 */
 int getChar(void){
     int aux = EOF;
-    //ncPrint("GET");
     if (head != tail || (head == tail && full)){
-
       aux = buffer[tail];
-
-      // char s[10];
-      // itoa(aux, s, 10);
-      // print(s);
-      //ncPrintChar(aux);
       //Le saca el modulo para que de "vueltas" alrededor del buffer
       tail = (tail + 1) % MAX_BUFFER_SIZE;
       if (full){

@@ -29,56 +29,59 @@ uint64_t * init_shell(void){
 		//printChar(key);
 		//writeKey(key);
 
-		//En el caso de que se pase de la cantidad de caracteres
+		//CASO EN QUE SE PASA DE LA CANTIDAD MAXIMA DE CARACTERES
 		if (commandBuffPos == MAX_BUFF_SIZE){
+			//Define el comando como invalido
 			command = INVALID_COMMAND;
+			//Imprime una linea nueva para que se vea bien
+			print("\n");
+			//Llama a la funcion para manejar el comando
 			handle_command(command);
-
-			clear_buffer(commandBuff);
+			//Hace un reset del buffer de comando volviendo a la posicion 0
 			commandBuffPos = 0;
-
+			//Imprime el usuario de nuevo
 			print("\narquiOS@ITBA: ");
 		}
 
-		//En el caso de que aprete enter
+		//CASO ENTER
 		if (key == '\n'){
+			//Manda el enter a la pantalla para que baje la linea y se vea bien
 			writeKey(&key);
-			// print(commandBuff);
-			// print("-");
-			ncNewline();
+			//Agrega terminacion en 0 al buffer de comando
 			commandBuff[commandBuffPos] = 0;
+			//Recupera el comando que fue elegido
 			command = getCommand(commandBuff);
-			//print(commandBuff);
-			//printHex(command);
+			//Llama a la funcion que decide como actuar en frente del comando
 			handle_command(command);
-			//clear_buffer(commandBuff);
+			//Hace un reset del buffer de comando volviendo a la posicion 0
 			commandBuffPos = 0;
+			//Vuelve a imprimir el usuario para que se vea bien
 			print("arquiOS@ITBA: ");
-		} else if (key == '\b'){
+		}
+		//CASO BACKSPACE - DELETE
+		else if (key == '\b'){
+			//En el caso de que se borro todo, para que no borre de mas
+			if (commandBuffPos != 0){
+				//Manda el backspace para que borre fisicamente a la tecla
+				writeKey(&key);
+				//Borra la letra del buffer de comando
+				commandBuffPos--;
+			}
+		}
+		//CASO CUALQUIER OTRA TECLA
+		else if (key != 0){
+			//Manda la letra a pantalla
 			writeKey(&key);
-			commandBuffPos--;
-		} else if (key != 0){
-			writeKey(&key);
+			//Manda la letra al buffer de comando
 			commandBuff[commandBuffPos] = key;
+			//Incrementa la longitud de la palabra
 			commandBuffPos++;
 		}
-		//Hacer un get de la tecla que se apreto
-
-		//Ver si es un enter
-
-		//Ver si matchea con alguno de los comandos
 	}
-
 
 	display_goodbye_message();
 
 	return (uint64_t *) RETURN_ADRESS;
-}
-
-void clear_buffer(char * buff){
-	for (int i = 0; i < MAX_BUFF_SIZE; i++){
-		buff[i] = 0;
-	}
 }
 
 int getCommand(char * cmd){
@@ -86,11 +89,7 @@ int getCommand(char * cmd){
 	int result = INVALID_COMMAND;
 	for (int i = 0; i < commandCount && result == INVALID_COMMAND; i++){
 		//En el caso de que sean iguales
-		// print(cmd);
-		// print("-");
-		// print(commands[i]);
 		if (!strcmp(cmd, commands[i])){
-			//print("EQU");
 			result = i;
 		}
 	}
@@ -98,11 +97,6 @@ int getCommand(char * cmd){
 }
 
 void handle_command(int cmd){
-	//printDec(cmd);
-	Vector2 pos = {100,100};
-	Vector2 size = {250,250};
-	Color color = {0,255,0};
-	int h;
 	switch(cmd){
 		case HELP:
 			display_help();
@@ -139,19 +133,22 @@ void handle_command(int cmd){
 	print("\n");
 }
 
+/*
+	Imprime el mensaje de bienvenida
+*/
 void display_welcome_message(void){
 	clearScreen();
-	print("                                               /$$  /$$$$$$   /$$$$$$\n");
-	print("                                              |__/ /$$__  $$ /$$__  $$\n");
-	print("        /$$$$$$   /$$$$$$   /$$$$$$  /$$   /$$ /$$| $$  \\ $$| $$  \\__/\n");
-	print("       |____  $$ /$$__  $$ /$$__  $$| $$  | $$| $$| $$  | $$|  $$$$$$ \n");
-	print("        /$$$$$$$| $$  \\__/| $$  \\ $$| $$  | $$| $$| $$  | $$ \\____  $$\n");
-	print("       /$$__  $$| $$      | $$  | $$| $$  | $$| $$| $$  | $$ /$$  \\ $$\n");
-	print("      |  $$$$$$$| $$      |  $$$$$$$|  $$$$$$/| $$|  $$$$$$/|  $$$$$$/\n");
-	print("       \\_______/|__/       \\____  $$ \\______/ |__/ \\______/  \\______/ \n");
-	print("                                | $$                                  \n");
-	print("                                | $$    \n");
-	print("                                |__/   \n");
+	print("						                                               /$$  /$$$$$$   /$$$$$$\n");
+	print("						                                              |__/ /$$__  $$ /$$__  $$\n");
+	print("						        /$$$$$$   /$$$$$$   /$$$$$$  /$$   /$$ /$$| $$  \\ $$| $$  \\__/\n");
+	print("						       |____  $$ /$$__  $$ /$$__  $$| $$  | $$| $$| $$  | $$|  $$$$$$ \n");
+	print("						        /$$$$$$$| $$  \\__/| $$  \\ $$| $$  | $$| $$| $$  | $$ \\____  $$\n");
+	print("						       /$$__  $$| $$      | $$  | $$| $$  | $$| $$| $$  | $$ /$$  \\ $$\n");
+	print("						      |  $$$$$$$| $$      |  $$$$$$$|  $$$$$$/| $$|  $$$$$$/|  $$$$$$/\n");
+	print("						       \\_______/|__/       \\____  $$ \\______/ |__/ \\______/  \\______/ \n");
+	print("						                                | $$                                  \n");
+	print("						                                | $$    \n");
+	print("						                                |__/   \n");
 	print("Welcome to arquiOS\n");
 	print("Type in \"help\" to discover all available commands\n\n");
 }

@@ -34,7 +34,7 @@ freq = 1193182 / div
 void over_clock(int div){
   //Verifica que no se este pasando
   if (1 <= div && div <= 65356){
-    _over_clock(rate);
+    _over_clock(div);
   }
 }
 

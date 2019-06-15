@@ -317,6 +317,8 @@ void makeSound(void){
 }
 
 void goToSleep(int ticks){
+	//Cambia la frecuencia para que vuelva a ser la normal, que tiene una interrupcion cada 55ms aprox
+	sys_over_clock(65356);
 	sys_sleep(ticks);
 }
 
