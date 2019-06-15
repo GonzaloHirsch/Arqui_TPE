@@ -6,8 +6,8 @@ const char * commandMessages[] = {"help - Show available commands and their use"
 								"verify - Runs verification routines for system exceptions",
 								"time - Displays system date and time"};
 
-const char * commands[] = {"help", "snake", "shutdown", "verify", "time", "beep", "sleep", "date", "clear"};
-const int commandCount = 9;
+const char * commands[] = {"help", "snake", "shutdown", "invalid", "time", "beep", "sleep", "date", "clear", "div"};
+const int commandCount = 10;
 
 uint64_t * init_shell(void){
 	display_welcome_message();
@@ -108,7 +108,11 @@ void handle_command(int cmd){
 		case SHUTDOWN:
 		return;
 		break;
-		case VERIFY:
+		case INVALID_OC:
+			generate_invalid_opc();
+		break;
+		case DIV:
+			generate_zero_division();
 		break;
 		//Imprime la fecha de hoy
 		case DATE:
@@ -170,6 +174,14 @@ void display_time(void){
 
 void display_date(void){
 	print(getDate());
+}
+
+void generate_invalid_opc(){
+	//inexistent_function();
+}
+
+void generate_zero_division(){
+	int result = 10 / 0;
 }
 
 void make_sound(void){
