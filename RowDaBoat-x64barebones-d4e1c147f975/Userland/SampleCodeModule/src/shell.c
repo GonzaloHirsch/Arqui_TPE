@@ -177,7 +177,9 @@ void display_date(void){
 }
 
 void generate_invalid_opc(){
-	//inexistent_function();
+	uint64_t invalid = 0xFFFFFFFFFFFF;
+	uint64_t * ptr = &invalid;
+	((void(*)())ptr)();
 }
 
 void generate_zero_division(){
