@@ -32,6 +32,7 @@ int get_max_cursorX(){
 void init_console(){
     clear_console();
     print("%d - %d - %d", get_max_line(), getVideoY);
+    cursor.y = get_max_line()-1;
 }
 
 void backspace(){
@@ -196,6 +197,7 @@ void clear_console(){
     Vector2 size = {getVideoX(), getVideoY()};
     draw_rect(ZeroVector, size, background);
     cursor.x = 0;
+    //cursor.y = get_max_line()-1;
     cursor.y = 0;
 }
 

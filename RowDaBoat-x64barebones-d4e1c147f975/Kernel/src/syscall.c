@@ -5,8 +5,10 @@
 
 //Todo: agregar todos los syscalls
 
+extern void hand();
+
 uint64_t handleSyscall(uint64_t rdi, uint64_t rsi, uint64_t rdx, uint64_t rcx, uint64_t r8, uint64_t r9){
-	switch(rdi){
+    switch(rdi){
 		case WRITE:
 		//ncPrint("WRITE");
 			handle_sys_write(rsi, (char *)rdx, rcx);
@@ -42,6 +44,12 @@ uint64_t handleSyscall(uint64_t rdi, uint64_t rsi, uint64_t rdx, uint64_t rcx, u
 		//ncPrint("SLEEP");
 			handle_sys_get_ticks((int *)rdx);
 		break;
+	    case SHUTDOWN:
+	        //Metodo facil: Halteo la PC, como seria en la version original
+	        //del kernel.
+	        //Todo: implementar un metodo que permita apagar la pc efectivamente
+            hang();
+        break;
 	}
 	return 0;
 }

@@ -139,7 +139,6 @@ void * initializeKernelBinary()
 
 	ncPrint("Prepare to go to Userland...");
 	ncNewline();
-	goToUserland();
 
 	return getStackBase();
 }
@@ -177,6 +176,10 @@ int main()
 
 	ncPrint("[Finished]");
     */
+
+    goToUserland();
+
+
 	return 0;
 
 }

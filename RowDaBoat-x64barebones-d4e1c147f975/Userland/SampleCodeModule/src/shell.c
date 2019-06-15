@@ -53,7 +53,7 @@ uint64_t * init_shell(void){
 			//Hace un reset del buffer de comando volviendo a la posicion 0
 			commandBuffPos = 0;
 			//Vuelve a imprimir el usuario para que se vea bien
-			print("arquiOS@ITBA: ");
+			if(command!=SHUTDOWN) print("arquiOS@ITBA: ");
 		}
 		//CASO BACKSPACE - DELETE
 		else if (key == '\b'){
@@ -105,7 +105,10 @@ void handle_command(int cmd){
 		break;
 		//Retorna y sale del while, y no se puede hacer nada mas
 		case SHUTDOWN:
-		return;
+		    clearScreen();
+		    //display_goodbye_message();
+            //sys_shutdown(0); //que se apague despues de 0 ticks
+		    return;
 		break;
 		case INVALID_OC:
 			generate_invalid_opc();

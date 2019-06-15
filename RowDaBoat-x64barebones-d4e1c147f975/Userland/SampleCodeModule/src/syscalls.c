@@ -55,6 +55,11 @@ uint64_t sys_get_ticks(void){
 	return ticks;
 }
 
+/*
+void sys_shutdown(int time){
+    _int80(SHUTDOWN, time, 0, 0, 0, 0);
+}
+*/
 void sys_draw(void){
 	//_int80();
 }

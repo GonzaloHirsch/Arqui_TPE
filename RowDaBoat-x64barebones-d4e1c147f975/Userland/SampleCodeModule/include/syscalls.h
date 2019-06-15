@@ -16,6 +16,7 @@
 #define CLEAR 8
 #define DRAW_PIXEL 9
 #define OVER_CLOCK 10
+#define SHUTDOWN 11
 
 void sys_write(int fd, const char *buf, int count);
 
@@ -40,6 +41,7 @@ void sys_clear_console(void);
 //void sys_time(char * buf);
 int sys_time(int selector);
 
+//void sys_shutdown(int time);
 // void sys_date(char * buf);
 
 #endif
