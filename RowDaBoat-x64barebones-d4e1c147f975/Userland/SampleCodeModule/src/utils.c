@@ -275,12 +275,10 @@ char getKey(void){
 // 	return buff;
 // }
 
-char * getTime(void){
+void getTime(char * buff){
 	int seconds = sys_time(SECONDS);
 	int minutes = sys_time(MINUTES);
 	int hours = sys_time(HOURS);
-
-	char * buff;
 
 	if (hours < 10){
 		itoa(0, buff, 10);
@@ -307,15 +305,12 @@ char * getTime(void){
 		itoa(seconds, buff + 6, 10);
 	}
 	*(buff + 8) = 0;
-
-	return buff;
 }
 
-char * getDate(void){
+void getDate(char * buff){
 	int day = sys_time(DAY_OF_MONTH);
 	int month = sys_time(MONTH);
 	int year = sys_time(YEAR);
-	char * buff;
 
 	if (day < 10){
 		itoa(0, buff, 10);
@@ -340,8 +335,6 @@ char * getDate(void){
 	itoa(year, buff + 6, 10);
 
 	*(buff + 10) = 0;
-
-	return buff;
 }
 
 void makeSound(void){

@@ -168,11 +168,15 @@ void display_help(void){
 }
 
 void display_time(void){
-	print(getTime());
+	char time[20];
+	getTime(time);
+	print(time);
 }
 
 void display_date(void){
-	print(getDate());
+	char date[20];
+	getDate(date);
+	print(date);
 }
 
 void generate_invalid_opc(){

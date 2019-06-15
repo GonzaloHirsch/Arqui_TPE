@@ -41,9 +41,9 @@ void makeSound(void);
 
 void goToSleep(int ticks);
 
-char * getTime(void);
+void getTime(char * buff);
 
-char * getDate(void);
+void getDate(char * buff);
 
 void print(const char * str);
 
