@@ -6,6 +6,7 @@
 #include <naiveConsole.h>
 #include <irqDispatcher.h>
 #include <time.h>
+#include <keyboard.h>
 #include <idtLoader.h>
 #include <interrupts.h>
 #include <syscall.h>
@@ -99,36 +100,35 @@ void * initializeKernelBinary()
 	ncPrint("Loading IDT...");
 	ncNewline();
 
-    ncPrint("[Initializing Graphics]");
-    ncNewline();
+  ncPrint("[Initializing Graphics]");
+  ncNewline();
 
-    ncPrintHex(getVideoX());
+  ncPrintHex(getVideoX());
 
-    initVideoDriver();
-    init_console();
+  initVideoDriver();
+  init_console();
 
-    Vector2 pos = {0,0};
-    Vector2 size = {100,100};
+  Vector2 pos = {0,0};
+  Vector2 size = {100,100};
 
-    Color foreground = {255,255,255};
-    Color background = {255,0,0};
+  Color foreground = {255,255,255};
+  Color background = {255,0,0};
 
-    char * str = "This is a string";
+  char * str = "This is a string";
 
-    char buf[2];
+  char buf[2];
 
-    //draw_string_with_background(pos, buf, foreground, background);
-    //print("HAHAHHOLA ESTO ES ALL CAPS");
-    //print("m");
+  //draw_string_with_background(pos, buf, foreground, background);
+  //print("HAHAHHOLA ESTO ES ALL CAPS");
+  //print("m");
 
-    for (int i = 0; i < 20; ++i) {
-        print("%d-", i);
-    }
+  for (int i = 0; i < 20; ++i) {
+      print("%d-", i);
+  }
 
+  //move_all_up();
 
-    //move_all_up();
-
-    //clear_line(47);
+  //clear_line(47);
 
 	print("Video Driver Loaded\nLoading IDT\n");
 	load_idt();
@@ -143,7 +143,6 @@ void * initializeKernelBinary()
 
 	return getStackBase();
 }
-
 
 int main()
 {

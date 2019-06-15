@@ -35,14 +35,16 @@ void init_console(){
 }
 
 void backspace(){
-    if(cursor.y == 0 && cursor.x == 0){
-        return;
-    } else if(cursor.x == 0){
-        cursor.x = get_max_cursorX()-1;
-        cursor.y--;
-    }
+  if(cursor.y == 0 && cursor.x == 0){
+    return;
+  } else if(cursor.x == 0){
+    cursor.x = get_max_cursorX()-1;
+    cursor.y--;
+  } else {
+    cursor.x--;
+  }
 
-    draw_char_with_background(cursor, ' ', background, background);
+  draw_char_with_background(cursor, ' ', background, background);
 }
 
 void new_line(){
