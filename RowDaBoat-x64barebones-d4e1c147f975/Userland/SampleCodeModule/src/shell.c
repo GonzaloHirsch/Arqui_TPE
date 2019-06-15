@@ -108,6 +108,7 @@ void handle_command(int cmd){
 			display_help();
 		break;
 		case SNAKE:
+		initSnakeGame();
 		break;
 		//Retorna y sale del while, y no se puede hacer nada mas
 		case SHUTDOWN:
@@ -125,6 +126,7 @@ void handle_command(int cmd){
 			//scanf("%d", &h);
 			//printf("%d", h);
 			display_time();
+			sys_over_clock(10000);
 		break;
 		case BEEP:
 			make_sound();

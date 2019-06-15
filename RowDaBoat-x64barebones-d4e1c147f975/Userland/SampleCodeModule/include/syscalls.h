@@ -9,7 +9,7 @@
 #define READ 1
 #define WRITE 2
 #define BEEP 3
-#define SNAKE 4
+#define TICKS 4
 #define TIME 5
 #define SLEEP 6
 #define DATE 7
@@ -31,7 +31,7 @@ void sys_sleep(int ticks);
 
 void sys_beep(void);
 
-void sys_snake(void);
+uint64_t sys_get_ticks(void);
 
 void sys_draw_pixel(int x, int y, int r, int g, int b);
 

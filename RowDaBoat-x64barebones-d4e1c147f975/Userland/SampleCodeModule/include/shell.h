@@ -6,6 +6,7 @@
 #include <utils.h>
 #include <graphicsLibrary.h>
 #include <types.h>
+#include <snakeGame.h>
 
 //Constantes para los comandos
 #define INVALID_COMMAND -1

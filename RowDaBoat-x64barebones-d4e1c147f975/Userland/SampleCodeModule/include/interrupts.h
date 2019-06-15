@@ -14,4 +14,8 @@
 */
 extern uint64_t _int80(uint64_t rdi, uint64_t rsi, uint64_t rdx, uint64_t rcx, uint64_t r8, uint64_t r9);
 
+void _cli();
+void _sti();
+void _hlt();
+
 #endif

@@ -38,12 +38,20 @@ uint64_t handleSyscall(uint64_t rdi, uint64_t rsi, uint64_t rdx, uint64_t rcx, u
 		//ncPrint("SLEEP");
 			handle_sys_draw_pixel(rsi, rdx, rcx, r8, r9);
 		break;
+		case TICKS:
+		//ncPrint("SLEEP");
+			handle_sys_get_ticks((int *)rdx);
+		break;
 	}
 	return 0;
 }
 
 void handle_sys_write(int fd, const char * buf, int length){
 	print_N(buf, length);
+}
+
+void handle_sys_get_ticks(int * ticks){
+	*(ticks) = ticks_elapsed();
 }
 
 void handle_sys_clear_console(void){
@@ -73,7 +81,7 @@ void handle_sys_beep(){
 }
 
 void handle_sys_over_clock(int rate){
-	over_clock(rate);
+	_over_clock(rate);
 }
 
 int handle_sys_time(uint64_t selector){

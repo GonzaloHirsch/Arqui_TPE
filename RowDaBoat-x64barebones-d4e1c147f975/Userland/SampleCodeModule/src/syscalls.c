@@ -49,8 +49,10 @@ void sys_clear_console(void){
 	_int80((uint64_t)CLEAR, 0, 0, 0, 0, 0);
 }
 
-void sys_snake(void){
-	//_int80();
+uint64_t sys_get_ticks(void){
+	int ticks;
+	_int80(TICKS, 0, &ticks, 0, 0, 0);
+	return ticks;
 }
 
 void sys_draw(void){
