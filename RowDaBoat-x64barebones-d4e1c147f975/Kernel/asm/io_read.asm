@@ -2,6 +2,7 @@ GLOBAL read_key
 GLOBAL check_key
 GLOBAL read_port
 GLOBAL write_port
+GLOBAL _over_clock
 
 read_key:
   push rbp
@@ -9,6 +10,25 @@ read_key:
 
 	in al, 60h
   and rax, 0ffh
+
+  mov rsp, rbp
+  pop rbp
+  ret
+
+;https://en.wikibooks.org/wiki/X86_Assembly/Programmable_Interval_Timer
+;Cambia la frecuencia de la interrupcion del PIT
+;Se calcula con una division donde el divisor esta en RDI, en la parte de DI
+_over_clock:
+  push rbp
+  mov rbp, rsp
+
+  mov al, 0x36
+  out 0x43, al    ;tell the PIT which channel we're setting
+
+  mov ax, di
+  out 0x40, al    ;send low byte
+  mov al, ah
+  out 0x40, al    ;send high byte
 
   mov rsp, rbp
   pop rbp

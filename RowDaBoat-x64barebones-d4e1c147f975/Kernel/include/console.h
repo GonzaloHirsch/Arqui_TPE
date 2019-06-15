@@ -8,13 +8,24 @@
 #include <types.h>
 #include <pixelMap.h>
 #include <strings.h>
+#include <stdarg.h>
 #include <videoDriver.h>
 
 void init_console();
 
-void print(char * str);
+void backspace();
 
-void print_N(char * str, int length);
+void printWithColors(Color chosenForeground, Color chosenBackground, char * str, va_list list);
+
+void print(char * str, ...);
+
+void print_N(char * src, int length);
+
+void print_char(char c);
+
+void printInteger(uint64_t dec);
+
+void printError(char * str, ...);
 
 void move_line_up(unsigned int line);
 

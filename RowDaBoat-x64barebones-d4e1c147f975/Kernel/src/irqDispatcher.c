@@ -7,7 +7,7 @@
 void irqDispatcher(uint64_t irq);
 void int_20();
 void int_21();
-//extern char read_key();
+extern int read_key();
 
 static char buffer[100];
 

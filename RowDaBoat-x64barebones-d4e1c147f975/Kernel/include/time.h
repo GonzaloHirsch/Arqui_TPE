@@ -1,8 +1,12 @@
 #ifndef TIME_H
 #define TIME_H
 
+#define REGULAR_TICK_TIME 55
+
+//#include <lib.h>
 #include <io_read.h>
 #include <interrupts.h>
+#include <lib.h>
 
 //source
 //https://wiki.osdev.org/CMOS#Getting_Current_Date_and_Time_from_RTC
@@ -29,7 +33,19 @@ static int selector_to_register[] = {SECONDS_REGISTER, MINUTES_REGISTER, HOURS_R
 
 void timer_handler();
 int ticks_elapsed();
-int get_time(int selector);
+void sleep(uint64_t millis);
 void timer_wait(int ticks);
+
+/*
+void ncPrint(const char * string);
+void ncPrintChar(char character);
+void ncNewline();
+void ncPrintDec(uint64_t value);
+void ncPrintHex(uint64_t value);
+void ncPrintBin(uint64_t value);
+void ncPrintBase(uint64_t value, uint32_t base);
+void ncClear();
+*/
+int get_time(int selector);
 
 #endif

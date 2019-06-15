@@ -24,6 +24,11 @@ int abosulteTimeDifference(int before, int after);
 void resetVariables(){
   winner = 1;
 
+  velocity = 65356;
+  totalTimeAlive = 0;
+  partialTime = 0;
+  relativeTime = sys_time(SECONDS);
+
   resetSnakeBody();
 }
 
@@ -37,8 +42,6 @@ int initSnakeGame(){
   Vector2 startPos = {10, 10};
 
   initSnakeBody(startPos);
-
-  relativeTime = sys_time(SECONDS);
 
   nextFrame();
 
