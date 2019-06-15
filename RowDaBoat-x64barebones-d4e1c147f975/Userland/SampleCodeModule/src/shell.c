@@ -121,12 +121,7 @@ void handle_command(int cmd){
 			display_date();
 		break;
 		case TIME:
-			//printf("Hola %d", "Jorge");
-
-			//scanf("%d", &h);
-			//printf("%d", h);
 			display_time();
-			sys_over_clock(10000);
 		break;
 		case BEEP:
 			make_sound();
