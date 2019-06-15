@@ -9,6 +9,6 @@
 #include <interrupts.h>
 #include <snakeBody.h>
 
-void initSnakeGame();
+int initSnakeGame();
 
 #endif

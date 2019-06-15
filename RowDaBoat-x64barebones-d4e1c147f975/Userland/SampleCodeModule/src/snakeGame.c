@@ -3,8 +3,8 @@
 static uint64_t frame = 0;
 static uint64_t lastFrame = 0;
 
-static isRunning;
-static int gameOver;
+static int isRunning;
+static int winner;
 
 static int snakeBody[400][2];
 static int snakeLength;
@@ -13,12 +13,12 @@ void onExit();
 void nextFrame();
 
 void resetVariables(){
-  gameOver = 0;
+  winner = 1;
 
   resetSnakeBody();
 }
 
-void initSnakeGame(){
+int initSnakeGame(){
   isRunning = 1;
   clearScreen();
   initGrid();
@@ -32,49 +32,30 @@ void initSnakeGame(){
   nextFrame();
 
   onExit();
+
+  return winner;
 }
 
 void updateInput(){
-  /* char key = getKey();
+  char key = getKey();
   switch (key) {
-    case 'W':
-    case 'w':
-      if(direction.y != 1){
-        direction.y = -1;
-        direction.x = 0;
-      }
-      break;
-    case 'S':
-    case 's':
-      if(direction.y != -1){
-        direction.y = 1;
-        direction.x = 0;
-      }
-      break;
-    case 'A':
-    case 'a':
-      if(direction.x != 1){
-        direction.x = -1;
-        direction.y = 0;
-      }
-        break;
-    case 'D':
-    case 'd':
-      if(direction.x != -1){
-        direction.x = 1;
-        direction.y = 0;
-      }
-      break;
     case 96:
     case 126:
       isRunning = 0;
     break;
-  }*/
+  }
+  updateDirection(key);
 }
 
 void Update(){
   updateInput();
+  if(isSnakeColliding()){
+    isRunning = 0;
+    winner = 0;
+  }
+  updateSnake(); 
 }
+
 
 
 void nextFrame(){

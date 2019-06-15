@@ -102,12 +102,14 @@ void handle_command(int cmd){
 	Vector2 pos = {100,100};
 	Vector2 size = {250,250};
 	Color color = {0,255,0};
+	int w;
 	switch(cmd){
 		case HELP:
 			display_help();
 		break;
 		case SNAKE:
-		initSnakeGame();
+		w = initSnakeGame();
+		printf("%s\n", w ? "You win!" : "Loser!");
 		break;
 
 		//Retorna y sale del while, y no se puede hacer nada mas

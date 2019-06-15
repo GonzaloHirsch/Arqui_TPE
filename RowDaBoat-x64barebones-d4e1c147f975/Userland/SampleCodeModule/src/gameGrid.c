@@ -1,15 +1,5 @@
 #include <gameGrid.h>
 
-#define BORDER_SIZE 5
-#define CELL_SIZE 10
-#define CELL_PADDING 1
-
-static Vector2 GRID_SIZE = {95,65};
-static Vector2 START_POS = {20,20};
-
-static Color BORDER_COLOR = {126, 56, 120};
-static Color CELL_COLOR = {255,255,255};
-
 void drawBorder(){
   Vector2 hor = {CELL_SIZE * GRID_SIZE.x, BORDER_SIZE};
   Vector2 ver = {BORDER_SIZE , CELL_SIZE * GRID_SIZE.y + BORDER_SIZE*2};
