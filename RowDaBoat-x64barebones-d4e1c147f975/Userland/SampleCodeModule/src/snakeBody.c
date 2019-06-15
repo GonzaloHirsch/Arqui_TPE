@@ -110,10 +110,8 @@ int isSnakeColliding(){
         for (int i = 0; i < snakeSize; ++i)
         {
             if(i != head && snake[i].x == snake[head].x && snake[i].y == snake[head].y){
-                printf("Head: %d - i: %d - Tail: %d - Size: %d", head, i, tail, snakeSize);
-                while(1);
-                return 1;
-
+                if (head != snakeSize - 1 && i != 0)
+                  return 1;
             }
         }
     }
