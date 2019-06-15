@@ -82,7 +82,7 @@ void Update(){
     winner = 0;
   }
   updateSnake();
-  drawPoints((int)frame); 
+  drawPoints((int)totalTimeAlive); 
 }
 
 int abosulteTimeDifference(int before, int after){

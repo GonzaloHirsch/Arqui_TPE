@@ -44,7 +44,7 @@ void drawHeader(){
 
 void drawPoints(int p){
   Vector2 pos = {50, 0};
-  drawString(pos, "Points: " , COLOR_WHITE, header);
+  drawString(pos, "Time: " , COLOR_WHITE, header);
   pos.x += 8;
   char buf[10];
   itoa(p, buf, 10);
