@@ -5,9 +5,16 @@ void _irq00Handler();
 void _irq01Handler();
 void _irq80Handler();
 
+
+void _exception00Handler();
+void _exception06Handler();
+void _exception13Handler();
+void _exception14Handler();
+
+
 void _cli();
 void _sti();
-void _hlt();
+void halt();
 
 void pic_master_mask(uint8_t mask);
 

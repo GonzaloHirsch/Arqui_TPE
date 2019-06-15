@@ -62,7 +62,7 @@ clearcs:
 
 
 ;cambiar el modo 13h
-s	mov ax, 0x13
+	mov ax, 0x13
 	int 0x10
 
 ; Disable blinking

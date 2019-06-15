@@ -21,9 +21,22 @@ int main() {
 
 	//Test if BSS is properly set up
 	if (var1 == 0 && var2 == 0)
-		return 0xBEBEC17A;
+		return 0xdeadbeef;
 	*/
 	//return 0xDEADBEEF;
-	init_shell();
+
+	//init_shell();
+
+	/* Prueba para excepciones
+	uint64_t invalid= 0xFFFFFFFFFFFF;
+    uint64_t * ptr = &invalid;
+    ((void(*)())ptr)();
+    */
+
+	int i = 0xFFFFFFFF;
+	i += 1;
+	ncPrintOnAddress((char *)(0xB8000 + 80*2*12), "hello, I'm a user");
+	i/=0;
+	//ncPrint("hello, I'm a user");
 	return 1;
 }

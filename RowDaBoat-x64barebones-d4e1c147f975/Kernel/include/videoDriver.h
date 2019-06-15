@@ -19,7 +19,6 @@ void draw_rect(Vector2 pos, Vector2 size, Color color);
 void draw_char_with_background(Vector2 pos, char c, Color foreground, Color background);
 void draw_string_with_background(Vector2 pos, char * str, Color foreground, Color background);
 
-
 int getResX();
 int getResY();
 
