@@ -3,22 +3,36 @@
 static uint64_t frame = 0;
 static uint64_t lastFrame = 0;
 
-static isRunning;
-static int gameOver;
+static int isRunning;
+static int winner;
 
 static int snakeBody[400][2];
 static int snakeLength;
 
+static int totalTimeAlive = 0;
+static int partialTime = 0;
+static int relativeTime = 0;
+
+//La velocidad inicial es para la frecuencia mas baja
+static int velocity = 65356;
+static int velocityIncrements = 5000;
+
 void onExit();
 void nextFrame();
+int abosulteTimeDifference(int before, int after);
 
 void resetVariables(){
-  gameOver = 0;
+  winner = 1;
+
+  velocity = 65356;
+  totalTimeAlive = 0;
+  partialTime = 0;
+  relativeTime = sys_time(SECONDS);
 
   resetSnakeBody();
 }
 
-void initSnakeGame(){
+int initSnakeGame(){
   isRunning = 1;
   clearScreen();
   initGrid();
@@ -32,50 +46,52 @@ void initSnakeGame(){
   nextFrame();
 
   onExit();
+
+  return totalTimeAlive;
 }
 
 void updateInput(){
-  /* char key = getKey();
+  char key = getKey();
   switch (key) {
-    case 'W':
-    case 'w':
-      if(direction.y != 1){
-        direction.y = -1;
-        direction.x = 0;
-      }
-      break;
-    case 'S':
-    case 's':
-      if(direction.y != -1){
-        direction.y = 1;
-        direction.x = 0;
-      }
-      break;
-    case 'A':
-    case 'a':
-      if(direction.x != 1){
-        direction.x = -1;
-        direction.y = 0;
-      }
-        break;
-    case 'D':
-    case 'd':
-      if(direction.x != -1){
-        direction.x = 1;
-        direction.y = 0;
-      }
-      break;
     case 96:
     case 126:
       isRunning = 0;
     break;
-  }*/
+  }
+  updateDirection(key);
 }
 
 void Update(){
+  int auxTime = sys_time(SECONDS);
+  int delta = abosulteTimeDifference(relativeTime, auxTime);
+  relativeTime = auxTime;
+  totalTimeAlive += delta;
+  partialTime += delta;
+
+  if (partialTime >= 15){
+    growSnake();
+    sys_beep();
+    velocity -= velocityIncrements;
+    sys_over_clock(velocity);
+    partialTime = 0;
+  }
+
   updateInput();
+  if(isSnakeColliding()){
+    isRunning = 0;
+    winner = 0;
+  }
+  updateSnake();
 }
 
+int abosulteTimeDifference(int before, int after){
+  int result = 0;
+  if (after < before){
+    result = 60 - before + after;
+  } else {
+    result = after - before;
+  }
+}
 
 void nextFrame(){
   _sti();

@@ -24,10 +24,7 @@ uint64_t * init_shell(void){
 
 	//while para la shell y su funcionamiento
 	while(command != SHUTDOWN){
-		//print("WHILE AWAY");
 		key = getKey();
-		//printChar(key);
-		//writeKey(key);
 
 		//CASO EN QUE SE PASA DE LA CANTIDAD MAXIMA DE CARACTERES
 		if (commandBuffPos == MAX_BUFF_SIZE){
@@ -97,12 +94,14 @@ int getCommand(char * cmd){
 }
 
 void handle_command(int cmd){
+	int w;
 	switch(cmd){
 		case HELP:
 			display_help();
 		break;
 		case SNAKE:
-		initSnakeGame();
+		w = initSnakeGame();
+		printf("You survived %d seconds\n", w);
 		break;
 		//Retorna y sale del while, y no se puede hacer nada mas
 		case SHUTDOWN:
