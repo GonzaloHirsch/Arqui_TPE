@@ -19,6 +19,7 @@
 #define DATE 7
 #define CLEAR 8
 #define DRAW_PIXEL 9
+#define OVER_CLOCK 10
 
 uint64_t handleSyscall(uint64_t rdi, uint64_t rsi, uint64_t rdx, uint64_t rcx, uint64_t r8, uint64_t r9);
 
@@ -30,7 +31,7 @@ void handle_sys_beep(void);
 
 void handle_sys_sleep(int ticks);
 
-void handle_sys_date(char * buff);
+void handle_sys_over_clock(int rate);
 
 int handle_sys_time(uint64_t selector);
 

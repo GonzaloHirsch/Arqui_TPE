@@ -3,8 +3,8 @@ GLOBAL _int80
 section .text
 
 ;fuente: RowDaBoat/Proyect Wyrm
-%macro pushState 0 	
-	push rax
+%macro pushState 0
+	;push rax
 	push rbx
 	push rcx
 	push rdx
@@ -36,7 +36,7 @@ section .text
 	pop rdx
 	pop rcx
 	pop rbx
-	pop rax
+	;pop rax
 %endmacro
 
 _int80:

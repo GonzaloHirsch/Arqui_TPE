@@ -4,9 +4,6 @@
 
 static unsigned long ticks = 0;
 
-void timer_handler();
-int ticks_elapsed();
-
 void timer_handler() {
 	//ncPrintDec(ticks);
   ticks++;
@@ -24,6 +21,19 @@ void timer_wait(int expectedTicks){
 
 int ticks_elapsed(){
 	return ticks;
+}
+
+//El rate tiene que ser 2 < rate < 15
+void over_clock(int rate){
+  if (2 < rate && rate < 15){
+    rate &= 0x0F;			// rate must be above 2 and not over 15
+    _cli();
+    write_port(0x70, 0x8A);		// set index to register A, disable NMI
+    char prev=read_port(0x71);	// get initial value of register A
+    write_port(0x70, 0x8A);		// reset index to A
+    write_port(0x71, (prev & 0xF0) | rate); //write only our rate to A. Note, rate is the bottom 4 bits.
+    _sti();
+  }
 }
 
 void set_time(){

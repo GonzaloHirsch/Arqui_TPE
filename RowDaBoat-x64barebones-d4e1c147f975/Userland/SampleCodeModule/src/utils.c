@@ -270,9 +270,9 @@ char * getTime(void){
 
 	if (seconds < 10){
 		itoa(0, buff + 6, 10);
-		itoa(minutes, buff + 7, 10);
+		itoa(seconds, buff + 7, 10);
 	} else{
-		itoa(minutes, buff + 6, 10);
+		itoa(seconds, buff + 6, 10);
 	}
 	*(buff + 8) = 0;
 
@@ -306,7 +306,7 @@ char * getDate(void){
 
 	year = 2000 + year;
 	itoa(year, buff + 6, 10);
-	
+
 	*(buff + 10) = 0;
 
 	return buff;

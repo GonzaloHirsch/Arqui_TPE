@@ -25,7 +25,12 @@ void sys_beep(void){
 // }
 
 int sys_time(int selector){
-	return _int80((uint64_t)TIME, (uint64_t)selector, 0, 0, 0, 0);
+	uint64_t time = _int80((uint64_t)TIME, (uint64_t)selector, 0, 0, 0, 0);
+	return time;
+}
+
+void sys_over_clock(int rate){
+	_int80((uint64_t)OVER_CLOCK, (uint64_t)rate, 0, 0, 0, 0);
 }
 
 // void sys_date(char * buf){

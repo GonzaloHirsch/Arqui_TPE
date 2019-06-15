@@ -3,6 +3,7 @@
 
 #include <io_read.h>
 #include <interrupts.h>
+#include <lib.h>
 
 //source
 //https://wiki.osdev.org/CMOS#Getting_Current_Date_and_Time_from_RTC
