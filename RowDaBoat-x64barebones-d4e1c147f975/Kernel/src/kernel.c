@@ -12,6 +12,7 @@
 #include <videoDriver.h>
 #include <console.h>
 #include <pixelMap.h>
+#include <exceptions.h>
 
 extern uint8_t text;
 extern uint8_t rodata;
@@ -131,6 +132,7 @@ void * initializeKernelBinary()
 
 	print("Video Driver Loaded\nLoading IDT\n");
 	load_idt();
+	loadExceptions();
 	ncPrint("[Done]");
 	ncNewline();
 

@@ -45,7 +45,6 @@ int scanf(const char * fmt, ...){
 		int j = 0;          //cursor para string auxiliar
 
 		int aux;
-        print(str);
 
 		print("\nDESPUES WHILE\n");
 		//Lee el formato
@@ -57,12 +56,10 @@ int scanf(const char * fmt, ...){
                         printf("matcheo un d\n");
 						matches++;
 						int * ptrD = va_arg(list, int*);
-                    (*ptrD)++;
 						char num[15] = {0};
 						j = 0;
 						//Itera el string que fue input
-						/*while(str[pos] != ' ' || str[pos] != '\n' || str[pos] != 0 || str[pos] != '\t'){
-							printf("%s\n", str);
+						while(str[pos] != ' ' || str[pos] != '\n' || str[pos] != 0 || str[pos] != '\t'){
 						    if (isNumeric(str[pos])){
 								num[j++] = str[pos++];
 							} else {
@@ -71,13 +68,10 @@ int scanf(const char * fmt, ...){
                                 *ptrD = aux;
                                 return -1;
 							}
-						}*/
-						while(isNumeric(str[pos])){
-						    num[j++] = str[pos++];
 						}
 						aux = atoi(num, j);
 						*ptrD = aux;
-                    i += 2;
+						i += 2;
                     break;
 
             case 's':
@@ -90,8 +84,8 @@ int scanf(const char * fmt, ...){
 						while(str[pos] != ' ' || str[pos] != '\n' || str[pos] != 0 || str[pos] != '\t'){
 							buffer[j++] = str[pos++];
 						}
-
-						ptrS = buffer;
+                        buffer[j]=0; //me aseguro de que termino el str
+						strcpy(ptrS, buffer);
                     i += 2;
                     break;
 
@@ -200,12 +194,12 @@ int atoi(const char* buffer, int len){
 	int i = 0;
 	int result = 0;
 
-	printf("atoi\n%s\n", buffer);
+	//printf("atoi: buffer = %s\n", buffer);
 
-	while(buffer[i] != 0/';'){
-		result += (pow(10, len) * (buffer[i] - 48));
+	while(buffer[i] != 0){
+		result += (pow(10, --len) * (buffer[i] - 48));
 		i++;
-		len--;
+		//len--;
 	}
 	return result;
 }
@@ -260,7 +254,7 @@ char* itoa(int value, char* buffer, int base)
 /* ------------------------------- */
 
 int isNumeric(char c){
-	return '0' <= c || c <= '9';
+	return '0' <= c && c <= '9';
 }
 
 char getKey(void){
@@ -312,6 +306,11 @@ int strcmp(const char * stra, const char * strb){
 	}
 	//ncPrintDec(result);
 	return result;
+}
+
+void strcpy(char * dst, char * src){
+
+    while((*(dst++) = *(src++)) != 0);
 }
 
 int strlen(const char * str){

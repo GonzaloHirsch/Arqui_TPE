@@ -10,6 +10,11 @@
 void exceptionDispatcher(uint64_t type);
 void printRegisters();
 
+void _exception00Handler();
+void _exception06Handler();
+void _exception13Handler();
+void _exception14Handler();
+
 typedef struct {
 
     uint64_t rax;
@@ -27,5 +32,6 @@ typedef struct {
 void setVerifying();
 void clearVerifying();
 void setExceptionAssert();
+void loadExceptions();
 
 #endif //ARQUI_TPE_EXCEPTIONDISPATCHER_H

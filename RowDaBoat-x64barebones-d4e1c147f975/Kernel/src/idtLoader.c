@@ -30,13 +30,6 @@ void load_idt() {
   setup_IDT_entry (0x21, (uint64_t) &_irq01Handler);
   setup_IDT_entry (0x80, (uint64_t) &_irq80Handler);
 
-  //Loading Exceptions
-
-  setup_IDT_entry(0x00, (uint64_t) &_exception00Handler);
-  setup_IDT_entry(0x06, (uint64_t) &_exception06Handler);
-  setup_IDT_entry(0x0D, (uint64_t) &_exception13Handler);
-  setup_IDT_entry(0x0E, (uint64_t) &_exception14Handler);
-
     //Interrupción de timer tick habilitada
   pic_master_mask(0xFC);
   pic_slave_mask(0xFF);

@@ -1,12 +1,12 @@
 
 
-#include <exceptionDispatcher.h>
+#include <exceptions.h>
 #include <naiveConsole.h>
 #include <interrupts.h>
 #include <lib.h>
 #include <time.h>
 #include <console.h>
-
+#include <idtLoader.h>
 
 static void divZeroError();
 static void invalidOpcodeError();
@@ -24,6 +24,16 @@ static void (*exceptionsArray[])() = {divZeroError, tBI, tBI, tBI, tBI, tBI, inv
 void retrieveRegisters();
 void printRegistersAccurate();
 
+void loadExceptions(){
+
+    //Loading Exceptions
+    _cli();
+    setup_IDT_entry(0x00, (uint64_t) &_exception00Handler);
+    setup_IDT_entry(0x06, (uint64_t) &_exception06Handler);
+    setup_IDT_entry(0x0D, (uint64_t) &_exception13Handler);
+    setup_IDT_entry(0x0E, (uint64_t) &_exception14Handler);
+    _sti();
+}
 
 void exceptionDispatcher(uint64_t type){
 
