@@ -36,7 +36,7 @@ void drawBorder(){
 
 void drawHeader(){
   Vector2 size = {1080, 16};
-  Color color = {153,180,51};
+  Color color = {43,87,151};
   drawRect(ZeroVector, size, color);
   drawString(ZeroVector, "Esc --> EXIT  WASD --> MOVE" , COLOR_WHITE, color);
 }
