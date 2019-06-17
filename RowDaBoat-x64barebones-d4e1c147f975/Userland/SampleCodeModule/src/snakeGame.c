@@ -108,5 +108,7 @@ void nextFrame(){
 }
 
 void onExit(){
+  velocity = 65356;
+  sys_over_clock(velocity);
   clearScreen();
 }
