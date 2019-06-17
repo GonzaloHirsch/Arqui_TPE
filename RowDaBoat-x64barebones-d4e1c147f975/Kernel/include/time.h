@@ -28,9 +28,6 @@
 #define YEAR 6
 #define CENTURY 7
 
-static int selector_to_register[] = {SECONDS_REGISTER, MINUTES_REGISTER, HOURS_REGISTER, WEEKDAY_REGISTER,
-  DAY_OF_MONTH_REGISTER, MONTH_REGISTER, YEAR_REGISTER, CENTURY_REGISTER};
-
 void timer_handler();
 int ticks_elapsed();
 void sleep(uint64_t millis);

@@ -1,5 +1,18 @@
 #include <shell.h>
 
+//Constantes para los comandos
+#define INVALID_COMMAND -1
+#define HELP_COMMAND 0
+#define SNAKE_COMMAND 1
+#define SHUTDOWN_COMMAND 2
+#define INVALID_OC_COMMAND 3
+#define TIME_COMMAND 4
+#define BEEP_COMMAND 5
+#define SLEEP_COMMAND 6
+#define DATE_COMMAND 7
+#define CLEAR_COMMAND 8
+#define DIV_COMMAND 9
+
 const char * commandMessages[] = {"help - Show available commands and their use",
 								"snake - Initializes the Snake game",
 								"shutdown - Shuts down and exits the system",
@@ -8,6 +21,10 @@ const char * commandMessages[] = {"help - Show available commands and their use"
 
 const char * commands[] = {"help", "snake", "shutdown", "invalid", "time", "beep", "sleep", "date", "clear", "div"};
 const int commandCount = 10;
+
+int getCommand(char * cmd);
+void generate_invalid_opc(void);
+int generate_zero_division(void);
 
 uint64_t * init_shell(void){
 	display_welcome_message();
@@ -23,7 +40,7 @@ uint64_t * init_shell(void){
 	char key;
 
 	//while para la shell y su funcionamiento
-	while(command != SHUTDOWN){
+	while(command != SHUTDOWN_COMMAND){
 		key = getKey();
 
 		//CASO EN QUE SE PASA DE LA CANTIDAD MAXIMA DE CARACTERES
@@ -53,7 +70,7 @@ uint64_t * init_shell(void){
 			//Hace un reset del buffer de comando volviendo a la posicion 0
 			commandBuffPos = 0;
 			//Vuelve a imprimir el usuario para que se vea bien
-			if(command!=SHUTDOWN) print("arquiOS@ITBA: ");
+			if(command!=SHUTDOWN_COMMAND) print("arquiOS@ITBA: ");
 		}
 		//CASO BACKSPACE - DELETE
 		else if (key == '\b'){
@@ -96,40 +113,39 @@ int getCommand(char * cmd){
 void handle_command(int cmd){
 	int w;
 	switch(cmd){
-		case HELP:
+		case HELP_COMMAND:
 			display_help();
 		break;
-		case SNAKE:
+		case SNAKE_COMMAND:
 		w = initSnakeGame();
 		printf("You survived %d seconds\n", w);
 		break;
 		//Retorna y sale del while, y no se puede hacer nada mas
-		case SHUTDOWN:
+		case SHUTDOWN_COMMAND:
 		    clearScreen();
-		    //display_goodbye_message();
-            //sys_shutdown(0); //que se apague despues de 0 ticks
+		    display_goodbye_message();
 		    return;
 		break;
-		case INVALID_OC:
+		case INVALID_OC_COMMAND:
 			generate_invalid_opc();
 		break;
-		case DIV:
+		case DIV_COMMAND:
 			generate_zero_division();
 		break;
 		//Imprime la fecha de hoy
-		case DATE:
+		case DATE_COMMAND:
 			display_date();
 		break;
-		case TIME:
+		case TIME_COMMAND:
 			display_time();
 		break;
-		case BEEP:
+		case BEEP_COMMAND:
 			make_sound();
 		break;
-		case SLEEP:
+		case SLEEP_COMMAND:
 			sleep();
 		break;
-		case CLEAR:
+		case CLEAR_COMMAND:
 			clearScreen();
 		break;
 		case INVALID_COMMAND:
@@ -188,8 +204,10 @@ void generate_invalid_opc(){
 	((void(*)())ptr)();
 }
 
-void generate_zero_division(){
-	int result = 10 / 0;
+int generate_zero_division(){
+	int a = 10;
+	int b = 0;
+	return a/b;
 }
 
 void make_sound(void){
@@ -205,5 +223,5 @@ void display_invalid_command(void){
 }
 
 void display_goodbye_message(void){
-
+	print("Goodbye\n");
 }

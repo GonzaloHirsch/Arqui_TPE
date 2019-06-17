@@ -19,7 +19,7 @@ void printWithColors(Color chosenForeground, Color chosenBackground, char * str,
 
 void print(char * str, ...);
 
-void print_N(char * src, int length);
+void print_N(const char * src, int length);
 
 void print_char(char c);
 

@@ -4,6 +4,7 @@
 #include <lib.h>
 
 extern char read_key();
+extern int check_key();
 
 /*
     Buffer con los caracteres escritos
@@ -60,11 +61,6 @@ unsigned char alternative_keycode_map[128] = {
   0,0,0,0,0,0,0,0,0,
   DOWN_ARROW,0,0,0,0,0,0,0,0,
   0,};
-
-void printKey(void){
-    buffer[0] = keycode_map[read_key()];
-    ncPrint(buffer);
-}
 
 void keyboard_handler(void){
     if (check_key()){

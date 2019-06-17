@@ -6,9 +6,6 @@ static uint64_t lastFrame = 0;
 static int isRunning;
 static int winner;
 
-static int snakeBody[400][2];
-static int snakeLength;
-
 static int totalTimeAlive = 0;
 static int partialTime = 0;
 static int relativeTime = 0;
@@ -25,6 +22,7 @@ void resetVariables(){
   winner = 1;
 
   velocity = 65356;
+  sys_over_clock(velocity);
   totalTimeAlive = 0;
   partialTime = 0;
   relativeTime = sys_time(SECONDS);
@@ -82,7 +80,7 @@ void Update(){
     winner = 0;
   }
   updateSnake();
-  drawPoints((int)totalTimeAlive); 
+  drawPoints((int)totalTimeAlive);
 }
 
 int abosulteTimeDifference(int before, int after){
@@ -92,6 +90,7 @@ int abosulteTimeDifference(int before, int after){
   } else {
     result = after - before;
   }
+  return result;
 }
 
 void nextFrame(){

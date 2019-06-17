@@ -1,28 +1,24 @@
 #include <syscalls.h>
 
 void sys_write(int fd, const char *buf, int count){
-	_int80((uint64_t)WRITE, (uint64_t)fd, buf, (uint64_t)count, 0, 0);
+	_int80((uint64_t)WRITE, (uint64_t)fd, (uint64_t)buf, (uint64_t)count, 0, 0);
 }
 
 void sys_read(int fd, char *buf, int count){
-	_int80((uint64_t)READ, (uint64_t)fd, buf, (uint64_t)count, 0, 0);
+	_int80((uint64_t)READ, (uint64_t)fd, (uint64_t)buf, (uint64_t)count, 0, 0);
 }
 
-void sys_get_key(int fd, char *buf){
-	_int80((uint64_t)READ, (uint64_t)fd, buf, (uint64_t)1, 0, 0);
+void sys_get_key(int fd, char * buf){
+	_int80((uint64_t)READ, (uint64_t)fd, (uint64_t)buf, (uint64_t)1, 0, 0);
 }
 
 void sys_write_key(int fd, const char * buf){
-	_int80((uint64_t)WRITE, (uint64_t)fd, buf, 1, 0, 0);
+	_int80((uint64_t)WRITE, (uint64_t)fd, (uint64_t)buf, (uint64_t)1, 0, 0);
 }
 
 void sys_beep(void){
 	_int80((uint64_t)BEEP, 0, 0, 0, 0, 0);
 }
-
-// void sys_time(char * buf){
-// 	_int80(TIME, 0, buf, 0, 0, 0);
-// }
 
 int sys_time(int selector){
 	uint64_t time = _int80((uint64_t)TIME, (uint64_t)selector, 0, 0, 0, 0);
@@ -32,10 +28,6 @@ int sys_time(int selector){
 void sys_over_clock(int rate){
 	_int80((uint64_t)OVER_CLOCK, (uint64_t)rate, 0, 0, 0, 0);
 }
-
-// void sys_date(char * buf){
-// 	_int80((uint64_t)DATE, 0, buf, 0, 0, 0);
-// }
 
 void sys_sleep(int ticks){
 	_int80((uint64_t)SLEEP, 0, 0, (uint64_t)ticks, 0, 0);
@@ -51,15 +43,6 @@ void sys_clear_console(void){
 
 uint64_t sys_get_ticks(void){
 	int ticks;
-	_int80(TICKS, 0, &ticks, 0, 0, 0);
+	_int80((uint64_t)TICKS, 0, (uint64_t)&ticks, 0, 0, 0);
 	return ticks;
-}
-
-/*
-void sys_shutdown(int time){
-    _int80(SHUTDOWN, time, 0, 0, 0, 0);
-}
-*/
-void sys_draw(void){
-	//_int80();
 }

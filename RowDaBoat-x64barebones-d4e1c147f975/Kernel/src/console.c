@@ -15,7 +15,7 @@ Color errorForeground = {255,0,0};
 
 Color okForeground = {0, 255, 0};
 
-
+static Vector2 ZeroVector = {0,0};
 static Vector2 cursor = {0,0};
 
 int get_max_line();
@@ -126,7 +126,7 @@ void print_char(char c){
     }
 }
 
-void print_N(char * str, int length){
+void print_N(const char * str, int length){
     for(int i = 0; i < length; i++){
         print_char(str[i]);
     }
@@ -159,7 +159,6 @@ void move_line_up(unsigned int line){
     for(int j = 0; j < CHAR_HEIGHT; j++){
         for (int i = 0; i < getResX(); ++i)
         {
-            Color color = {0,255,0};
             get_pixel(posGet, &c);
             draw_pixel(posDraw, c);
             posGet.x++;

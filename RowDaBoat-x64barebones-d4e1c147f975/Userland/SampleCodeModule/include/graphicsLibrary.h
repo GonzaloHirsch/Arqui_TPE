@@ -5,8 +5,6 @@
 #include <types.h>
 #include <pixelMap.h>
 
-static Color background = {29,29,29};
-
 void drawRect(Vector2 start, Vector2 size, Color color);
 
 void drawPixel(Vector2 pos, Color color);

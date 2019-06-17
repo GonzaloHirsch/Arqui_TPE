@@ -2,7 +2,8 @@
 
 #define MAX_BODY_SIZE 400
 
-static Vector2 snake[MAX_BODY_SIZE] = {0,0};
+static Vector2 snake[MAX_BODY_SIZE] = {{0,0}};
+static Vector2 GRID_SIZE = {95,65};
 
 static int snakeSize;
 

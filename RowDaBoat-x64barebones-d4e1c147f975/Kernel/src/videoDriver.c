@@ -44,9 +44,10 @@ void draw_pixel(Vector2 pos, Color color){
     if (out_of_range_pixel(pos))
         return;
 
+    //int * pixel_address;
     unsigned char * pixel_address;
     int bpp = infoBlock->bpp / 8;
-    pixel_address = (unsigned char *) (infoBlock->physbase + pos.x * bpp  + pos.y * (infoBlock->x_res) * bpp);
+    pixel_address = (unsigned char *) ((uint64_t)(infoBlock->physbase + pos.x * bpp  + pos.y * (infoBlock->x_res) * bpp));
     pixel_address[0] = color.b;
     pixel_address[1] = color.g;
     pixel_address[2] = color.r;
@@ -58,7 +59,7 @@ void get_pixel(Vector2 pos, Color* out){
 
     unsigned char * pixel_address;
     int bpp = infoBlock->bpp / 8;
-    pixel_address = (unsigned char *) (infoBlock->physbase + pos.x * bpp  + pos.y * (infoBlock->x_res) * bpp);
+    pixel_address = (unsigned char *) ((uint64_t)(infoBlock->physbase + pos.x * bpp + pos.y * (infoBlock->x_res) * bpp));
     out->b = pixel_address[0];
     out->g = pixel_address[1];
     out->r = pixel_address[2];
@@ -74,7 +75,7 @@ void draw_rect(Vector2 pos, Vector2 size, Color color){
 }
 
 void draw_char_with_background(Vector2 pos, char c, Color foreground, Color background){
-    char * cMap = pixel_map(c);
+    unsigned char * cMap = pixel_map(c);
     for (int j = 0; j < CHAR_HEIGHT; ++j) {
         for (int i = 0; i < CHAR_WIDTH; ++i) {
             Vector2 aux = {(pos.x*(CHAR_WIDTH))+i, (pos.y*CHAR_HEIGHT)+j};

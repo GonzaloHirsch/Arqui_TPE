@@ -5,6 +5,8 @@
 
 static unsigned long ticks = 0;
 
+static int selector_to_register[] = {SECONDS_REGISTER, MINUTES_REGISTER, HOURS_REGISTER, WEEKDAY_REGISTER,
+  DAY_OF_MONTH_REGISTER, MONTH_REGISTER, YEAR_REGISTER, CENTURY_REGISTER};
 
 void timer_handler();
 int ticks_elapsed();
@@ -48,27 +50,15 @@ int get_time(int selector){
 void sleep(uint64_t millis){
     _sti();
     int x = ticks_elapsed();
-
-    char buffer[100];
-
-    int i = 0;
     while((ticks_elapsed()-x)*REGULAR_TICK_TIME < millis){
-
-        //ncPrintOnAddress(0xB8000 + 80*2*23,itoa(x, buffer, 10));
-        //ncPrintOnAddress(0xB8000 + 80*2*24,itoa(millis/REGULAR_TICK_TIME, buffer, 10));
-        ncPrintOnAddress((char *)(0xB8000 + 80*2*12 + 40), "Waiting");
-        ncPrintOnAddress((char *)(0xB8000 + 80*2*12 + 40 + 7*2), "   ");
-        ncPrintOnAddress((char *)(0xB8000 + 80*2*12 + 40 + 7*2 + (i%3)*2), ".");
-        i++;
        halt();
     }
-    ncPrintOnAddress((char *)(0xB800 + 80*2*15 + 120 + (i%5)*2), "Done");
 }
 
 void timer_wait(int expectedTicks){
   //Prepara para que pueda recibir iterrupciones
   _sti();
-  expectedTicks = ticks + expectedTicks;
+  expectedTicks += ticks;
   while (ticks < expectedTicks){
     //Le dice que puede ser interrumpido
     halt();

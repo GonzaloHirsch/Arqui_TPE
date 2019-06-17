@@ -1,9 +1,12 @@
 #include <utils.h>
 
+int pow(int base, int exponent);
+int concat(char * to, const char * from);
+
 /*STANDARD C LIBRARY FUNCTIONS*/
 
 char getChar(){
-	char * buff;
+	char buff[1];
 	sys_read(0, buff, 1);
 	return buff[0];
 }
@@ -11,8 +14,6 @@ char getChar(){
 void putChar(char c){
 	sys_write(0, &c, 1);
 }
-
-
 
 int scanf(const char * fmt, ...){
     va_list list;
@@ -128,12 +129,9 @@ void printf(char * str, ...){
 
     while(str[i] != 0){
     	if(str[i] == '%' && (i == 0 || str[i-1] != '\\')){
-				//ncPrintDec(i);
-				//ncPrint("-");
             char buffer[MAX_BUFFER] = {0};
             switch (str[i+1]) {
                 case 'd':
-										//ncPrintDec(va_arg(list,int));
                     itoa((int) va_arg(list,int), buffer, 10);
                     len += concat((newStr + len), buffer);
                     i += 2;
@@ -142,12 +140,6 @@ void printf(char * str, ...){
 										len += concat((newStr + len), va_arg(list,char*));
                     i += 2;
                     break;
-                /* Todo: debuggear
-                case 'c':
-                    newStr[len++] = (char) va_arg(list, char);
-                    i +=2;
-                    break;
-                */
                 default:
                     i += 2;
                     break;
@@ -264,12 +256,6 @@ char getKey(void){
 	return buff;
 }
 
-// char * getTime(void){
-// 	char * buff;
-// 	sys_time(buff);
-// 	return buff;
-// }
-
 void getTime(char * buff){
 	int seconds = sys_time(SECONDS);
 	int minutes = sys_time(MINUTES);
@@ -368,7 +354,6 @@ int strcmp(const char * stra, const char * strb){
 }
 
 void strcpy(char * dst, char * src){
-
     while((*(dst++) = *(src++)) != 0);
 }
 

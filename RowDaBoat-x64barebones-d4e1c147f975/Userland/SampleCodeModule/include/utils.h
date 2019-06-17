@@ -37,6 +37,8 @@ int strcmp(const char * stra, const char * strb);
 
 int strlen(const char * str);
 
+void strcpy(char * dst, char * src);
+
 void makeSound(void);
 
 void goToSleep(int ticks);

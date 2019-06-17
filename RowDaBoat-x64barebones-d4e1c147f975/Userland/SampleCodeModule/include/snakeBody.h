@@ -8,10 +8,14 @@
 
 void initSnakeBody(Vector2 startPos);
 
-void updateSnake();
+void updateSnake(void);
 
 void updateDirection(char key);
 
-int isSnakeColliding();
+int isSnakeColliding(void);
+
+void resetSnakeBody(void);
+
+void growSnake(void);
 
 #endif

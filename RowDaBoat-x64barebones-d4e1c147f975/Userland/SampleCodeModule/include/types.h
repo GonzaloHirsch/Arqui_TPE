@@ -6,9 +6,9 @@
 #define ARQUI_TPE_TYPES_H
 
 typedef struct Color{
-    int r;
-    int g;
-    int b;
+    unsigned char r;
+    unsigned char g;
+    unsigned char b;
 }Color;
 
 typedef struct Vector2{
