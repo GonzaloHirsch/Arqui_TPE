@@ -179,11 +179,13 @@ void display_help(void){
 	print("help - Displays available commands and their usage\n");
 	print("snake - Initiates the snake game\n");
 	print("shutdown - Shuts down the system\n");
-	print("verify - Runs system verification routines and informs the results\n");
 	print("time - Displays current system time\n");
 	print("date - Displays current system date\n");
 	print("beep - Makes the system go Beep!\n");
 	print("sleep - Makes the system sleep for 5 seconds\n");
+    print("div - Performs a division by zero\n");
+    print("invalid - Executes an invalid operation\n");
+    print("clear - Clears the screen\n");
 }
 
 void display_time(void){

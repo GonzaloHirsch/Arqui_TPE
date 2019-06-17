@@ -42,12 +42,19 @@ void exceptionDispatcher(uint64_t type){
 
         _cli();
 
-        //uso este extended assembly para no ir a otra funcion
-        //y tener un lio en el stack. Todavia tengo 8 bytes del
-        //retAddr de exceptionDispatcher.
-        __asm__ volatile ("mov 32(%%rsp), %0;"
+    if (type < 8 || type == 9 || type == 15 || type == 16 || (type > 17 && type < 30) || type > 30) {
+        //Estas excepciones no tienen Error Code
+        __asm__ volatile ("mov 16(%%rsp), %0;"
         : "=a" (eSF.rip)
         );
+    }
+    else
+    {
+        //Estas excepciones tienen Error Code
+        __asm__ volatile ("mov 24(%%rsp), %0;"
+        : "=a" (eSF.rip)
+        );
+    }
 
         retrieveRegisters();        //Obtengo los registros antes de llamar a cualquier
                                     //otra funcion desde aca.
