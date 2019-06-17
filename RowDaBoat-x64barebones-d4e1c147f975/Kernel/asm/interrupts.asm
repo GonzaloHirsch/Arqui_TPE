@@ -74,12 +74,12 @@ extern print
 %endmacro
 
 %macro exceptionHandlerMaster 1
-    ;pushState
+    pushState
         mov rdi, %1
         call exceptionDispatcher
         mov al, 20h
         out 20h, al
-    ;popState
+    popState
   iretq
 %endmacro
 
