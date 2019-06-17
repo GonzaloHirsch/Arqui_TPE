@@ -31,7 +31,9 @@ static int shift = 0;
     Flag de caps lock, empieza en falso
 */
 static int caps_lock = 0;
-
+/*
+    Flag de que el buffer esta lleno
+*/
 static int full = 0;
 
 //Macro que shiftea al 1 index veces y le hace un and al binario para ver si esta prendido
@@ -39,28 +41,21 @@ static int full = 0;
 
 //Key codes normales, para el teclado sin estar con el shift apretado
 unsigned char keycode_map[128] = {
-    27,  '`', '1', '2', '3', '4', '5', '6', '7', '8', /* INDEX: 0 - 9 */
-    '9','0', '-', '=','\b', '\t' /* Tab */,'q', 'w', 'e', 'r',	/* INDEX: 10 - 19 */
-  't', 'y', 'u', 'i', 'o', 'p', '[', ']', '\n', 0 /* Control */, /* INDEX: 20 - 29 */
-  'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', ';',	/* INDEX: 30 - 39 */
- '\'', '`',  LEFT_SHIFT,'\\', 'z', 'x', 'c', 'v', 'b', 'n', /* INDEX: 40 - 49 */
-  'm', ',', '.', '/', RIGHT_SHIFT,'*',0/* Alt */,' '/* Space bar */, CAPS_LOCK, 0 /* F1 */, /* INDEX: 50 - 59 */
-    0/* F2 */,   0/* F3 */,   0/* F4 */,   0/* F5 */,   0/* F6 */,   0/* F7 */,   0/* F8 */,   0/* F9 */, 0 /*F10 */, 0/*Num lock*/, /* INDEX: 60 - 69 */
-    0 /* Scroll Lock */,0 /* Home key */, UP_ARROW /* Up Arrow */, 0 /* Page Up */, '-', LEFT_ARROW/* Left Arrow */, 0, RIGHT_ARROW/* Right Arrow */,'+', 0/*End key*/, /* INDEX: 70 - 79 */
-    DOWN_ARROW/* Down Arrow */,0/* Page Down */, 0/* Insert Key */, 0/* Delete Key */, 0,   0,   0,  0/* F11 Key */, 0/* F12 Key */,
-    0,	/* All other keys are undefined */
+    27,  '`', '1', '2', '3', '4', '5', '6', '7', '8', '9','0', '-', '=','\b', '\t','q', 'w', 'e', 'r',
+  't', 'y', 'u', 'i', 'o', 'p', '[', ']', '\n', 0 /* Control */,
+  'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', ';', '\'', '`',  LEFT_SHIFT,'\\', 'z', 'x', 'c', 'v', 'b', 'n',
+  'm', ',', '.', '/', RIGHT_SHIFT,'*',0/* Alt */,' ', CAPS_LOCK, 0 ,
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ,0, UP_ARROW, 0, '-', LEFT_ARROW, 0, RIGHT_ARROW,'+', 0,
+    DOWN_ARROW,0/* Page Down */, 0, 0, 0, 0, 0, 0, 0, 0,
 };
 
 //Key codes con la tecla shift apretada
 unsigned char alternative_keycode_map[128] = {
-  0,'~','!','\"','#','$','%',94, '&', '*', '(', ')', 95,'+', '\b', '\t', /* shift + tab not defined in normal aasci*/
+  0,'~','!','\"','#','$','%',94, '&', '*', '(', ')', 95,'+', '\b', '\t',
   'Q','W','E','R','T','Y', 'U', 'I', 'O', 'P', '{', '}', '\n', 0,
   'A', 'B', 'C', 'D', 'F', 'G', 'H', 'J', 'K', 'L', ':',
   '~', LEFT_SHIFT, '|', 'Z', 'X', 'C', 'V', 'B', 'N',
-  'M', '<', '>', '?', RIGHT_SHIFT, '*', 0, ' ', CAPS_LOCK, 0,
-  0,0,0,0,0,0,0,0,0,
-  DOWN_ARROW,0,0,0,0,0,0,0,0,
-  0,};
+  'M', '<', '>', '?', RIGHT_SHIFT, '*', 0, ' ', CAPS_LOCK, 0,0,0,0,0,0,0,0,0,0, DOWN_ARROW,0,0,0,0,0,0,0,0,0,};
 
 void keyboard_handler(void){
     if (check_key()){
