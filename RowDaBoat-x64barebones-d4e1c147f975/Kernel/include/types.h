@@ -16,7 +16,4 @@ typedef struct Vector2{
     int y;
 }Vector2;
 
-static Vector2 ZeroVector = {0,0};
-
-
 #endif //ARQUI_TPE_TYPES_H

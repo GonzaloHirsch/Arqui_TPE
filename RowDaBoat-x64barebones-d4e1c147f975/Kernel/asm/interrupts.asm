@@ -1,15 +1,26 @@
 GLOBAL _cli
 GLOBAL _sti
-GLOBAL _hlt
 GLOBAL pic_master_mask
 GLOBAL pic_slave_mask
+GLOBAL halt
+
 
 GLOBAL _irq00Handler
 GLOBAL _irq01Handler
 GLOBAL _irq80Handler
 
+GLOBAL _exception00Handler
+GLOBAL _exception06Handler
+GLOBAL _exception13Handler
+GLOBAL _exception14Handler
+
+
 EXTERN irqDispatcher
 EXTERN handleSyscall
+EXTERN exceptionDispatcher
+
+Extern printInteger
+extern print
 
 %macro pushState 0
 	push rax
@@ -62,6 +73,16 @@ EXTERN handleSyscall
      iretq
 %endmacro
 
+%macro exceptionHandlerMaster 1
+    ;pushState
+        mov rdi, %1
+        call exceptionDispatcher
+        mov al, 20h
+        out 20h, al
+    ;popState
+  iretq
+%endmacro
+
 _irq00Handler:
     irqHandlerMaster 0
 
@@ -73,25 +94,34 @@ _irq80Handler:
     call handleSyscall
 
     ; signal pic EOI
-    mov al, 20h
-    out 20h, al
+    ;mov al, 20h
+    ;out 20h, al
 
     iretq
 
-;Espera a que la proxima interrupcion ocurra
-_hlt:
-	sti
-	hlt
-	ret
+_exception00Handler:
+    exceptionHandlerMaster 0
+
+_exception06Handler:
+    exceptionHandlerMaster 6
+
+_exception13Handler:
+    exceptionHandlerMaster 13
+
+_exception14Handler:
+    exceptionHandlerMaster 14
 
 _cli:
 	cli
 	ret
 
-
 _sti:
 	sti
 	ret
+
+halt:   ;necesito el halt
+    hlt
+    ret
 
 pic_master_mask:
 	push rbp

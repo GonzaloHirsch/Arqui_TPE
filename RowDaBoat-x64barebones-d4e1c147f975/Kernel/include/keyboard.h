@@ -11,7 +11,7 @@
 #define UP_ARROW                133
 #define DOWN_ARROW              134
 #define LEFT_ARROW              135
-#define RIGHT_ARROW 136
+#define RIGHT_ARROW             136
 
 #define EOF 0
 #define MAX_BUFFER_SIZE 750

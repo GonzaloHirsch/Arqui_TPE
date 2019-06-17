@@ -7,12 +7,9 @@
 void irqDispatcher(uint64_t irq);
 void int_20();
 void int_21();
-//extern char read_key();
-
-static char buffer[100];
+extern int read_key();
 
 void irqDispatcher(uint64_t irq) {
-  //ncPrint("Dispatcher");
     switch (irq) {
         case 0:
           int_20();
@@ -24,12 +21,12 @@ void irqDispatcher(uint64_t irq) {
 	return;
 }
 
+//Interrupcion para el timer tick
 void int_20() {
     timer_handler();
 }
 
+//Interrupcion para el teclado
 void int_21() {
     keyboard_handler();
-    //printKey();
-    //ncPrint("Key");
 }

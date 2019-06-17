@@ -6,12 +6,14 @@
 #include <naiveConsole.h>
 #include <irqDispatcher.h>
 #include <time.h>
+#include <keyboard.h>
 #include <idtLoader.h>
 #include <interrupts.h>
 #include <syscall.h>
 #include <videoDriver.h>
 #include <console.h>
 #include <pixelMap.h>
+#include <exceptions.h>
 
 extern uint8_t text;
 extern uint8_t rodata;
@@ -98,24 +100,26 @@ void * initializeKernelBinary()
 	ncPrint("Loading IDT...");
 	ncNewline();
 
-    ncPrint("[Initializing Graphics]");
-    ncNewline();
+  ncPrint("[Initializing Graphics]");
+  ncNewline();
 
-    initVideoDriver();
-    init_console();
+  ncPrintHex(getVideoX());
+
+  initVideoDriver();
+  init_console();
 
 	print("Video Driver Loaded\nLoading IDT\n");
 	load_idt();
+	loadExceptions();
 	ncPrint("[Done]");
 	ncNewline();
 
+
 	ncPrint("Prepare to go to Userland...");
 	ncNewline();
-	goToUserland();
 
-	return getStackBase();;
+	return getStackBase();
 }
-
 
 int main()
 {
@@ -149,6 +153,11 @@ int main()
 	ncNewline();
 
 	ncPrint("[Finished]");
-	*/
+    */
+
+    goToUserland();
+
+
 	return 0;
+
 }

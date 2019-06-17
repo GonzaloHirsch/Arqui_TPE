@@ -18,7 +18,7 @@ void clearScreen(){
 }
 
 void draw_char_with_background(Vector2 pos, char c, Color foreground, Color background){
-    char * cMap = pixel_map(c);
+    unsigned char * cMap = pixel_map(c);
     for (int j = 0; j < CHAR_HEIGHT; ++j) {
         for (int i = 0; i < CHAR_WIDTH; ++i) {
             Vector2 aux = {(pos.x*(CHAR_WIDTH))+i, (pos.y*CHAR_HEIGHT)+j};

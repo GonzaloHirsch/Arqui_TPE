@@ -1,15 +1,121 @@
 #include <utils.h>
 
+int pow(int base, int exponent);
+int concat(char * to, const char * from);
+
 /*STANDARD C LIBRARY FUNCTIONS*/
 
 char getChar(){
-	char * buff;
+	char buff[1];
 	sys_read(0, buff, 1);
 	return buff[0];
 }
 
 void putChar(char c){
 	sys_write(0, &c, 1);
+}
+
+int scanf(const char * fmt, ...){
+    va_list list;
+    va_start(list, fmt);
+
+
+		char str[MAX_BUFFER];       //donde se almacena lo que el usuario escribe
+		int len = 0;                //la longitud del str
+		char key = 0;               //current key
+
+		//Le habilita al usuario a escribir hasta el enter, solo caracteres mayores a ascii 10
+
+		while((key = getKey() & 0xFF) != '\n'){
+			if (key == '\b'){
+				str[len - 1] = 0;
+				len--;
+			} else {
+				if (key >= 10 && len < MAX_BUFFER){
+					str[len++] = key;
+                    putChar(key);
+				}
+			}
+		}
+
+		str[len]=0;
+		int i = 0;          //el cursor para el string de fmt
+		int pos = 0;        //el cursor para el string str recien obtenido
+		int matches = 0;    //cant de params que matchean
+		int j = 0;          //cursor para string auxiliar
+
+		int aux;
+
+		//Lee el formato
+    while(fmt[i] != 0 && str[pos]!=0){
+    	if(fmt[i] == '%'){
+        switch (fmt[i+1]) {
+
+            case 'd':
+						matches++;
+						int * ptrD = va_arg(list, int*);
+						char num[15] = {0};
+						j = 0;
+						//Itera el string que fue input
+						while(str[pos] != ' ' && str[pos] != '\n' && str[pos] != 0 && str[pos] != '\t'){
+						    if (isNumeric(str[pos])){
+								num[j++] = str[pos++];
+							} else {
+                                printf("%s\n", str);
+                                aux = atoi(num, j);
+                                *ptrD = aux;
+                                return -1;
+							}
+						}
+						aux = atoi(num, j);
+						*ptrD = aux;
+						i += 2;
+                    break;
+
+            case 's':
+                        matches++;
+						char * ptrS = va_arg(list, char*);
+						j = 0;
+						char buffer[MAX_BUFFER] = {0};
+
+						while(str[pos] != ' ' && str[pos] != '\n' && str[pos] != 0 && str[pos] != '\t'){
+							buffer[j++] = str[pos++];
+						}
+                        buffer[j]=0; //me aseguro de que termino el str
+						strcpy(ptrS, buffer);
+                    i += 2;
+                    break;
+
+            case 'c':
+					matches++;
+					char * ptrC = va_arg(list, char*);
+					j = 0;
+
+					if(str[pos] != ' ' && str[pos] != '\n' && str[pos] != 0 && str[pos] != '\t'){
+						*ptrC = *(str + pos);
+						pos++;
+					}
+
+					i += 2;
+					break;
+
+            default:
+
+                    break;
+
+          }
+        }
+    	else {
+            if(str[pos++]==fmt[i++]);
+            else return matches;
+    	}
+    }
+
+		// newStr[len] = 0;
+		// len++;
+		// sys_write(0, newStr, len);
+		//printf("%s: %s\n", fmt, str);
+		return matches;
 }
 
 void printf(char * str, ...){
@@ -23,12 +129,9 @@ void printf(char * str, ...){
 
     while(str[i] != 0){
     	if(str[i] == '%' && (i == 0 || str[i-1] != '\\')){
-				//ncPrintDec(i);
-				//ncPrint("-");
             char buffer[MAX_BUFFER] = {0};
             switch (str[i+1]) {
                 case 'd':
-										//ncPrintDec(va_arg(list,int));
                     itoa((int) va_arg(list,int), buffer, 10);
                     len += concat((newStr + len), buffer);
                     i += 2;
@@ -37,9 +140,9 @@ void printf(char * str, ...){
 										len += concat((newStr + len), va_arg(list,char*));
                     i += 2;
                     break;
-										default:
-										i += 2;
-										break;
+                default:
+                    i += 2;
+                    break;
             }
         }
         else {
@@ -78,6 +181,28 @@ char* reverse(char *buffer, int i, int j)
 		swap(&buffer[i++], &buffer[j--]);
 
 	return buffer;
+}
+
+int atoi(const char* buffer, int len){
+	int i = 0;
+	int result = 0;
+
+	//printf("atoi: buffer = %s\n", buffer);
+
+	while(buffer[i] != 0){
+		result += (pow(10, --len) * (buffer[i] - 48));
+		i++;
+		//len--;
+	}
+	return result;
+}
+
+int pow(int base, int exponent){
+	int result = 1;
+	for (int i = 0; i < exponent; i++){
+		result = result * base;
+	}
+	return result;
 }
 
 // Iterative function to implement itoa() function in C
@@ -121,22 +246,76 @@ char* itoa(int value, char* buffer, int base)
 
 /* ------------------------------- */
 
+int isNumeric(char c){
+	return '0' <= c && c <= '9';
+}
+
 char getKey(void){
 	char buff;
 	sys_get_key(0, &buff);
 	return buff;
 }
 
-char * getTime(void){
-	char * buff;
-	sys_time(buff);
-	return buff;
+void getTime(char * buff){
+	int seconds = sys_time(SECONDS);
+	int minutes = sys_time(MINUTES);
+	int hours = sys_time(HOURS);
+
+	if (hours < 10){
+		itoa(0, buff, 10);
+		itoa(hours, buff + 1, 10);
+	} else{
+		itoa(hours, buff, 10);
+	}
+
+	*(buff + 2) = ':';
+
+	if (minutes < 10){
+		itoa(0, buff + 3, 10);
+		itoa(minutes, buff + 4, 10);
+	} else{
+		itoa(minutes, buff + 3, 10);
+	}
+
+	*(buff + 5) = ':';
+
+	if (seconds < 10){
+		itoa(0, buff + 6, 10);
+		itoa(seconds, buff + 7, 10);
+	} else{
+		itoa(seconds, buff + 6, 10);
+	}
+	*(buff + 8) = 0;
 }
 
-char * getDate(void){
-	char * buff;
-	sys_date(buff);
-	return buff;
+void getDate(char * buff){
+	int day = sys_time(DAY_OF_MONTH);
+	int month = sys_time(MONTH);
+	int year = sys_time(YEAR);
+
+	if (day < 10){
+		itoa(0, buff, 10);
+		itoa(day, buff + 1, 10);
+	} else{
+		itoa(day, buff, 10);
+	}
+
+	*(buff + 2) = '/';
+
+	if (month < 10){
+		itoa(0, buff + 3, 10);
+		itoa(month, buff + 4, 10);
+	} else{
+		itoa(month, buff + 3, 10);
+	}
+
+	*(buff + 5) = '/';
+	//int century = get_time(CENTURY);
+
+	year = 2000 + year;
+	itoa(year, buff + 6, 10);
+
+	*(buff + 10) = 0;
 }
 
 void makeSound(void){
@@ -144,6 +323,8 @@ void makeSound(void){
 }
 
 void goToSleep(int ticks){
+	//Cambia la frecuencia para que vuelva a ser la normal, que tiene una interrupcion cada 55ms aprox
+	sys_over_clock(65356);
 	sys_sleep(ticks);
 }
 
@@ -170,6 +351,10 @@ int strcmp(const char * stra, const char * strb){
 	}
 	//ncPrintDec(result);
 	return result;
+}
+
+void strcpy(char * dst, char * src){
+    while((*(dst++) = *(src++)) != 0);
 }
 
 int strlen(const char * str){

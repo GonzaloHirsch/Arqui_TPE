@@ -1,4 +1,6 @@
 global loader
+global hang
+
 extern main
 extern initializeKernelBinary
 
