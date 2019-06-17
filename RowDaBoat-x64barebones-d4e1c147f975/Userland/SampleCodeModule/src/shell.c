@@ -124,7 +124,7 @@ void handle_command(int cmd){
 		case SHUTDOWN_COMMAND:
 		    clearScreen();
 		    display_goodbye_message();
-		    return;
+		    sys_shutdown();
 		break;
 		case INVALID_OC_COMMAND:
 			generate_invalid_opc();

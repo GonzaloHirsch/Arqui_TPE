@@ -40,4 +40,6 @@ void sys_clear_console(void);
 
 int sys_time(int selector);
 
+void sys_shutdown();
+
 #endif

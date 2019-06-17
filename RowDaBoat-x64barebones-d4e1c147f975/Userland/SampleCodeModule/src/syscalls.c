@@ -46,3 +46,7 @@ uint64_t sys_get_ticks(void){
 	_int80((uint64_t)TICKS, 0, (uint64_t)&ticks, 0, 0, 0);
 	return ticks;
 }
+
+void sys_shutdown(){
+    _int80(SHUTDOWN, 0, 0, 0, 0, 0);
+}
