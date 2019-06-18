@@ -13,16 +13,16 @@ extern int check_key();
 static char buffer[MAX_BUFFER_SIZE]={0};
 /*
     Posicion de la escritura en el buffer
-    HEAD se usa para operaciones destructivas en el buffer
+    write se usa para operaciones destructivas en el buffer
     Apunta al proximo
 */
-static int head;
+static int write;
 /*
     Posicion de la lectura en el buffer
-    TAIL se usa para operaciones no destructivas del buffer
+    read se usa para operaciones no destructivas del buffer
     Apunta al proximo
 */
-static int tail;
+static int read;
 /*
     Flag de shift, empieza en falso
 */
@@ -41,7 +41,7 @@ static int full = 0;
 
 //Key codes normales, para el teclado sin estar con el shift apretado
 unsigned char keycode_map[128] = {
-    27,  '`', '1', '2', '3', '4', '5', '6', '7', '8', '9','0', '-', '=','\b', '\t','q', 'w', 'e', 'r',
+    27,  0, '1', '2', '3', '4', '5', '6', '7', '8', '9','0', '-', '=','\b', '\t','q', 'w', 'e', 'r',
   't', 'y', 'u', 'i', 'o', 'p', '[', ']', '\n', 0 /* Control */,
   'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', ';', '\'', '`',  LEFT_SHIFT,'\\', 'z', 'x', 'c', 'v', 'b', 'n',
   'm', ',', '.', '/', RIGHT_SHIFT,'*',0/* Alt */,' ', CAPS_LOCK, 0 ,
@@ -115,9 +115,9 @@ void keyboard_handler(void){
 */
 int addChar(char c){
     if (!full){
-      buffer[head] = c;
-      head = (head + 1) % MAX_BUFFER_SIZE;
-      if (head == tail && !full){
+      buffer[write] = c;
+      write = (write + 1) % MAX_BUFFER_SIZE;
+      if (write == read && !full){
         full = 1;
       }
       return 1;
@@ -130,10 +130,10 @@ int addChar(char c){
 */
 int getChar(void){
     int aux = EOF;
-    if (head != tail || (head == tail && full)){
-      aux = buffer[tail];
+    if (write != read || (write == read && full)){
+      aux = buffer[read];
       //Le saca el modulo para que de "vueltas" alrededor del buffer
-      tail = (tail + 1) % MAX_BUFFER_SIZE;
+      read = (read + 1) % MAX_BUFFER_SIZE;
       if (full){
         full = 0;
       }

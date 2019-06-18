@@ -12,19 +12,15 @@
 #define DATE_COMMAND 7
 #define CLEAR_COMMAND 8
 #define DIV_COMMAND 9
+#define CREDITS_COMMAND 10
 
-const char * commandMessages[] = {"help - Show available commands and their use",
-								"snake - Initializes the Snake game",
-								"shutdown - Shuts down and exits the system",
-								"verify - Runs verification routines for system exceptions",
-								"time - Displays system date and time"};
-
-const char * commands[] = {"help", "snake", "shutdown", "invalid", "time", "beep", "sleep", "date", "clear", "div"};
-const int commandCount = 10;
+const char * commands[] = {"help", "snake", "shutdown", "invalid", "time", "beep", "sleep", "date", "clear", "div", "credits"};
+const int commandCount = 11;
 
 int getCommand(char * cmd);
 void generate_invalid_opc(void);
 int generate_zero_division(void);
+void display_credits(void);
 
 uint64_t * init_shell(void){
 	display_welcome_message();
@@ -151,6 +147,9 @@ void handle_command(int cmd){
 		case INVALID_COMMAND:
 			display_invalid_command();
 		break;
+		case CREDITS_COMMAND:
+			display_credits();
+		break;
 	}
 	print("\n");
 }
@@ -170,9 +169,12 @@ void display_welcome_message(void){
 	print("						       \\_______/|__/       \\____  $$ \\______/ |__/ \\______/  \\______/ \n");
 	print("						                                | $$                                  \n");
 	print("						                                | $$    \n");
-	print("						                                |__/   \n");
-	print("Welcome to arquiOS\n");
-	print("Type in \"help\" to discover all available commands\n\n");
+	print("						                                |__/   \n\n");
+	print("													Trabajo Practico Especial\n");
+	print("												 Arquitectura de Computadoras\n");
+	print("											 		1er Cuatrimestre - 2019\n\n");
+	print("													  Welcome to arquiOS\n");
+	print("										Type \"help\" to discover all available commands\n\n");
 }
 
 void display_help(void){
@@ -183,9 +185,10 @@ void display_help(void){
 	print("date - Displays current system date\n");
 	print("beep - Makes the system go Beep!\n");
 	print("sleep - Makes the system sleep for 5 seconds\n");
-    print("div - Performs a division by zero\n");
-    print("invalid - Executes an invalid operation\n");
-    print("clear - Clears the screen\n");
+  print("div - Performs a division by zero\n");
+  print("invalid - Executes an invalid operation\n");
+  print("clear - Clears the screen\n");
+	print("credits - Displays info about the group\n");
 }
 
 void display_time(void){
@@ -198,6 +201,11 @@ void display_date(void){
 	char date[20];
 	getDate(date);
 	print(date);
+}
+
+void display_credits(void){
+	print("The authors of this OS are:\n");
+  print("Ignacio Ribas - Gonzalo Hirsch - Ignacio Villanueva\n");
 }
 
 void generate_invalid_opc(){
@@ -225,5 +233,16 @@ void display_invalid_command(void){
 }
 
 void display_goodbye_message(void){
-	print("Goodbye\n");
+	clearScreen();
+	print("							  /$$$$$$                            /$$ /$$                          \n");
+	print("							 /$$__  $$                          | $$| $$                          \n");
+	print("							| $$  \\__/  /$$$$$$   /$$$$$$   /$$$$$$$| $$$$$$$  /$$   /$$  /$$$$$$ \n");
+	print("							| $$ /$$$$ /$$__  $$ /$$__  $$ /$$__  $$| $$__  $$| $$  | $$ /$$__  $$\n");
+	print("							| $$|_  $$| $$  \\ $$| $$  \\ $$| $$  | $$| $$  \\ $$| $$  | $$| $$$$$$$$\n");
+	print("							| $$  \\ $$| $$  | $$| $$  | $$| $$  | $$| $$  | $$| $$  | $$| $$_____/\n");
+	print("							|  $$$$$$/|  $$$$$$/|  $$$$$$/|  $$$$$$$| $$$$$$$/|  $$$$$$$|  $$$$$$$\n");
+	print("							 \\______/  \\______/  \\______/  \\_______/|_______/  \\____  $$ \\_______/\n");
+	print("							                                                   /$$  | $$          \n");
+	print("							                                                  |  $$$$$$/          \n");
+	print("					    		                                               \\______/           \n");
 }
