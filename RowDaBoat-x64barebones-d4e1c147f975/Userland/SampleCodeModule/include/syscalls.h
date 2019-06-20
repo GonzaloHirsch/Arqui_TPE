@@ -30,7 +30,7 @@ void sys_read(int fd, char *buf, int count);
 
 void sys_sleep(int ticks);
 
-void sys_beep(void);
+void sys_beep(int freq, int time);
 
 uint64_t sys_get_ticks(void);
 

@@ -29,7 +29,7 @@ void handle_sys_write(int fd, const char * buf, int length);
 
 void handle_sys_read(int fd, char * buf, int length);
 
-void handle_sys_beep(void);
+void handle_sys_beep(int freq, int time);
 
 void handle_sys_get_ticks(int * ticks);
 

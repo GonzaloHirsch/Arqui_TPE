@@ -53,6 +53,15 @@ void draw_pixel(Vector2 pos, Color color){
     pixel_address[2] = color.r;
 }
 
+
+void move_all_lines_up(){
+  void * source = (void *)((uint64_t)(infoBlock->physbase + (infoBlock->bpp/8) * infoBlock->x_res * CHAR_HEIGHT));
+  void * dest = (void *)((uint64_t)infoBlock->physbase);
+  int size = (((infoBlock->bpp/8) * (infoBlock->x_res-1) *  infoBlock->y_res)-(infoBlock->bpp/8) * infoBlock->x_res * CHAR_HEIGHT);
+  infoBlock->physbase = ((uint64_t)(memcpy(dest, source, size)));
+}
+
+
 void get_pixel(Vector2 pos, Color* out){
     if (out_of_range_pixel(pos))
         return;

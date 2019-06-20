@@ -41,7 +41,7 @@ static int full = 0;
 
 //Key codes normales, para el teclado sin estar con el shift apretado
 unsigned char keycode_map[128] = {
-    27,  0, '1', '2', '3', '4', '5', '6', '7', '8', '9','0', '-', '=','\b', '\t','q', 'w', 'e', 'r',
+    27, '`', '1', '2', '3', '4', '5', '6', '7', '8', '9','0', '-', '=','\b', '\t','q', 'w', 'e', 'r',
   't', 'y', 'u', 'i', 'o', 'p', '[', ']', '\n', 0 /* Control */,
   'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', ';', '\'', '`',  LEFT_SHIFT,'\\', 'z', 'x', 'c', 'v', 'b', 'n',
   'm', ',', '.', '/', RIGHT_SHIFT,'*',0/* Alt */,' ', CAPS_LOCK, 0 ,

@@ -23,7 +23,7 @@ uint64_t handleSyscall(uint64_t rdi, uint64_t rsi, uint64_t rdx, uint64_t rcx, u
 		break;
 		case BEEP:
 		//ncPrint("READ");
-			handle_sys_beep();
+			handle_sys_beep(rsi, rdx);
 		break;
 		case SLEEP:
 		//ncPrint("SLEEP");
@@ -85,8 +85,8 @@ void handle_sys_sleep(int ticks){
 	timer_wait(ticks);
 }
 
-void handle_sys_beep(){
-	beep();
+void handle_sys_beep(int freq, int time){
+	beep(freq, time);
 }
 
 void handle_sys_over_clock(int rate){

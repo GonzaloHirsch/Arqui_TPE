@@ -11,8 +11,11 @@ static int partialTime = 0;
 static int relativeTime = 0;
 
 //La velocidad inicial es para la frecuencia mas baja
-static int velocity = 65356;
-static int velocityIncrements = 5000;
+//static int velocity = 65356;
+
+static int velocityIncrements = 2;
+static int expectedFrame = 18;
+
 
 void onExit();
 void nextFrame();
@@ -21,11 +24,12 @@ int abosulteTimeDifference(int before, int after);
 void resetVariables(){
   winner = 1;
 
-  velocity = 65356;
-  sys_over_clock(velocity);
+  //velocity = 65356;
+  //sys_over_clock(velocity);
   totalTimeAlive = 0;
   partialTime = 0;
   relativeTime = sys_time(SECONDS);
+  expectedFrame = 18;
 
   resetSnakeBody();
 }
@@ -37,7 +41,7 @@ int initSnakeGame(){
 
   resetVariables();
 
-  Vector2 startPos = {10, 10};
+  Vector2 startPos = {30, 10};
 
   initSnakeBody(startPos);
 
@@ -68,9 +72,14 @@ void Update(){
 
   if (partialTime >= 15){
     growSnake();
-    sys_beep();
-    velocity -= velocityIncrements;
-    sys_over_clock(velocity);
+    sys_beep(800, 5);
+    if (expectedFrame - velocityIncrements >= 1){
+      expectedFrame -= velocityIncrements;
+    } else {
+      //Velocidad maxima
+      expectedFrame = 0;
+    }
+    //sys_over_clock(velocity);
     partialTime = 0;
   }
 
@@ -99,7 +108,7 @@ void nextFrame(){
   while(isRunning){
     frame = sys_get_ticks();
     //print(frame);
-    if (frame > lastFrame){
+    if (frame - lastFrame > expectedFrame){
       lastFrame = frame;
       Update();
     }
@@ -108,7 +117,7 @@ void nextFrame(){
 }
 
 void onExit(){
-  velocity = 65356;
-  sys_over_clock(velocity);
+  //velocity = 65356;
+  //sys_over_clock(velocity);
   clearScreen();
 }

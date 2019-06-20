@@ -318,8 +318,8 @@ void getDate(char * buff){
 	*(buff + 10) = 0;
 }
 
-void makeSound(void){
-	sys_beep();
+void makeSound(int freq, int time){
+	sys_beep(freq, time);
 }
 
 void goToSleep(int ticks){

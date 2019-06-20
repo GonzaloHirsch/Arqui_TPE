@@ -16,7 +16,7 @@ void resetSnakeBody(){
   direction.x = 1;
   direction.y = 0;
 
-  snakeSize = 4;
+  snakeSize = 25;
   head = 0;
   tail = snakeSize - 1;
 
@@ -46,13 +46,32 @@ void growSnake(){
 
 void initSnakeBody(Vector2 startPos){
   Vector2 auxPos = {startPos.x, startPos.y};
-  setSnakeCell(0, auxPos);
-  auxPos.x--;
-  setSnakeCell(1, auxPos);
-  auxPos.x--;
-  setSnakeCell(2, auxPos);
-  auxPos.x--;
-  setSnakeCell(3, auxPos);
+  snakeSize = 25;
+  for (int i = 0; i < snakeSize; i++){
+    setSnakeCell(i, auxPos);
+    auxPos.x--;
+  }
+  // setSnakeCell(0, auxPos);
+  // auxPos.x--;
+  // setSnakeCell(1, auxPos);
+  // auxPos.x--;
+  // setSnakeCell(2, auxPos);
+  // auxPos.x--;
+  // setSnakeCell(3, auxPos);
+  // auxPos.x--;
+  // setSnakeCell(4, auxPos);
+  // auxPos.x--;
+  // setSnakeCell(5, auxPos);
+  // auxPos.x--;
+  // setSnakeCell(6, auxPos);
+  // auxPos.x--;
+  // setSnakeCell(7, auxPos);
+  // auxPos.x--;
+  // setSnakeCell(8, auxPos);
+  // auxPos.x--;
+  // setSnakeCell(9, auxPos);
+  // auxPos.x--;
+  // setSnakeCell(10, auxPos);
 
   drawSnake();
 

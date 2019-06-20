@@ -32,8 +32,8 @@ void nosound() {
  }
 
  //Make a beep
- void beep() {
- 	 play_sound(800);	//800 esta buena
- 	 sleep(4);		//4 ticks, son como 220ms
+ void beep(int freq, int time) {
+ 	 play_sound(freq);	//800 esta buena
+ 	 sleep(time);		//4 ticks, son como 220ms
  	 nosound();
  }

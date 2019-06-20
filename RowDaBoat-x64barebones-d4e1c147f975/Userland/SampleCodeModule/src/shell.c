@@ -115,6 +115,9 @@ void handle_command(int cmd){
 		case SNAKE_COMMAND:
 		w = initSnakeGame();
 		printf("You survived %d seconds\n", w);
+		makeSound(800, 10);
+		makeSound(500, 10);
+		makeSound(100, 10);
 		break;
 		//Retorna y sale del while, y no se puede hacer nada mas
 		case SHUTDOWN_COMMAND:
@@ -174,7 +177,7 @@ void display_welcome_message(void){
 	print("												 Arquitectura de Computadoras\n");
 	print("											 		1er Cuatrimestre - 2019\n\n");
 	print("													  Welcome to arquiOS\n");
-	print("										Type \"help\" to discover all available commands\n\n");
+	print("										Type \"help\" to discover all available commands\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
 }
 
 void display_help(void){
@@ -221,7 +224,7 @@ int generate_zero_division(){
 }
 
 void make_sound(void){
-	makeSound();
+	makeSound(800, 5);
 }
 
 void sleep(void){
@@ -244,5 +247,5 @@ void display_goodbye_message(void){
 	print("							 \\______/  \\______/  \\______/  \\_______/|_______/  \\____  $$ \\_______/\n");
 	print("							                                                   /$$  | $$          \n");
 	print("							                                                  |  $$$$$$/          \n");
-	print("					    		                                               \\______/           \n");
+	print("					    		                                               \\______/           \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
 }

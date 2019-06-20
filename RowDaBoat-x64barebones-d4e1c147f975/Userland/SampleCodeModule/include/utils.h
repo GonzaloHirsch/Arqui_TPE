@@ -39,7 +39,7 @@ int strlen(const char * str);
 
 void strcpy(char * dst, char * src);
 
-void makeSound(void);
+void makeSound(int freq, int time);
 
 void goToSleep(int ticks);
 
