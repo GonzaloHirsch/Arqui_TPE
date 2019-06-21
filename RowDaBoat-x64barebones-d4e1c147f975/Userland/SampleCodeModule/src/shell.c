@@ -14,15 +14,17 @@
 #define DIV_COMMAND 9
 #define CREDITS_COMMAND 10
 #define STARWARS_COMMAND 11
+#define MARIO_COMMAND 12
 
-const char * commands[] = {"help", "snake", "shutdown", "invalid", "time", "beep", "sleep", "date", "clear", "div", "credits", "starwars"};
-const int commandCount = 12;
+const char * commands[] = {"help", "snake", "shutdown", "invalid", "time", "beep", "sleep", "date", "clear", "div", "credits", "starwars", "mario"};
+const int commandCount = 13;
 
 int getCommand(char * cmd);
 void generate_invalid_opc(void);
 int generate_zero_division(void);
 void display_credits(void);
 void make_starwars(void);
+void make_mario(void);
 
 uint64_t * init_shell(void){
 	display_welcome_message();
@@ -158,6 +160,9 @@ void handle_command(int cmd){
 		case STARWARS_COMMAND:
 			make_starwars();
 		break;
+		case MARIO_COMMAND:
+			make_mario();
+			break;
 	}
 	print("\n");
 }
@@ -198,6 +203,7 @@ void display_help(void){
   print("clear - Clears the screen\n");
 	print("credits - Displays info about the group\n");
 	print("starwars - Makes a cool Star Wars sound!\n");
+	print("mario - Makes a cool Mario sound!\n");
 }
 
 void display_time(void){
@@ -280,6 +286,54 @@ void make_starwars(void){
     makeSound(440, 1500/3); makeSound(349, 375/3);
     makeSound(261, 375/3); makeSound(440, 1000/3);
     goToSleep(7);
+}
+
+void make_mario(void){
+	makeSound(659, 125/45); makeSound(659, 125/45); goToSleep(125/45); makeSound(659, 125/45);
+	goToSleep(167/45); makeSound(523, 125/45); makeSound(659, 125/45); goToSleep(125/45);
+	makeSound(784, 125/45); goToSleep(375/45); makeSound(392, 125/45); goToSleep(375/45);
+	makeSound(523, 125/45); goToSleep(250/45); makeSound(392, 125/45); goToSleep(250/45);
+	makeSound(330, 125/45); goToSleep(250/45); makeSound(440, 125/45); goToSleep(125/45);
+	makeSound(494, 125/45); goToSleep(125/45); makeSound(466, 125/45); goToSleep(42/45);
+	makeSound(440, 125/45); goToSleep(125/45); makeSound(392, 125/45); goToSleep(125/45);
+	makeSound(659, 125/45); goToSleep(125/45); makeSound(784, 125/45); goToSleep(125/45);
+	 makeSound(880, 125/45); goToSleep(125/45); makeSound(698, 125/45); makeSound(784, 125/45);
+	 goToSleep(125/45); makeSound(659, 125/45); goToSleep(125/45); makeSound(523, 125/45);
+	 goToSleep(125/45); makeSound(587, 125/45); makeSound(494, 125/45); goToSleep(125/45);
+	  makeSound(523, 125/45); goToSleep(250/45); makeSound(392, 125/45); goToSleep(250/45);
+		makeSound(330, 125/45); goToSleep(250/45); makeSound(440, 125/45); goToSleep(125/45);
+		makeSound(494, 125/45); goToSleep(125/45); makeSound(466, 125/45); goToSleep(42/45);
+		makeSound(440, 125/45); goToSleep(125/45); makeSound(392, 125/45); goToSleep(125/45);
+		makeSound(659, 125/45); goToSleep(125/45); makeSound(784, 125/45); goToSleep(125/45);
+		 makeSound(880, 125/45); goToSleep(125/45); makeSound(698, 125/45); makeSound(784, 125/45);
+		 goToSleep(125/45); makeSound(659, 125/45); goToSleep(125/45); makeSound(523, 125/45);
+		goToSleep(125/45); makeSound(587, 125/45); makeSound(494, 125/45); goToSleep(375/45);
+		makeSound(784, 125/45); makeSound(740, 125/45); makeSound(698, 125/45); goToSleep(42/45);
+		 makeSound(622, 125/45); goToSleep(125/45); makeSound(659, 125/45); goToSleep(167/45);
+		 makeSound(415, 125/45); makeSound(440, 125/45); makeSound(523, 125/45); goToSleep(125/45);
+		  makeSound(440, 125/45); makeSound(523, 125/45); makeSound(587, 125/45); goToSleep(250/45);
+			makeSound(784, 125/45); makeSound(740, 125/45); makeSound(698, 125/45); goToSleep(42/45);
+			makeSound(622, 125/45); goToSleep(125/45); makeSound(659, 125/45);
+		goToSleep(167/45); makeSound(698, 125/45); goToSleep(125/45); makeSound(698, 125/45);
+		makeSound(698, 125/45); goToSleep(625/45); makeSound(784, 125/45); makeSound(740, 125/45);
+		 makeSound(698, 125/45); goToSleep(42/45); makeSound(622, 125/45); goToSleep(125/45);
+		 makeSound(659, 125/45); goToSleep(167/45); makeSound(415, 125/45); makeSound(440, 125/45);
+		 makeSound(523, 125/45); goToSleep(125/45); makeSound(440, 125/45); makeSound(523, 125/45);
+		  makeSound(587, 125/45); goToSleep(250/45); makeSound(622, 125/45); goToSleep(250/45);
+			makeSound(587, 125/45); goToSleep(250/45); makeSound(523, 125/45); goToSleep(1125/45);
+			makeSound(784, 125/45); makeSound(740, 125/45); makeSound(698, 125/45); goToSleep(42/45);
+			makeSound(622, 125/45); goToSleep(125/45); makeSound(659, 125/45);
+		 goToSleep(167/45); makeSound(415, 125/45); makeSound(440, 125/45); makeSound(523, 125/45);
+		  goToSleep(125/45); makeSound(440, 125/45); makeSound(523, 125/45); makeSound(587, 125/45);
+			goToSleep(250/45); makeSound(784, 125/45); makeSound(740, 125/45); makeSound(698, 125/45);
+			goToSleep(42/45); makeSound(622, 125/45); goToSleep(125/45); makeSound(659, 125/45);
+			goToSleep(167/45); makeSound(698, 125/45); goToSleep(125/45); makeSound(698, 125/45);
+			makeSound(698, 125/45); goToSleep(625/45); makeSound(784, 125/45);
+		 makeSound(740, 125/45); makeSound(698, 125/45); goToSleep(42/45); makeSound(622, 125/45);
+		 goToSleep(125/45); makeSound(659, 125/45); goToSleep(167/45); makeSound(415, 125/45);
+		 makeSound(440, 125/45); makeSound(523, 125/45); goToSleep(125/45); makeSound(440, 125/45);
+		 makeSound(523, 125/45); makeSound(587, 125/45); goToSleep(250/45); makeSound(622, 125/45);
+		 goToSleep(250/45); makeSound(587, 125/45); goToSleep(250/45); makeSound(523, 125/45);
 }
 
 void sleep(void){
