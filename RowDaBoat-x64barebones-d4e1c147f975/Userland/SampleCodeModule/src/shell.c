@@ -13,14 +13,16 @@
 #define CLEAR_COMMAND 8
 #define DIV_COMMAND 9
 #define CREDITS_COMMAND 10
+#define STARWARS_COMMAND 11
 
-const char * commands[] = {"help", "snake", "shutdown", "invalid", "time", "beep", "sleep", "date", "clear", "div", "credits"};
-const int commandCount = 11;
+const char * commands[] = {"help", "snake", "shutdown", "invalid", "time", "beep", "sleep", "date", "clear", "div", "credits", "starwars"};
+const int commandCount = 12;
 
 int getCommand(char * cmd);
 void generate_invalid_opc(void);
 int generate_zero_division(void);
 void display_credits(void);
+void make_starwars(void);
 
 uint64_t * init_shell(void){
 	display_welcome_message();
@@ -153,6 +155,9 @@ void handle_command(int cmd){
 		case CREDITS_COMMAND:
 			display_credits();
 		break;
+		case STARWARS_COMMAND:
+			make_starwars();
+		break;
 	}
 	print("\n");
 }
@@ -174,7 +179,7 @@ void display_welcome_message(void){
 	print("						                                | $$    \n");
 	print("						                                |__/   \n\n");
 	print("													Trabajo Practico Especial\n");
-	print("												 Arquitectura de Computadoras\n");
+	print("												  Arquitectura de Computadoras\n");
 	print("											 		1er Cuatrimestre - 2019\n\n");
 	print("													  Welcome to arquiOS\n");
 	print("										Type \"help\" to discover all available commands\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
@@ -192,15 +197,18 @@ void display_help(void){
   print("invalid - Executes an invalid operation\n");
   print("clear - Clears the screen\n");
 	print("credits - Displays info about the group\n");
+	print("starwars - Makes a cool Star Wars sound!\n");
 }
 
 void display_time(void){
+	print("The time is ");
 	char time[20];
 	getTime(time);
 	print(time);
 }
 
 void display_date(void){
+	print("The date is ");
 	char date[20];
 	getDate(date);
 	print(date);
@@ -225,6 +233,53 @@ int generate_zero_division(){
 
 void make_sound(void){
 	makeSound(800, 5);
+}
+
+void make_starwars(void){
+		makeSound(440, 500/3); makeSound(440, 1500/3);
+    makeSound(440, 1500/3);
+    makeSound(349, 1050/3); makeSound(523, 450/3);
+    makeSound(440, 1500/3); makeSound(349, 1050/3);
+    makeSound(523, 450/3); makeSound(440, 1000/3);
+    goToSleep(10); // Delay 250 milliseconds !!!!
+    makeSound(659, 1500/3); makeSound(659, 1500/3);
+    makeSound(659, 1500/3); makeSound(698, 1050/3);
+    makeSound(523, 450/3);
+    makeSound(415, 1500/3); makeSound(349, 1050/3);
+    makeSound(523, 450/3); makeSound(440, 1000/3);
+    goToSleep(10); // Delay 250 milliseconds !!!!
+    makeSound(880, 1500/3); makeSound(440, 1050/3);
+    makeSound(440, 450/3); makeSound(880, 1500/3);
+    makeSound(830, 750/3);
+    makeSound(784, 750/3);
+    makeSound(740, 375/3); makeSound(698, 375/3);
+    makeSound(740, 750/3);
+    goToSleep(7); // Delay 250 milliseconds !!!!
+    makeSound(455, 750/3); makeSound(622, 1500/3);
+    makeSound(587, 750/3); makeSound(554, 750/3);
+    makeSound(523, 375/3); makeSound(466, 375/3);
+    makeSound(523, 750/3);
+    goToSleep(7); // Delay 250 milliseconds !!!!
+    makeSound(349, 375/3); makeSound(415, 1500/3);
+    makeSound(349, 375/3); makeSound(440, 375/3);
+    makeSound(523, 1500/3); makeSound(440, 375/3);
+    makeSound(523, 375/3); makeSound(659, 1000/3);
+    makeSound(880, 1500/3); makeSound(440, 1050/3);
+    makeSound(440, 450/3); makeSound(880, 1500/3);
+    makeSound(830, 750/3); makeSound(784, 750/3);
+    makeSound(740, 375/3); makeSound(698, 375/3);
+    makeSound(740, 750/3);
+    goToSleep(7);
+    makeSound(455, 750/3); makeSound(622, 1500/3);
+    makeSound(587, 750/3); makeSound(554, 750/3);
+    makeSound(523, 375/3); makeSound(466, 375/3);
+    makeSound(523, 750/3);
+    goToSleep(7);
+    makeSound(349, 750/3); makeSound(415, 1500/3);
+    makeSound(349, 375/3); makeSound(523, 375/3);
+    makeSound(440, 1500/3); makeSound(349, 375/3);
+    makeSound(261, 375/3); makeSound(440, 1000/3);
+    goToSleep(7);
 }
 
 void sleep(void){
