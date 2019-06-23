@@ -116,10 +116,16 @@ void print_char(char c){
             break;
     }
 
+    //Empezar una nueva linea si el cursor se pasa del
+    //maximo x posible
     if(cursor.x >= getVideoX()/CHAR_WIDTH){
         cursor.x = 0;
         cursor.y++;
     }
+
+    //Mover todo el contenido una linea para arriba
+    //si se necesita una nueva linea y el cursor esta
+    //en la posicion mas baja de la pantalla
     if(cursor.y >= getVideoY()/CHAR_HEIGHT){
         move_all_up();
         cursor.y--;
