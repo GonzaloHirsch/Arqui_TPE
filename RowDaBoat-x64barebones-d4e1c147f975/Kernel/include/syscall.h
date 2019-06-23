@@ -25,22 +25,4 @@
 
 uint64_t handleSyscall(uint64_t rdi, uint64_t rsi, uint64_t rdx, uint64_t rcx, uint64_t r8, uint64_t r9);
 
-void handle_sys_write(int fd, const char * buf, int length);
-
-void handle_sys_read(int fd, char * buf, int length);
-
-void handle_sys_beep(int freq, int time);
-
-void handle_sys_get_ticks(int * ticks);
-
-void handle_sys_sleep(int ticks);
-
-void handle_sys_over_clock(int rate);
-
-int handle_sys_time(uint64_t selector);
-
-void handle_sys_clear_console(void);
-
-void handle_sys_draw_pixel(int x, int y, int r, int g, int b);
-
 #endif

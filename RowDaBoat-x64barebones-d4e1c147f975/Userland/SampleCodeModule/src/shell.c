@@ -16,6 +16,7 @@
 #define STARWARS_COMMAND 11
 #define MARIO_COMMAND 12
 
+//Todos los comandos disponibles
 const char * commands[] = {"help", "snake", "shutdown", "invalid", "time", "beep", "sleep", "date", "clear", "div", "credits", "starwars", "mario"};
 const int commandCount = 13;
 
@@ -110,6 +111,8 @@ int getCommand(char * cmd){
 	return result;
 }
 
+//Switch para el comando elegido
+//Recibe el comando como un parametro
 void handle_command(int cmd){
 	int w;
 	switch(cmd){
@@ -119,9 +122,6 @@ void handle_command(int cmd){
 		case SNAKE_COMMAND:
 		w = initSnakeGame();
 		printf("You survived %d seconds\n", w);
-		makeSound(800, 10);
-		makeSound(500, 10);
-		makeSound(100, 10);
 		break;
 		//Retorna y sale del while, y no se puede hacer nada mas
 		case SHUTDOWN_COMMAND:
@@ -135,7 +135,6 @@ void handle_command(int cmd){
 		case DIV_COMMAND:
 			generate_zero_division();
 		break;
-		//Imprime la fecha de hoy
 		case DATE_COMMAND:
 			display_date();
 		break;
@@ -169,6 +168,7 @@ void handle_command(int cmd){
 
 /*
 	Imprime el mensaje de bienvenida
+	Se generaron con una pagina web
 */
 void display_welcome_message(void){
 	clearScreen();

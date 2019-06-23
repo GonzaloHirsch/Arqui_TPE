@@ -111,10 +111,6 @@ int scanf(const char * fmt, ...){
     	}
     }
 
-		// newStr[len] = 0;
-		// len++;
-		// sys_write(0, newStr, len);
-		//printf("%s: %s\n", fmt, str);
 		return matches;
 }
 
@@ -122,7 +118,6 @@ void printf(char * str, ...){
     va_list list;
     va_start(list, str);
     int i = 0;
-		//ncPrint(str);
 
 		char newStr[MAX_BUFFER] = {0};
 		int len = 0;
@@ -187,12 +182,10 @@ int atoi(const char* buffer, int len){
 	int i = 0;
 	int result = 0;
 
-	//printf("atoi: buffer = %s\n", buffer);
 
 	while(buffer[i] != 0){
 		result += (pow(10, --len) * (buffer[i] - 48));
 		i++;
-		//len--;
 	}
 	return result;
 }
@@ -220,9 +213,6 @@ char* itoa(int value, char* buffer, int base)
 	{
 		int r = n % base;
 
-		//if (r >= 10)
-		//	buffer[i++] = 65 + (r - 10);
-		//else
 			buffer[i++] = 48 + r;
 
 		n = n / base;
@@ -310,7 +300,6 @@ void getDate(char * buff){
 	}
 
 	*(buff + 5) = '/';
-	//int century = get_time(CENTURY);
 
 	year = 2000 + year;
 	itoa(year, buff + 6, 10);
@@ -323,7 +312,6 @@ void makeSound(int freq, int time){
 }
 
 void goToSleep(int ticks){
-	//Cambia la frecuencia para que vuelva a ser la normal, que tiene una interrupcion cada 55ms aprox
 	sys_sleep(ticks);
 }
 
@@ -348,7 +336,6 @@ int strcmp(const char * stra, const char * strb){
 	} else if (*(stra + i) == 0 && *(strb + i) != 0){
 		return -1;
 	}
-	//ncPrintDec(result);
 	return result;
 }
 
