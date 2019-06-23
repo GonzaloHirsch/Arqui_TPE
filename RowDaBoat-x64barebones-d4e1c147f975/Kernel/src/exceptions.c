@@ -25,6 +25,8 @@ static void (*exceptionsArray[])() = {divZeroError, tBI, tBI, tBI, tBI, tBI, inv
 void retrieveRegisters();
 void printRegistersAccurate();
 
+
+//Esta funcion carga en la IDT las rutinas de atencion de las excepciones soportadas por el SO.
 void loadExceptions(){
 
     //Loading Exceptions
@@ -36,6 +38,9 @@ void loadExceptions(){
     _sti();
 }
 
+
+//Las rutinas de atencion de excepcion son wrappers de esta funcion, a la cual se le envia
+//como parametro el numero de excepcion para mapear al mensaje de interrupcion correspondiente
 void exceptionDispatcher(uint64_t type){
 
 
@@ -56,8 +61,8 @@ void exceptionDispatcher(uint64_t type){
         );
     }
 
-        retrieveRegisters();        //Obtengo los registros antes de llamar a cualquier
-                                    //otra funcion desde aca.
+        retrieveRegisters();        //Se obtienen todos los registros menos el RIP de una
+                                    // vez antes de llamar a cualquier otra funcion.
 
         clear_console();
         print("\n");
@@ -65,6 +70,8 @@ void exceptionDispatcher(uint64_t type){
         printError("RIP: %d\n", eSF.rip);
         printRegistersAccurate();
 
+
+        //Se reinicia el modulo de Usuario
         print("\n\nRebooting to userland");
         _sti();
         sleep(2000);
@@ -101,6 +108,9 @@ static void doubleFault(){
 }
 
 void retrieveRegisters(){
+
+    //usar una unica linea para obtener todos los registros
+    //traia problemas
 
     __asm__ volatile ("mov %%rax, %0;"
     : "=a" (cRV.rax)
