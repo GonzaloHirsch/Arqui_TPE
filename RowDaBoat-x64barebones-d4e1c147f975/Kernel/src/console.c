@@ -30,7 +30,6 @@ int get_max_cursorX(){
 
 void init_console(){
     clear_console();
-    //print("%d - %d - %d", get_max_line(), getResY);
     cursor.y = get_max_line()-1;
 }
 
@@ -183,9 +182,6 @@ void move_line_up(unsigned int line){
 
 void move_all_up(){
   move_all_lines_up();
-    // for(int i = 1; i < get_max_line(); i++){
-    //     move_line_up(i);
-    // }
     clear_line(get_max_line()-1);
 }
 
@@ -209,7 +205,6 @@ void clear_console(){
     draw_rect(ZeroVector, size, background);
     cursor.x = 0;
     cursor.y = get_max_line()-1;
-    //cursor.y = 0;
 }
 
 int get_max_line(){
