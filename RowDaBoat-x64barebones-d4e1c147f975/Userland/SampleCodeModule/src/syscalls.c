@@ -1,10 +1,12 @@
 #include <syscalls.h>
 
-/*
-	Llamadas a la int 80
-	Aca se agregan todas las llamadas que va a usar Userland, para que el usuario no tenga acceso directo
-	desde el shell a estas llamadas
-*/
+// ----------------------------------------------------------------------------------
+// Este modulo es el modulo de Syscalls
+// Llamadas a la int 80
+// Aca se agregan todas las llamadas que va a usar Userland,
+// para que el usuario no tenga acceso directo
+// desde el shell a estas llamadas
+// ----------------------------------------------------------------------------------
 
 void sys_write(int fd, const char *buf, int count){
 	_int80((uint64_t)WRITE, (uint64_t)fd, (uint64_t)buf, (uint64_t)count, 0, 0);

@@ -1,5 +1,11 @@
 #include <shell.h>
 
+// ----------------------------------------------------------------------------------
+// Este modulo es el modulo principal de Userland
+// A partir de este modulo se pueden seleccionar otros modulos a traves de la terminal
+// Se hace todo el manejo de los comandos
+// ----------------------------------------------------------------------------------
+
 //Constantes para los comandos
 #define INVALID_COMMAND -1
 #define HELP_COMMAND 0

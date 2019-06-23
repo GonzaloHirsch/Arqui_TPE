@@ -1,5 +1,10 @@
 #include <utils.h>
 
+// ----------------------------------------------------------------------------------
+// Este modulo es el modulo de utilitarios
+// Hay funciones de libreria estandar, ademas de otras funciones agregadas por nosotros
+// ----------------------------------------------------------------------------------
+
 int pow(int base, int exponent);
 int concat(char * to, const char * from);
 
