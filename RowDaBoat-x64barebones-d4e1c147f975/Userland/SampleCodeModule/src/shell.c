@@ -289,14 +289,14 @@ void make_starwars(void){
 }
 
 void make_mario(void){
-	makeSound(659, 125/35); makeSound(659, 125/35); goToSleep(125/35); makeSound(659, 125/35);
-	goToSleep(167/35); makeSound(523, 125/35); makeSound(659, 125/35); goToSleep(125/35);
-	makeSound(784, 125/35); goToSleep(375/35); makeSound(392, 125/35); goToSleep(375/35);
-	makeSound(523, 125/35); goToSleep(250/35); makeSound(392, 125/35); goToSleep(250/35);
-	makeSound(330, 125/35); goToSleep(250/35); makeSound(440, 125/35); goToSleep(125/35);
-	makeSound(494, 125/35); goToSleep(125/35); makeSound(466, 125/35); goToSleep(42/35);
-	makeSound(440, 125/35); goToSleep(125/35); makeSound(392, 125/35); goToSleep(125/35);
-	makeSound(659, 125/35); goToSleep(125/35); makeSound(784, 125/35); goToSleep(125/35);
+		makeSound(659, 125/35); makeSound(659, 125/35); goToSleep(125/35); makeSound(659, 125/35);
+		goToSleep(167/35); makeSound(523, 125/35); makeSound(659, 125/35); goToSleep(125/35);
+		makeSound(784, 125/35); goToSleep(375/35); makeSound(392, 125/35); goToSleep(375/35);
+		makeSound(523, 125/35); goToSleep(250/35); makeSound(392, 125/35); goToSleep(250/35);
+		makeSound(330, 125/35); goToSleep(250/35); makeSound(440, 125/35); goToSleep(125/35);
+		makeSound(494, 125/35); goToSleep(125/35); makeSound(466, 125/35); goToSleep(42/35);
+		makeSound(440, 125/35); goToSleep(125/35); makeSound(392, 125/35); goToSleep(125/35);
+		makeSound(659, 125/35); goToSleep(125/35); makeSound(784, 125/35); goToSleep(125/35);
 	 makeSound(880, 125/35); goToSleep(125/35); makeSound(698, 125/35); makeSound(784, 125/35);
 	 goToSleep(125/35); makeSound(659, 125/35); goToSleep(125/35); makeSound(523, 125/35);
 	 goToSleep(125/35); makeSound(587, 125/35); makeSound(494, 125/35); goToSleep(125/35);
@@ -316,24 +316,24 @@ void make_mario(void){
 			makeSound(622, 125/35); goToSleep(125/35); makeSound(659, 125/35);
 		goToSleep(167/35); makeSound(698, 125/35); goToSleep(125/35); makeSound(698, 125/35);
 		makeSound(698, 125/35); goToSleep(625/35); makeSound(784, 125/35); makeSound(740, 125/35);
-		 makeSound(698, 125/35); goToSleep(42/35); makeSound(622, 125/35); goToSleep(125/35);
-		 makeSound(659, 125/35); goToSleep(167/35); makeSound(415, 125/35); makeSound(440, 125/35);
-		 makeSound(523, 125/35); goToSleep(125/35); makeSound(440, 125/35); makeSound(523, 125/35);
-		  makeSound(587, 125/35); goToSleep(250/35); makeSound(622, 125/35); goToSleep(250/35);
-			makeSound(587, 125/35); goToSleep(250/35); makeSound(523, 125/35); goToSleep(1125/35);
-			makeSound(784, 125/35); makeSound(740, 125/35); makeSound(698, 125/35); goToSleep(42/35);
-			makeSound(622, 125/35); goToSleep(125/35); makeSound(659, 125/35);
-		 goToSleep(167/35); makeSound(415, 125/35); makeSound(440, 125/35); makeSound(523, 125/35);
-		  goToSleep(125/35); makeSound(440, 125/35); makeSound(523, 125/35); makeSound(587, 125/35);
-			goToSleep(250/35); makeSound(784, 125/35); makeSound(740, 125/35); makeSound(698, 125/35);
-			goToSleep(42/35); makeSound(622, 125/35); goToSleep(125/35); makeSound(659, 125/35);
-			goToSleep(167/35); makeSound(698, 125/35); goToSleep(125/35); makeSound(698, 125/35);
-			makeSound(698, 125/35); goToSleep(625/35); makeSound(784, 125/35);
-		 makeSound(740, 125/35); makeSound(698, 125/35); goToSleep(42/35); makeSound(622, 125/35);
-		 goToSleep(125/35); makeSound(659, 125/35); goToSleep(167/35); makeSound(415, 125/35);
-		 makeSound(440, 125/35); makeSound(523, 125/35); goToSleep(125/35); makeSound(440, 125/35);
-		 makeSound(523, 125/35); makeSound(587, 125/35); goToSleep(250/35); makeSound(622, 125/35);
-		 goToSleep(250/35); makeSound(587, 125/35); goToSleep(250/35); makeSound(523, 125/35);
+	 makeSound(698, 125/35); goToSleep(42/35); makeSound(622, 125/35); goToSleep(125/35);
+	 makeSound(659, 125/35); goToSleep(167/35); makeSound(415, 125/35); makeSound(440, 125/35);
+	 makeSound(523, 125/35); goToSleep(125/35); makeSound(440, 125/35); makeSound(523, 125/35);
+	  makeSound(587, 125/35); goToSleep(250/35); makeSound(622, 125/35); goToSleep(250/35);
+		makeSound(587, 125/35); goToSleep(250/35); makeSound(523, 125/35); goToSleep(1125/35);
+		makeSound(784, 125/35); makeSound(740, 125/35); makeSound(698, 125/35); goToSleep(42/35);
+		makeSound(622, 125/35); goToSleep(125/35); makeSound(659, 125/35);
+	 goToSleep(167/35); makeSound(415, 125/35); makeSound(440, 125/35); makeSound(523, 125/35);
+	  goToSleep(125/35); makeSound(440, 125/35); makeSound(523, 125/35); makeSound(587, 125/35);
+		goToSleep(250/35); makeSound(784, 125/35); makeSound(740, 125/35); makeSound(698, 125/35);
+		goToSleep(42/35); makeSound(622, 125/35); goToSleep(125/35); makeSound(659, 125/35);
+		goToSleep(167/35); makeSound(698, 125/35); goToSleep(125/35); makeSound(698, 125/35);
+		makeSound(698, 125/35); goToSleep(625/35); makeSound(784, 125/35);
+	 makeSound(740, 125/35); makeSound(698, 125/35); goToSleep(42/35); makeSound(622, 125/35);
+	 goToSleep(125/35); makeSound(659, 125/35); goToSleep(167/35); makeSound(415, 125/35);
+	 makeSound(440, 125/35); makeSound(523, 125/35); goToSleep(125/35); makeSound(440, 125/35);
+	 makeSound(523, 125/35); makeSound(587, 125/35); goToSleep(250/35); makeSound(622, 125/35);
+	 goToSleep(250/35); makeSound(587, 125/35); goToSleep(250/35); makeSound(523, 125/35);
 }
 
 void sleep(void){

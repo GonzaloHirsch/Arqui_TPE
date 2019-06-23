@@ -6,14 +6,16 @@ static uint64_t lastFrame = 0;
 static int isRunning;
 static int winner;
 
+//Tiempo de vida
 static int totalTimeAlive = 0;
+//Tiempo entre incrementos de velocidad y tamaño
 static int partialTime = 0;
+//Tiempo relativo, porque recuperamos los segundos del sistema, que no empieza en 0
 static int relativeTime = 0;
 
-//La velocidad inicial es para la frecuencia mas baja
-//static int velocity = 65356;
-
+//Cantidad de ticks que se restan a los esperados para el incremento
 static int velocityIncrements = 2;
+//Ticks esperados para hacer un incremento
 static int expectedFrame = 18;
 
 
@@ -24,8 +26,6 @@ int abosulteTimeDifference(int before, int after);
 void resetVariables(){
   winner = 1;
 
-  //velocity = 65356;
-  //sys_over_clock(velocity);
   totalTimeAlive = 0;
   partialTime = 0;
   relativeTime = sys_time(SECONDS);
@@ -79,7 +79,6 @@ void Update(){
       //Velocidad maxima
       expectedFrame = 0;
     }
-    //sys_over_clock(velocity);
     partialTime = 0;
   }
 
@@ -107,7 +106,6 @@ void nextFrame(){
   lastFrame = sys_get_ticks();
   while(isRunning){
     frame = sys_get_ticks();
-    //print(frame);
     if (frame - lastFrame > expectedFrame){
       lastFrame = frame;
       Update();
@@ -117,7 +115,5 @@ void nextFrame(){
 }
 
 void onExit(){
-  //velocity = 65356;
-  //sys_over_clock(velocity);
   clearScreen();
 }
