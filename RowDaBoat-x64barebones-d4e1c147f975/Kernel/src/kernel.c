@@ -30,7 +30,6 @@ static void * const sampleDataModuleAddress = (void*)0x500000;
 
 typedef int (*EntryPoint)();
 
-//extern char read_key();
 
 void clearBSS(void * bssAddress, uint64_t bssSize)
 {
@@ -54,15 +53,8 @@ void * initializeKernelBinary()
 {
 	char buffer[10];
 
-	ncPrint("[x64BareBones]");
-	ncNewline();
+	cpuVendor(buffer);
 
-	ncPrint("CPU Vendor:");
-	ncPrint(cpuVendor(buffer));
-	ncNewline();
-
-	ncPrint("[Loading modules]");
-	ncNewline();
 	//Llena con los addresses a donde copia los modulos
 	void * moduleAddresses[] = {
 		sampleCodeModuleAddress,
@@ -70,90 +62,21 @@ void * initializeKernelBinary()
 	};
 
 	loadModules(&endOfKernelBinary, moduleAddresses);
-	ncPrint("[Done]");
-	ncNewline();
-	ncNewline();
-
-	ncPrint("[Initializing kernel's binary]");
-	ncNewline();
 
 	clearBSS(&bss, &endOfKernel - &bss);
-
-	ncPrint("  text: 0x");
-	ncPrintHex((uint64_t)&text);
-	ncNewline();
-	ncPrint("  rodata: 0x");
-	ncPrintHex((uint64_t)&rodata);
-	ncNewline();
-	ncPrint("  data: 0x");
-	ncPrintHex((uint64_t)&data);
-	ncNewline();
-	ncPrint("  bss: 0x");
-	ncPrintHex((uint64_t)&bss);
-	ncNewline();
-
-	ncPrint("[Done]");
-	ncNewline();
-
-	ncPrint("Loading IDT...");
-	ncNewline();
-
-  ncPrint("[Initializing Graphics]");
-  ncNewline();
 
   initVideoDriver();
   init_console();
 
-	print("Video Driver Loaded\nLoading IDT\n");
-	load_idt();
+ 	load_idt();
 	loadExceptions();
-	ncPrint("[Done]");
-	ncNewline();
-
-
-	ncPrint("Prepare to go to Userland...");
-	ncNewline();
 
 	return getStackBase();
 }
 
 int main()
 {
-/*
-    char buffer[100];
-	ncPrint("[Kernel Main]");
-	ncNewline();
-
-	ncPrint("Arquitectura de Computadoras");
-	ncNewline();
-
-	ncPrintDec(ticks_elapsed());
-	ncNewline();
-	ncPrint("  Sample code module at 0x");
-	ncPrintHex((uint64_t)sampleCodeModuleAddress);
-	ncNewline();
-	ncPrint("  Calling the sample code module returned: ");
-	ncPrintHex(((EntryPoint)sampleCodeModuleAddress)());
-	ncNewline();
-	ncNewline();
-
-	while(1){
-	    ncPrintOnAddress((char *) 0xB8000, itoa(ticks_elapsed(), buffer, 10));
-	}
-
-	ncPrint("  Sample data module at 0x");
-	ncPrintHex((uint64_t)sampleDataModuleAddress);
-	ncNewline();
-	ncPrint("  Sample data module contents: ");
-	ncPrint((char*)sampleDataModuleAddress);
-	ncNewline();
-
-	ncPrint("[Finished]");
-    */
-
-    goToUserland();
-
-
+  goToUserland();
 	return 0;
 
 }
