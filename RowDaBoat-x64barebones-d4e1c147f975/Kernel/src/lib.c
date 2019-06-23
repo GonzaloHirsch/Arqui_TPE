@@ -27,6 +27,8 @@ void * memcpy(void * destination, const void * source, uint64_t length)
 	*/
 	uint64_t i;
 
+	//si el tamanio de la fuente y el destino son divisibles por
+	//el tamanio de un entero de 32 bits, entonces se copia de a 32 bits (4 bytes)
 	if ((uint64_t)destination % sizeof(uint32_t) == 0 &&
 		(uint64_t)source % sizeof(uint32_t) == 0 &&
 		length % sizeof(uint32_t) == 0)
@@ -37,6 +39,7 @@ void * memcpy(void * destination, const void * source, uint64_t length)
 		for (i = 0; i < length / sizeof(uint32_t); i++)
 			d[i] = s[i];
 	}
+	//de lo contrario, se copia de a bytes
 	else
 	{
 		uint8_t * d = (uint8_t*)destination;
@@ -49,12 +52,12 @@ void * memcpy(void * destination, const void * source, uint64_t length)
 	return destination;
 }
 
-// inline function to swap two numbers
+// funcion para intercambiar dos numeros
 void swap(char *x, char *y) {
 	char t = *x; *x = *y; *y = t;
 }
 
-// function to reverse buffer[i..j]
+// funcion para invertir el buffer
 char* reverse(char *buffer, int i, int j)
 {
 	while (i < j)
@@ -63,14 +66,14 @@ char* reverse(char *buffer, int i, int j)
 	return buffer;
 }
 
-// Iterative function to implement itoa() function in C
+// Implementacion iterativa la funcion de itoa de C
 char* itoa(int value, char* buffer, int base)
 {
-	// invalid input
+	// entrada invalida
 	if (base < 2 || base > 32)
 		return buffer;
 
-	// consider absolute value of number
+	// se considera el valor absoluto
 	int n = value;
 
 	int i = 0;
@@ -86,18 +89,18 @@ char* itoa(int value, char* buffer, int base)
 		n = n / base;
 	}
 
-	// if number is 0
+	// si el numero es 0
 	if (i == 0)
 		buffer[i++] = '0';
 
-	// If base is 10 and value is negative, the resulting string 
-	// is preceded with a minus sign (-)
-	// With any other base, value is always considered unsigned
+	//Si la base es 10 y el numero es negativo, se
+	//lo precede con un signo menos. Para cualquier
+	//otra base, el numero se asume positivo
 	if (value < 0 && base == 10)
 		buffer[i++] = '-';
 
-	buffer[i] = '\0'; // null terminate string
+	buffer[i] = '\0'; // terminar el string
 
-	// reverse the string and return it
+	// revertir el string y devolverlo
 	return reverse(buffer, 0, i - 1);
 }
