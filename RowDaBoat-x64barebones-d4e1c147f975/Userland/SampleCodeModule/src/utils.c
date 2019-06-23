@@ -3,7 +3,7 @@
 int pow(int base, int exponent);
 int concat(char * to, const char * from);
 
-/*STANDARD C LIBRARY FUNCTIONS*/
+/*FUNCIONES DE LA LIBRERIA ESTANDAR DE C*/
 
 char getChar(){
 	char buff[1];
@@ -158,7 +158,7 @@ void printf(char * str, ...){
 }
 
 /* ------------------------------- */
-/* HELPER FUNCTIONS */
+/* FUNCIONES HELPER */
 
 int concat(char * to, const char * from){
 	int i = 0;
@@ -169,12 +169,12 @@ int concat(char * to, const char * from){
 	return i;
 }
 
-// inline function to swap two numbers
+// intercambiar dos numeros
 void swap(char *x, char *y) {
 	char t = *x; *x = *y; *y = t;
 }
 
-// function to reverse buffer[i..j]
+// invertir el contenido de buffer
 char* reverse(char *buffer, int i, int j)
 {
 	while (i < j)
@@ -205,14 +205,14 @@ int pow(int base, int exponent){
 	return result;
 }
 
-// Iterative function to implement itoa() function in C
+// Implementacion iterativa de itoa
 char* itoa(int value, char* buffer, int base)
 {
-	// invalid input
+	// numero invalido
 	if (base < 2 || base > 32)
 		return buffer;
 
-	// consider absolute value of number
+	// se considera el valor absoluto del numero
 	int n = value;
 
 	int i = 0;
@@ -228,19 +228,19 @@ char* itoa(int value, char* buffer, int base)
 		n = n / base;
 	}
 
-	// if number is 0
+	// si el numero es 0
 	if (i == 0)
 		buffer[i++] = '0';
 
-	// If base is 10 and value is negative, the resulting string
-	// is preceded with a minus sign (-)
-	// With any other base, value is always considered unsigned
+    //Si la base es 10 y el numero es negativo, se
+    //lo precede con un signo menos. Para cualquier
+    //otra base, el numero se asume positivo
 	if (value < 0 && base == 10)
 		buffer[i++] = '-';
 
-	buffer[i] = '\0'; // null terminate string
+	buffer[i] = '\0'; // terminar el string
 
-	// reverse the string and return it
+    // invertir el string y devolverlo
 	return reverse(buffer, 0, i - 1);
 }
 

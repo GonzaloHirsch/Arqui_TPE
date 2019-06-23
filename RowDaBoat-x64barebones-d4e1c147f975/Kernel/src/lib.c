@@ -101,6 +101,6 @@ char* itoa(int value, char* buffer, int base)
 
 	buffer[i] = '\0'; // terminar el string
 
-	// revertir el string y devolverlo
+	// invertir el string y devolverlo
 	return reverse(buffer, 0, i - 1);
 }
