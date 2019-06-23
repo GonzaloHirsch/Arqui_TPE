@@ -101,8 +101,6 @@ void * initializeKernelBinary()
   ncPrint("[Initializing Graphics]");
   ncNewline();
 
-  ncPrintHex(getVideoX());
-
   initVideoDriver();
   init_console();
 

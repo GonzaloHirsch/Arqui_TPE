@@ -1,5 +1,9 @@
 #include <snakeBody.h>
 
+// ----------------------------------------------------------------------------------
+// Este modulo de se ocupa de actualizar y manejar la viborita
+// ----------------------------------------------------------------------------------
+
 #define MAX_BODY_SIZE 400
 
 static Vector2 snake[MAX_BODY_SIZE] = {{0,0}};
@@ -51,27 +55,6 @@ void initSnakeBody(Vector2 startPos){
     setSnakeCell(i, auxPos);
     auxPos.x--;
   }
-  // setSnakeCell(0, auxPos);
-  // auxPos.x--;
-  // setSnakeCell(1, auxPos);
-  // auxPos.x--;
-  // setSnakeCell(2, auxPos);
-  // auxPos.x--;
-  // setSnakeCell(3, auxPos);
-  // auxPos.x--;
-  // setSnakeCell(4, auxPos);
-  // auxPos.x--;
-  // setSnakeCell(5, auxPos);
-  // auxPos.x--;
-  // setSnakeCell(6, auxPos);
-  // auxPos.x--;
-  // setSnakeCell(7, auxPos);
-  // auxPos.x--;
-  // setSnakeCell(8, auxPos);
-  // auxPos.x--;
-  // setSnakeCell(9, auxPos);
-  // auxPos.x--;
-  // setSnakeCell(10, auxPos);
 
   drawSnake();
 

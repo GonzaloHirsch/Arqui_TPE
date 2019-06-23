@@ -12,11 +12,6 @@ char *cpuVendor(char *result);
 int getSeconds();
 int getKeyboard();
 
-int getVideoBaseAddress();
-int getVideoX();
-int getVideoY();
-int getVideoDepth();
-
 
 
 #endif

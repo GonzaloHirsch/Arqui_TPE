@@ -1,5 +1,11 @@
 #include <gameGrid.h>
 
+// ----------------------------------------------------------------------------------
+// Este modulo se ocupa de dibujar todo lo relacionado al tablero
+// Como los bordes, el puntaje y las instrucciones.
+// ----------------------------------------------------------------------------------
+
+
 #define BORDER_SIZE 5
 #define CELL_SIZE 10
 #define CELL_PADDING 1

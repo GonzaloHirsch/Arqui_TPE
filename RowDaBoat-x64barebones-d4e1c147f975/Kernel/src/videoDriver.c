@@ -12,10 +12,10 @@ typedef struct __attribute__((packed)) {
     uint16_t winsize;
     uint16_t segment_A, segment_B;
     uint32_t real_fct_ptr;
-    uint16_t pitch; // bytes per scanline
+    uint16_t pitch;
 
-    uint16_t x_res, y_res;
-    uint8_t w_char, y_char, planes, bpp, banks;
+    uint16_t x_res, y_res; // Screen X and Y resolution
+    uint8_t w_char, y_char, planes, bpp, banks; // BPP - Bits Per Pixel
     uint8_t memory_model, bank_size, image_pages;
     uint8_t reserved0;
 
@@ -32,19 +32,21 @@ typedef struct __attribute__((packed)) {
 
 static ModeInfoBlock* infoBlock;
 
+// Relevo de informacion de la pantalla
 void initVideoDriver() {
     infoBlock = (ModeInfoBlock*)0x0000000000005C00;
 }
 
+// Checkear si la posicion esta dentro de la pantalla
 int out_of_range_pixel(Vector2 pos) {
     return !((pos.x >= 0) && (pos.x <= infoBlock->x_res) && (pos.y >= 0) && (pos.y <= infoBlock->y_res));
 }
 
+// Dibujar un pixel a pantalla
 void draw_pixel(Vector2 pos, Color color){
     if (out_of_range_pixel(pos))
         return;
-
-    //int * pixel_address;
+    
     unsigned char * pixel_address;
     int bpp = infoBlock->bpp / 8;
     pixel_address = (unsigned char *) ((uint64_t)(infoBlock->physbase + pos.x * bpp  + pos.y * (infoBlock->x_res) * bpp));
@@ -54,6 +56,7 @@ void draw_pixel(Vector2 pos, Color color){
 }
 
 
+// Mover todas las lineas una para arriba
 void move_all_lines_up(){
   void * source = (void *)((uint64_t)(infoBlock->physbase + (infoBlock->bpp/8) * infoBlock->x_res * CHAR_HEIGHT));
   void * dest = (void *)((uint64_t)infoBlock->physbase);
@@ -62,6 +65,7 @@ void move_all_lines_up(){
 }
 
 
+// Relevar color de pixel en cierta posicion
 void get_pixel(Vector2 pos, Color* out){
     if (out_of_range_pixel(pos))
         return;
@@ -74,6 +78,7 @@ void get_pixel(Vector2 pos, Color* out){
     out->r = pixel_address[2];
 }
 
+// Obsoleto: Dibujar rectangulo
 void draw_rect(Vector2 pos, Vector2 size, Color color){
     Vector2 auxPos = {0,0};
     for (auxPos.y = pos.y; auxPos.y < pos.y + size.x; auxPos.y++) {
@@ -83,6 +88,8 @@ void draw_rect(Vector2 pos, Vector2 size, Color color){
     }
 }
 
+// Dibujar caracter en pantalla
+// Se utiliza pixel_map, el cual contiene cada letra, pixel por pixel
 void draw_char_with_background(Vector2 pos, char c, Color foreground, Color background){
     unsigned char * cMap = pixel_map(c);
     for (int j = 0; j < CHAR_HEIGHT; ++j) {
@@ -98,6 +105,7 @@ void draw_char_with_background(Vector2 pos, char c, Color foreground, Color back
 
 }
 
+//Obsoleto: Dibujar string a pantalla
 void draw_string_with_background(Vector2 pos, char * str, Color foreground, Color background){
     Vector2 auxPos = {pos.x,pos.y};
 

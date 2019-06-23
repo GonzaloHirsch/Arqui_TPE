@@ -1,5 +1,11 @@
 #include <snakeGame.h>
 
+// ----------------------------------------------------------------------------------
+// Este modulo es el modulo principal del juego.
+// Desde aca se inicializa el mismo, se maneja el presionado de teclas
+// y se maneja el framerate.
+// ----------------------------------------------------------------------------------
+
 static uint64_t frame = 0;
 static uint64_t lastFrame = 0;
 

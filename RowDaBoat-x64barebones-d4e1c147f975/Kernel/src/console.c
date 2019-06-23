@@ -20,21 +20,21 @@ static Vector2 cursor = {0,0};
 
 int get_max_line();
 
-
 int get_max_cursorY(){
-    return getVideoY() / CHAR_HEIGHT;
+    return getResY() / CHAR_HEIGHT;
 }
 
 int get_max_cursorX(){
-    return getVideoX() / CHAR_WIDTH;
+    return getResX() / CHAR_WIDTH;
 }
 
 void init_console(){
     clear_console();
-    //print("%d - %d - %d", get_max_line(), getVideoY);
+    //print("%d - %d - %d", get_max_line(), getResY);
     cursor.y = get_max_line()-1;
 }
 
+// Borrado de un caracter
 void backspace(){
   if(cursor.y == 0 && cursor.x == 0){
     return;
@@ -53,6 +53,7 @@ void new_line(){
     cursor.x=0;
 }
 
+// Imprime un string finalizado con 0 con Color especifico.
 void printWithColors(Color chosenForeground, Color chosenBackground, char * str, va_list list){
 
     int i = 0;
@@ -87,11 +88,11 @@ void printWithColors(Color chosenForeground, Color chosenBackground, char * str,
         }
 
 
-        if(cursor.x >= getVideoX()/CHAR_WIDTH){
+        if(cursor.x >= getResX()/CHAR_WIDTH){
             cursor.x = 0;
             cursor.y++;
         }
-        if(cursor.y >= getVideoY()/CHAR_HEIGHT){
+        if(cursor.y >= getResY()/CHAR_HEIGHT){
             move_all_up();
             cursor.y--;
         }
@@ -99,6 +100,7 @@ void printWithColors(Color chosenForeground, Color chosenBackground, char * str,
     }
 }
 
+// Imprimir un solo caracter
 void print_char(char c){
     switch(c) {
         case '\n':
@@ -118,7 +120,7 @@ void print_char(char c){
 
     //Empezar una nueva linea si el cursor se pasa del
     //maximo x posible
-    if(cursor.x >= getVideoX()/CHAR_WIDTH){
+    if(cursor.x >= getResX()/CHAR_WIDTH){
         cursor.x = 0;
         cursor.y++;
     }
@@ -126,12 +128,13 @@ void print_char(char c){
     //Mover todo el contenido una linea para arriba
     //si se necesita una nueva linea y el cursor esta
     //en la posicion mas baja de la pantalla
-    if(cursor.y >= getVideoY()/CHAR_HEIGHT){
+    if(cursor.y >= getResY()/CHAR_HEIGHT){
         move_all_up();
         cursor.y--;
     }
 }
 
+// Imprimir un string de N caracteres
 void print_N(const char * str, int length){
     for(int i = 0; i < length; i++){
         print_char(str[i]);
@@ -158,6 +161,7 @@ void printError(char * str, ...){
     va_end(list);
 }
 
+//Obsolete: Mover una linea para arriba
 void move_line_up(unsigned int line){
     Color c = {0,0,0};
     Vector2 posGet = {0,line*CHAR_HEIGHT};
@@ -185,6 +189,7 @@ void move_all_up(){
     clear_line(get_max_line()-1);
 }
 
+// Borrar linea
 void clear_line(unsigned int line){
     Vector2 posDraw = {0,line*CHAR_HEIGHT};
     for(int j = 0; j < CHAR_HEIGHT; j++){
@@ -198,9 +203,9 @@ void clear_line(unsigned int line){
     }
 }
 
-
+// Limpiar pantalla
 void clear_console(){
-    Vector2 size = {getVideoX(), getVideoY()};
+    Vector2 size = {getResX(), getResY()};
     draw_rect(ZeroVector, size, background);
     cursor.x = 0;
     cursor.y = get_max_line()-1;
