@@ -16,7 +16,7 @@ uint32_t int_to_string(uint64_t value, char * buffer, uint32_t base)
     char *p1, *p2;
     uint32_t digits = 0;
 
-    //Calculate characters for each digit
+    //Se calcula el digito correspondiente para cada caracter
     do
     {
         uint32_t remainder = value % base;
@@ -25,10 +25,10 @@ uint32_t int_to_string(uint64_t value, char * buffer, uint32_t base)
     }
     while (value /= base);
 
-    // Terminate string in buffer.
+    // Se termina el string
     *p = 0;
 
-    //Reverse string in buffer.
+    // Se revierte el string
     p1 = buffer;
     p2 = p - 1;
     while (p1 < p2)

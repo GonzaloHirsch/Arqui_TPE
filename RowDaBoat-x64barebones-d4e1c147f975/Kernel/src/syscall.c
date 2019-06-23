@@ -47,7 +47,8 @@ uint64_t handleSyscall(uint64_t rdi, uint64_t rsi, uint64_t rdx, uint64_t rcx, u
 		break;
 	    case SHUTDOWN:
 	        //Metodo facil: Halteo la PC, como seria en la version original
-	        //del kernel.
+	        //del kernel. Se podria buscar una forma de apagar la PC
+	        //realmente, es decir, apagar el hardware.
             hang();
         break;
 	}
